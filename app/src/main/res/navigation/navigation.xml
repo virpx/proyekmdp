@@ -10,4 +10,15 @@
         android:name="com.example.myapplication.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" /><action android:id="@+id/action_global_loginFragment" app:destination="@id/loginFragment"/>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.myapplication.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment" />
+    <fragment
+        android:id="@+id/dokterFragment"
+        android:name="com.example.myapplication.DokterFragment"
+        android:label="fragment_dokter"
+        tools:layout="@layout/fragment_dokter" /><action android:id="@+id/action_global_dokterFragment" app:destination="@id/dokterFragment"/>
 </navigation>
