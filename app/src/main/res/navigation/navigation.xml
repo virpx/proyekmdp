@@ -18,12 +18,12 @@
     <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment" />
     <fragment
         android:id="@+id/dokterFragment"
-        android:name="com.example.myapplication.DokterFragment"
+        android:name="com.example.myapplication.Doctor.DokterFragment"
         android:label="fragment_dokter"
         tools:layout="@layout/fragment_dokter" /><action android:id="@+id/action_global_dokterFragment" app:destination="@id/dokterFragment"/>
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.myapplication.UserFragment"
+        android:name="com.example.myapplication.User.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
     <fragment
@@ -36,5 +36,5 @@
         android:id="@+id/myProfileFragment"
         android:name="com.example.myapplication.MyProfileFragment"
         android:label="fragment_my_profile"
-        tools:layout="@layout/fragment_my_profile" />
+        tools:layout="@layout/fragment_my_profile" /><action android:id="@+id/action_global_userFragment" app:destination="@id/userFragment"/>
 </navigation>

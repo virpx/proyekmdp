@@ -5,112 +5,144 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DokterFragment">
+    tools:context=".Doctor.DokterFragment">
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/btnToRegisterU"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Not a Doctor"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword5"
-        android:layout_width="307dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword4" />
+        app:layout_constraintTop_toBottomOf="@+id/btnRegisterD" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:text="REGISTER DOCTOR"
         android:textSize="34sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/usernameETD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/usernameETD"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/emailETD"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/emailETD"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/fullnameETD"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameETD" />
 
     <EditText
-        android:id="@+id/editTextText8"
+        android:id="@+id/passwordETD"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:ems="10"
-        android:hint="Spesialist"
-        android:inputType="text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
-
-    <EditText
-        android:id="@+id/editTextTextPassword4"
-        android:layout_width="307dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText9" />
+        app:layout_constraintTop_toBottomOf="@+id/cpasswordETD" />
 
     <EditText
-        android:id="@+id/editTextText9"
+        android:id="@+id/cpasswordETD"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Alamat"
-        android:inputType="text"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toTopOf="@+id/passwordETD"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText8" />
+        app:layout_constraintTop_toBottomOf="@+id/specialistSpinner" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnRegisterD"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
         android:text="Register"
+        app:layout_constraintBottom_toTopOf="@+id/btnToRegisterU"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword5" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+    <EditText
+        android:id="@+id/fullnameETD"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Full Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/specialistSpinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailETD" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegisterD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordETD">
+
+        <RadioButton
+            android:id="@+id/lakiRB2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Laki-laki"
+            tools:layout_editor_absoluteX="55dp"
+            tools:layout_editor_absoluteY="537dp" />
+
+        <RadioButton
+            android:id="@+id/perempuanRB2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Perempuan"
+            tools:layout_editor_absoluteX="179dp"
+            tools:layout_editor_absoluteY="538dp" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/specialistSpinner"
+        android:layout_width="317dp"
+        android:layout_height="38dp"
+        app:layout_constraintBottom_toTopOf="@+id/cpasswordETD"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullnameETD" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
