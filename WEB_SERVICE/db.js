@@ -10,10 +10,13 @@ User.init(
   {
     username: {
       type: DataTypes.STRING,
+      allowNull: false,
       primaryKey: true,
-      autoIncrement: false,
     },
     email: {
+      type: DataTypes.STRING,
+    },
+    fullname: {
       type: DataTypes.STRING,
     },
     password: {
@@ -23,9 +26,6 @@ User.init(
       type: DataTypes.STRING,
     },
     specialist: {
-      type: DataTypes.STRING,
-    },
-    alamat: {
       type: DataTypes.STRING,
     },
   },

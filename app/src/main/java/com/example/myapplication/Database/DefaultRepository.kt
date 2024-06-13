@@ -1,26 +1,25 @@
 package com.example.myapplication.Database
 
-class DefaultRepository(private val dataSource:AppDatabase){
+class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
 
     suspend fun getAllUser(force: Boolean = false): List<User> {
-        return dataSource.UserDao().getAll()
+        return remoteDataSource.getAllUsers()
     }
 
     suspend fun getUserByUsername(username: String): User {
-        return dataSource.UserDao().getByUsername(username)
+        return remoteDataSource.getUserByUsername(username)
     }
 
     suspend fun createUser(user: User) {
-        val posts = dataSource.UserDao().getAll()
-        dataSource.UserDao().insert(user)
+        val newData = remoteDataSource.createUser(user)
     }
 
     suspend fun updatePost(user: User) {
-        dataSource.UserDao().update(user)
+        val updateData = remoteDataSource.updateUser(user.username, user)
     }
 
     suspend fun deletePost(user: User) {
-        dataSource.UserDao().delete(user)
+        val deleteData = remoteDataSource.deleteUser(user.username)
     }
 
 }
