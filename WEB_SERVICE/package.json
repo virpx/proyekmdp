@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "mysql2": "^3.9.4",
     "sequelize": "^6.37.2"
@@ -7,7 +8,6 @@
   "name": "mdpinf20232m09",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

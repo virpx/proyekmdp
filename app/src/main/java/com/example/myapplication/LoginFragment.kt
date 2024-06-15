@@ -1,12 +1,11 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentLoginBinding
 import kotlinx.coroutines.CoroutineScope
@@ -35,10 +34,35 @@ class LoginFragment : Fragment() {
         }
 
         binding.btnLogin.setOnClickListener {
-            ioScope.launch {
-                val existingUser = repository.getUserByUsername(binding.usernameET.text.toString())
+            val username = binding.usernameET.text.toString()
+            val password = binding.passwordET.text.toString()
+
+            if (username.isEmpty() || password.isEmpty()) {
+                showToastOnMainThread("Username and password must not be empty")
+            } else {
+                ioScope.launch {
+                    try {
+                        val loginRequest = mapOf("username" to username, "password" to password)
+                        val response = repository.loginUser(loginRequest)
+                        val msg = response["msg"]
+
+                        if (msg == "Login successful") {
+                            val role = response["role"]
+                            if (role == "patient") {
+                                showToastOnMainThread("Logged in as patient")
+                            } else if (role == "doctor") {
+                                showToastOnMainThread("Logged in as doctor")
+                            }
+                        } else {
+                            showToastOnMainThread(msg!!)
+                        }
+                    } catch (e: Exception) {
+                        showToastOnMainThread("Login failed: ${e.message}")
+                    }
+                }
             }
         }
+
     }
 
     private fun showToastOnMainThread(message: String) {

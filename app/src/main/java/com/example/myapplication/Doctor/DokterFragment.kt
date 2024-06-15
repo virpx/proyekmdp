@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Database.User
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import com.example.myapplication.User.UserFragmentDirections
 import com.example.myapplication.databinding.FragmentDokterBinding
 import com.example.myapplication.databinding.FragmentUserBinding
 import kotlinx.coroutines.CoroutineScope
@@ -32,6 +33,13 @@ class DokterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var arrUser: ArrayList<User>? = null
+
+        ioScope.launch {
+            var semuauser = repository.getAllUser()
+            arrUser?.addAll(semuauser)
+        }
 
         val specialties = arrayListOf(
             "General Practitioner",
@@ -61,18 +69,29 @@ class DokterFragment : Fragment() {
                 val gender = if (binding.lakiRB2.isChecked) "Male" else "Female"
                 val specialist = binding.specialistSpinner.selectedItem.toString()
 
-                ioScope.launch {
-                    val existingUser = repository.getUserByUsername(username)
-                    if (existingUser != null) {
-                        showToastOnMainThread("Username already exists")
-                    } else {
-                        val newUser = User(username = username, email = email, fullname =
-                        fullName, password = password, gender = gender, specialist =
-                        specialist)
-                        repository.createUser(newUser)
-                        showToastOnMainThread("Registration Successful")
-                    }
+                if (arrUser?.any { it.username == username } == true) {
+                    showToastOnMainThread("Username already exists")
+                    return@setOnClickListener
                 }
+                else if (arrUser?.any { it.email== email } == true) {
+                    showToastOnMainThread("Email already exists")
+                    return@setOnClickListener
+                }
+
+                ioScope.launch {
+                    val newUser = User(
+                        username = username,
+                        email = email,
+                        fullname = fullName,
+                        password = password,
+                        gender = gender,
+                        specialist = specialist
+                    )
+                    repository.createUser(newUser)
+                    showToastOnMainThread("Registration Successful")
+                }
+
+                findNavController().navigate(DokterFragmentDirections.actionGlobalLoginFragment())
             }
         }
     }

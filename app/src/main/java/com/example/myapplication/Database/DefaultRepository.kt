@@ -14,12 +14,16 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         val newData = remoteDataSource.createUser(user)
     }
 
-    suspend fun updatePost(user: User) {
+    suspend fun updateUser(user: User) {
         val updateData = remoteDataSource.updateUser(user.username, user)
     }
 
-    suspend fun deletePost(user: User) {
+    suspend fun deleteUser(user: User) {
         val deleteData = remoteDataSource.deleteUser(user.username)
+    }
+
+    suspend fun loginUser(loginRequest: Map<String, String>): Map<String, String>{
+        return remoteDataSource.loginUser(loginRequest)
     }
 
 }

@@ -23,4 +23,7 @@ interface MdpService {
 
     @DELETE("users/{username}")
     suspend fun deleteUser(@Path("username") username: String): User
+
+    @POST("login")
+    suspend fun loginUser(@Body loginRequest: Map<String, String>): Map<String, String>
 }
