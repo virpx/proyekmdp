@@ -37,4 +37,16 @@
         android:name="com.example.myapplication.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile" /><action android:id="@+id/action_global_userFragment" app:destination="@id/userFragment"/>
+    <fragment
+        android:id="@+id/homeDocterFragment"
+        android:name="com.example.myapplication.HomeDocterFragment"
+        android:label="fragment_home_docter"
+        tools:layout="@layout/fragment_home_docter" />
+    <action android:id="@+id/action_global_homeDocterFragment" app:destination="@id/homeDocterFragment" />
+    <action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment" />
+    <fragment
+        android:id="@+id/profileDocterFragment"
+        android:name="com.example.myapplication.ProfileDocterFragment"
+        android:label="fragment_profile_docter"
+        tools:layout="@layout/fragment_profile_docter" />
 </navigation>
