@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initRepository(baseContext)
         setContentView(R.layout.activity_main)
+        val intent = Intent(this, admin_main::class.java)
+        startActivity(intent)
     }
 
     companion object{
@@ -37,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://192.168.1.9:3000/")
                 .build()
 
             Repository = DefaultRepository(
