@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 06:40 PM
+-- Generation Time: Jun 16, 2024 at 07:06 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -19,6 +19,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `proyek_mdp`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `artikel`
+--
+
+CREATE TABLE IF NOT EXISTS `artikel` (
+`id` int(11) NOT NULL,
+  `judul` text NOT NULL,
+  `penulis` text NOT NULL,
+  `isi` text NOT NULL,
+  `image` longtext NOT NULL,
+  `view` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dokter_regis`
+--
+
+CREATE TABLE IF NOT EXISTS `dokter_regis` (
+  `username` varchar(255) NOT NULL,
+  `email` text NOT NULL,
+  `fullname` text NOT NULL,
+  `password` text NOT NULL,
+  `gender` text NOT NULL,
+  `specialist` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `dokter_regis`
+--
+
+INSERT INTO `dokter_regis` (`username`, `email`, `fullname`, `password`, `gender`, `specialist`, `created_at`) VALUES
+('yoanesrobahdokter', 'yoanesrobahdokter@gmail.com', 'Yoanes Robah Dokter', 'ggasep', 'male', 'dokter anaconda', '2024-06-16 23:25:25');
 
 -- --------------------------------------------------------
 
@@ -127,6 +166,18 @@ INSERT INTO `user` (`username`, `email`, `fullname`, `password`, `gender`, `spec
 --
 
 --
+-- Indexes for table `artikel`
+--
+ALTER TABLE `artikel`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `dokter_regis`
+--
+ALTER TABLE `dokter_regis`
+ ADD PRIMARY KEY (`created_at`);
+
+--
 -- Indexes for table `d_chat`
 --
 ALTER TABLE `d_chat`
@@ -160,12 +211,17 @@ ALTER TABLE `review`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
- ADD PRIMARY KEY (`username`);
+ ADD PRIMARY KEY (`created_at`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `artikel`
+--
+ALTER TABLE `artikel`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `d_chat`
 --

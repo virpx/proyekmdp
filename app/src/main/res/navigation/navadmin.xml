@@ -23,4 +23,15 @@
             android:name="username"
             app:argType="string" />
     </fragment><action android:id="@+id/action_global_admin_list_user" app:destination="@id/admin_list_user"/><action android:id="@+id/action_global_admin_home" app:destination="@id/admin_home"/><action android:id="@+id/action_global_detail_user_admin" app:destination="@id/detail_user_admin"/>
+    <fragment
+        android:id="@+id/admin_list_artikel"
+        android:name="com.example.myapplication.admin_list_artikel"
+        android:label="fragment_admin_list_artikel"
+        tools:layout="@layout/fragment_admin_list_artikel" />
+    <action android:id="@+id/action_global_admin_list_artikel" app:destination="@id/admin_list_artikel" />
+    <fragment
+        android:id="@+id/admin_list_regis_dokter"
+        android:name="com.example.myapplication.admin_list_regis_dokter"
+        android:label="fragment_admin_list_regis_dokter"
+        tools:layout="@layout/fragment_admin_list_regis_dokter" /><action android:id="@+id/action_global_admin_list_regis_dokter" app:destination="@id/admin_list_regis_dokter"/>
 </navigation>

@@ -1,5 +1,7 @@
 package com.example.myapplication.Database
 
+import com.example.myapplication.Admin_class_list_artikel
+import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
 
@@ -34,4 +36,12 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun admingetuserreview(username:String): MutableList<Admin_class_review_user>{
         return remoteDataSource.admingetuserreview(username)
     }
+    suspend fun admingetlartikel(): MutableList<Admin_class_list_artikel>{
+        return remoteDataSource.admingetlartikel()
+    }
+
+    suspend fun admingetregisdokter(): MutableList<Admin_class_list_regis_dokter>{
+        return remoteDataSource.admingetregisdokter()
+    }
+
 }

@@ -10,4 +10,12 @@
         android:id="@+id/l_user"
         android:title=""
         android:icon="@drawable/users_icon"/>
+    <item
+        android:id="@+id/l_artikel"
+        android:title=""
+        android:icon="@drawable/artikel_bottom_nav"/>
+    <item
+        android:id="@+id/acc_dokter"
+        android:title=""
+        android:icon="@drawable/acc_dokter"/>
 </menu>

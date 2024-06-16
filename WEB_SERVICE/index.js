@@ -1,5 +1,5 @@
 const express = require("express");
-const { User, Review } = require("./db");
+const { DChat, FoodTrack, HChat, Resep, Review, User,Artikel,Dokterregis } = require("./db");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const app = express();
@@ -115,44 +115,76 @@ app.post("/login", async function (req, res) {
     return res.status(500).send({ msg: "Server error", error: error.message });
   }
 });
-app.get("/admin/getluser/",async function(req,res){
+app.get("/admin/getluser/", async function (req, res) {
   const user = await User.findAll()
   var datareturn = []
   for (const iterator of user) {
     jenisakun = 1
-    if(iterator.specialist == ""){
+    if (iterator.specialist == "") {
       jenisakun = 0
     }
     var databaru = {
-      nama:iterator.fullname,
-      jenis:jenisakun,
-      username:iterator.username
+      nama: iterator.fullname,
+      jenis: jenisakun,
+      username: iterator.username
     }
     datareturn.push(databaru)
   }
   return res.status(200).json(datareturn)
 })
-app.get("/admin/lreview/:username",async function(req,res){
+app.get("/admin/lreview/:username", async function (req, res) {
   const username = req.params.username;
   var datareturn = []
   const reviewe = await Review.findAll({
-    where:{
-      username_target:username
+    where: {
+      username_target: username
     }
   })
   for (const iterator of reviewe) {
     const usere = await User.findOne({
-      where:{
-        username:iterator.username_pengirim
+      where: {
+        username: iterator.username_pengirim
       }
     })
     var databaru = {
-      nama:usere.fullname,
-      isi:iterator.isi
+      nama: usere.fullname,
+      isi: iterator.isi
     }
     datareturn.push(databaru)
   }
   return res.status(200).send(datareturn)
+})
+app.get("/admin/lartikel", async function (req, res) {
+  const artikel = await Artikel.findAll()
+  var datakembali = []
+  for (const iterator of artikel) {
+    const usere = await User.findOne({
+      where: {
+        username: iterator.penulis
+      }
+    })
+    datakembali.push({
+      judul: iterator.judul,
+      author: usere.fullname,
+      view: iterator.view
+    })
+  }
+  return res.status(200).json(datakembali)
+})
+app.get("/admin/ldokterregis", async function (req, res) {
+  const artikel = await Dokterregis.findAll()
+  var datakembali = []
+  for (const iterator of artikel) {
+    if (iterator.specialist != "") {
+      datakembali.push({
+        nama: iterator.fullname,
+        sekolahlulus: iterator.sekolah+" ("+iterator.tahun_lulus+")",
+        lama_praktik: iterator.lama_praktik,
+        specialist: iterator.specialist,
+      })
+    }
+  }
+  return res.status(200).json(datakembali)
 })
 const port = 3000;
 app.listen(port, function () {

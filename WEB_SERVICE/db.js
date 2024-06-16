@@ -216,11 +216,108 @@ const User = sequelize.define('User', {
   specialist: {
     type: DataTypes.TEXT,
     allowNull: false
-  }
+  },
+  sekolah: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  tahun_lulus: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  lama_praktik: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  created_at: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
 }, {
   tableName: 'user',
   timestamps: false,
   charset: 'latin1'
 });
-
-module.exports = { sequelize, DChat, FoodTrack, HChat, Resep, Review, User };
+const Dokterregis = sequelize.define('Dokterregis', {
+  username: {
+    type: DataTypes.STRING(255),
+    primaryKey: true
+  },
+  email: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  fullname: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  password: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  gender: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  specialist: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  sekolah: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  tahun_lulus: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  lama_praktik: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  created_at: {
+    type: DataTypes.DATE,
+    allowNull: false
+  },
+}, {
+  tableName: 'dokter_regis',
+  timestamps: false,
+  charset: 'latin1'
+});
+const Artikel = sequelize.define('Artikel', {
+  id: {
+    type: DataTypes.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
+  judul: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  penulis: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  isi: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  image: {
+    type: DataTypes.TEXT('long'),
+    allowNull: false
+  },
+  view: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  created_at: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+  }
+}, {
+  tableName: 'artikel',
+  timestamps: false,
+  charset: 'latin1',
+});
+module.exports = { sequelize, DChat, FoodTrack, HChat, Resep, Review, User,Artikel,Dokterregis };

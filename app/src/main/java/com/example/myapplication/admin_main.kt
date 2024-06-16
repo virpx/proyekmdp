@@ -26,19 +26,32 @@ class admin_main : AppCompatActivity() {
                     loadFragment(1)
                     true
                 }
-                else -> {
+                R.id.l_user ->{
                     loadFragment(2)
                     true
                 }
+                R.id.l_artikel ->{
+                    loadFragment(3)
+                    true
+                }
+                R.id.acc_dokter ->{
+                    loadFragment(4)
+                    true
+                }
+                else -> false
             }
         }
     }
     private fun loadFragment(kode:Int) {
         if(kode == 1){
-            container.getFragment<Fragment>().findNavController().navigate(R.id.admin_home)
+            container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_admin_home)
+        }else if(kode == 2){
+            container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_admin_list_user)
+        }else if(kode == 3){
+            container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_admin_list_artikel)
         }else {
             container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_admin_list_user)
+                .navigate(R.id.action_global_admin_list_regis_dokter)
         }
     }
 }

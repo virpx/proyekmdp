@@ -1,5 +1,7 @@
 package com.example.myapplication.Database
 
+import com.example.myapplication.Admin_class_list_artikel
+import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
 import retrofit2.http.Body
@@ -32,4 +34,8 @@ interface MdpService {
     suspend fun admingetluser(): MutableList<Admin_class_list_user>
     @GET("admin/lreview/{username}")
     suspend fun admingetuserreview(@Path("username") username: String): MutableList<Admin_class_review_user>
+    @GET("admin/lartikel")
+    suspend fun admingetlartikel(): MutableList<Admin_class_list_artikel>
+    @GET("admin/ldokterregis")
+    suspend fun admingetregisdokter(): MutableList<Admin_class_list_regis_dokter>
 }
