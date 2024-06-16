@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 04:33 PM
+-- Generation Time: Jun 16, 2024 at 04:51 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -87,8 +87,7 @@ CREATE TABLE IF NOT EXISTS `resep` (
 
 CREATE TABLE IF NOT EXISTS `review` (
 `id` int(11) NOT NULL,
-  `username_penulis` text NOT NULL,
-  `username_target` text NOT NULL,
+  `username` text NOT NULL,
   `isi` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -106,6 +105,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   `gender` text NOT NULL,
   `specialist` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`username`, `email`, `fullname`, `password`, `gender`, `specialist`) VALUES
+('yoanesrobah', 'yoanesrobah@gmail.com', 'Yoanes Robah', 'ggasep', 'male', '');
 
 --
 -- Indexes for dumped tables
