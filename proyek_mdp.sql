@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 04:51 PM
+-- Generation Time: Jun 16, 2024 at 04:55 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -87,9 +87,17 @@ CREATE TABLE IF NOT EXISTS `resep` (
 
 CREATE TABLE IF NOT EXISTS `review` (
 `id` int(11) NOT NULL,
-  `username` text NOT NULL,
+  `username_pengirim` text NOT NULL,
+  `username_target` text NOT NULL,
   `isi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `username_pengirim`, `username_target`, `isi`) VALUES
+(1, 'wa', 'yoanesrobah', 'user gila coy');
 
 -- --------------------------------------------------------
 
@@ -181,7 +189,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
