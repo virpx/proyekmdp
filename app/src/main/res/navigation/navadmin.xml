@@ -18,5 +18,9 @@
         android:id="@+id/detail_user_admin"
         android:name="com.example.myapplication.detail_user_admin"
         android:label="fragment_detail_user_admin"
-        tools:layout="@layout/fragment_detail_user_admin" /><action android:id="@+id/action_global_admin_list_user" app:destination="@id/admin_list_user"/><action android:id="@+id/action_global_admin_home" app:destination="@id/admin_home"/><action android:id="@+id/action_global_detail_user_admin" app:destination="@id/detail_user_admin"/>
+        tools:layout="@layout/fragment_detail_user_admin" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment><action android:id="@+id/action_global_admin_list_user" app:destination="@id/admin_list_user"/><action android:id="@+id/action_global_admin_home" app:destination="@id/admin_home"/><action android:id="@+id/action_global_detail_user_admin" app:destination="@id/detail_user_admin"/>
 </navigation>

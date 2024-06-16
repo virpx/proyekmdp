@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 16, 2024 at 04:55 PM
+-- Generation Time: Jun 16, 2024 at 06:40 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `review` (
 --
 
 INSERT INTO `review` (`id`, `username_pengirim`, `username_target`, `isi`) VALUES
-(1, 'wa', 'yoanesrobah', 'user gila coy');
+(1, 'yoanesrobah', 'yoanesrobah', 'user gila coy');
 
 -- --------------------------------------------------------
 
@@ -111,15 +111,16 @@ CREATE TABLE IF NOT EXISTS `user` (
   `fullname` text NOT NULL,
   `password` text NOT NULL,
   `gender` text NOT NULL,
-  `specialist` text NOT NULL
+  `specialist` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`username`, `email`, `fullname`, `password`, `gender`, `specialist`) VALUES
-('yoanesrobah', 'yoanesrobah@gmail.com', 'Yoanes Robah', 'ggasep', 'male', '');
+INSERT INTO `user` (`username`, `email`, `fullname`, `password`, `gender`, `specialist`, `created_at`) VALUES
+('yoanesrobah', 'yoanesrobah@gmail.com', 'Yoanes Robah', 'ggasep', 'male', '', '2024-06-16 23:25:25');
 
 --
 -- Indexes for dumped tables

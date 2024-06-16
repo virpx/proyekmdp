@@ -5,30 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [detail_user_admin.newInstance] factory method to
- * create an instance of this fragment.
- */
 class detail_user_admin : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private val repository = MainActivity.Repository
+    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    lateinit var rvne: RecyclerView
+    lateinit var adminadapter: adminadapter_lreview
+    lateinit var layoutManager: RecyclerView.LayoutManager
+    var datareview = mutableListOf(
+        Admin_class_review_user("","")
+    )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,23 +30,26 @@ class detail_user_admin : Fragment() {
         return inflater.inflate(R.layout.fragment_detail_user_admin, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment detail_user_admin.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            detail_user_admin().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val usernamee = detail_user_adminArgs?.fromBundle(arguments as Bundle)?.username
+        rvne = view.findViewById(R.id.recyclerView3)
+        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
+        adminadapter = adminadapter_lreview(datareview)
+        rvne.adapter = adminadapter
+        rvne.layoutManager = layoutManager
+        ioScope.launch {
+            datareview.clear()
+            var hasil = repository.admingetuserreview(usernamee!!)
+            datareview.addAll(hasil)
+            var datauser = repository.getUserByUsername(usernamee!!)
+            requireActivity().runOnUiThread {
+                adminadapter.notifyDataSetChanged()
+                view.findViewById<TextView>(R.id.textView39).text = datauser.fullname
+                if(datauser.specialist == ""){
+                    view.findViewById<TextView>(R.id.textView40).text = "Standard"
                 }
             }
+        }
     }
 }

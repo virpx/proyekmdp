@@ -1,6 +1,7 @@
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ class adapteradmin_listuser(
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val namauser = row.findViewById<TextView>(R.id.textView35)
         val username = row.findViewById<TextView>(R.id.textView36)
-        val btndelete = row.findViewById<ImageView>(R.id.imageView13)
+        val btndelete = row.findViewById<Button>(R.id.button2)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRepository(baseContext)
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
         val intent = Intent(this, admin_main::class.java)
         startActivity(intent)
     }

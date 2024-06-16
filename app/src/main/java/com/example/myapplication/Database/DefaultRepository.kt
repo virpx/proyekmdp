@@ -1,6 +1,7 @@
 package com.example.myapplication.Database
 
 import com.example.myapplication.Admin_class_list_user
+import com.example.myapplication.Admin_class_review_user
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
 
@@ -27,7 +28,10 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun loginUser(loginRequest: Map<String, String>): Map<String, String>{
         return remoteDataSource.loginUser(loginRequest)
     }
-    suspend fun admingetluser(): Admin_class_list_user {
+    suspend fun admingetluser(): MutableList<Admin_class_list_user>{
         return remoteDataSource.admingetluser()
+    }
+    suspend fun admingetuserreview(username:String): MutableList<Admin_class_review_user>{
+        return remoteDataSource.admingetuserreview(username)
     }
 }

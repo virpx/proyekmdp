@@ -7,6 +7,6 @@ class Admin_class {
 class Admin_class_review_user(val nama:String,val isi:String){
 
 }
-class Admin_class_list_user(val nama:String,jenis:Int,val username:String,val l_review:MutableList<Admin_class_review_user>){
+class Admin_class_list_user(val nama:String,val jenis:Int,val username:String){
 
 }

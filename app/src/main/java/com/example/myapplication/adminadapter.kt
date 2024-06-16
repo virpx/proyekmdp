@@ -11,11 +11,11 @@ class adminadapter {
 }
 class adminadapter_luser(
     val data: MutableList<Admin_class_list_user>,
+    var pindahkedetail:((String)->Unit)
 ): RecyclerView.Adapter<adminadapter_luser.ViewHolder>(){
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val namauser:TextView = row.findViewById(R.id.textView35)
         val username:TextView = row.findViewById(R.id.textView36)
-        val btndel:ImageView = row.findViewById(R.id.imageView13)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,11 +31,11 @@ class adminadapter_luser(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var datae = data[position]
+        holder.itemView.setOnClickListener {
+            pindahkedetail.invoke(datae.username)
+        }
         holder.namauser.text = datae.nama
         holder.username.text = datae.username
-        holder.btndel.setOnClickListener {
-
-        }
     }
 
 }

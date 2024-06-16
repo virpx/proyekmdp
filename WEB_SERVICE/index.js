@@ -1,5 +1,5 @@
 const express = require("express");
-const { User } = require("./db");
+const { User, Review } = require("./db");
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const app = express();
@@ -115,8 +115,44 @@ app.post("/login", async function (req, res) {
     return res.status(500).send({ msg: "Server error", error: error.message });
   }
 });
-app.get("/admin/getluser",async function(req,res){
-  
+app.get("/admin/getluser/",async function(req,res){
+  const user = await User.findAll()
+  var datareturn = []
+  for (const iterator of user) {
+    jenisakun = 1
+    if(iterator.specialist == ""){
+      jenisakun = 0
+    }
+    var databaru = {
+      nama:iterator.fullname,
+      jenis:jenisakun,
+      username:iterator.username
+    }
+    datareturn.push(databaru)
+  }
+  return res.status(200).json(datareturn)
+})
+app.get("/admin/lreview/:username",async function(req,res){
+  const username = req.params.username;
+  var datareturn = []
+  const reviewe = await Review.findAll({
+    where:{
+      username_target:username
+    }
+  })
+  for (const iterator of reviewe) {
+    const usere = await User.findOne({
+      where:{
+        username:iterator.username_pengirim
+      }
+    })
+    var databaru = {
+      nama:usere.fullname,
+      isi:iterator.isi
+    }
+    datareturn.push(databaru)
+  }
+  return res.status(200).send(datareturn)
 })
 const port = 3000;
 app.listen(port, function () {
