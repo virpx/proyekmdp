@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navdokter"
+    app:startDestination="@id/fragment_user_listchat">
+
+    <fragment
+        android:id="@+id/fragment_chat_main"
+        android:name="com.example.myapplication.fragment_chat_main"
+        android:label="fragment_chat_main"
+        tools:layout="@layout/fragment_chat_main" />
+    <fragment
+        android:id="@+id/fragment_user_listchat"
+        android:name="com.example.myapplication.fragment_user_listchat"
+        android:label="fragment_user_listchat"
+        tools:layout="@layout/fragment_user_listchat" /><action android:id="@+id/action_global_fragment_user_listchat" app:destination="@id/fragment_user_listchat"/><action android:id="@+id/action_global_fragment_chat_main" app:destination="@id/fragment_chat_main"/>
+</navigation>

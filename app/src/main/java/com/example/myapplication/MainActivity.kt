@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initRepository(baseContext)
 //        setContentView(R.layout.activity_main)
-        val intent = Intent(this, admin_main::class.java)
-        startActivity(intent)
+//        val intent = Intent(this, admin_main::class.java)
+//        startActivity(intent)
     }
 
     companion object{
