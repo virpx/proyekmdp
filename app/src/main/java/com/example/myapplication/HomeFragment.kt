@@ -117,8 +117,8 @@ class HomeFragment : Fragment() {
             container.getFragment<Fragment>().findNavController()
                 .navigate(R.id.action_global_homeFragment)
         }else {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_chatFragment)
+//            container.getFragment<Fragment>().findNavController()
+//                .navigate(R.id.action_global_chatFragment)
         }
     }
 }
