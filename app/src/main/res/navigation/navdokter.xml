@@ -14,5 +14,12 @@
         android:id="@+id/fragment_user_listchat"
         android:name="com.example.myapplication.fragment_user_listchat"
         android:label="fragment_user_listchat"
-        tools:layout="@layout/fragment_user_listchat" /><action android:id="@+id/action_global_fragment_user_listchat" app:destination="@id/fragment_user_listchat"/><action android:id="@+id/action_global_fragment_chat_main" app:destination="@id/fragment_chat_main"/>
+        tools:layout="@layout/fragment_user_listchat" />
+    <action android:id="@+id/action_global_fragment_user_listchat" app:destination="@id/fragment_user_listchat" />
+    <action android:id="@+id/action_global_fragment_chat_main" app:destination="@id/fragment_chat_main" />
+    <fragment
+        android:id="@+id/homeDocterFragment2"
+        android:name="com.example.myapplication.HomeDocterFragment"
+        android:label="fragment_home_docter"
+        tools:layout="@layout/fragment_home_docter" />
 </navigation>
