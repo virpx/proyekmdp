@@ -5,30 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.databinding.FragmentLoginBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    lateinit var container: FragmentContainerView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: homeuserAdapter
+    private lateinit var artikelList: MutableList<User_class_list_artikel>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,23 +29,96 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        super.onViewCreated(view, savedInstanceState)
+
+        val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> {
+                    // Handle home navigation
+                    loadFragment(1)
+                    true
                 }
+                R.id.search -> {
+                    // Handle dashboard navigation
+                    loadFragment(2)
+                    true
+                }
+                R.id.profile -> {
+                    // Handle notifications navigation
+                    loadFragment(3)
+                    true
+                }
+                else -> false
             }
+        }
+
+        val bottomNavigationView2 = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView2)
+        bottomNavigationView2.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.app -> {
+                    // Handle home navigation
+                    topFragment(1)
+                    true
+                }
+                R.id.app2 -> {
+                    // Handle dashboard navigation
+                    topFragment(2)
+                    true
+                }
+                R.id.app3 -> {
+                    // Handle notifications navigation
+                    topFragment(3)
+                    true
+                }
+                R.id.chats -> {
+                    // Handle notifications navigation
+                    topFragment(4)
+                    true
+                }
+                else -> false
+            }
+        }
+        artikelList = mutableListOf() // Initialize the list
+
+        // Initialize RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerViewHome)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = homeuserAdapter(artikelList)
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+    }
+
+    private fun loadFragment(kode:Int) {
+        if (kode == 1) {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_homeFragment)
+        } else if (kode == 2) {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_searchFragment)
+        } else {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_myProfileFragment)
+        }
+    }
+
+    private fun topFragment(kode:Int) {
+        if (kode == 1) {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_homeFragment)
+        } else if (kode == 2) {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_homeFragment)
+        }
+        else if (kode == 3) {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_homeFragment)
+        }else {
+            container.getFragment<Fragment>().findNavController()
+                .navigate(R.id.action_global_chatFragment)
+        }
     }
 }

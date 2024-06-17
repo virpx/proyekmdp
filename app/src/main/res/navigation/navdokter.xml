@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navdokter"
-    app:startDestination="@id/fragment_user_listchat">
+    app:startDestination="@id/homeDocterFragment2">
 
     <fragment
         android:id="@+id/fragment_chat_main"
@@ -26,4 +26,11 @@
         android:name="com.example.myapplication.HomeDocterFragment"
         android:label="fragment_home_docter"
         tools:layout="@layout/fragment_home_docter" />
+    <fragment
+        android:id="@+id/buatArtikel"
+        android:name="com.example.myapplication.Doctor.buatArtikel"
+        android:label="fragment_buat_artikel"
+        tools:layout="@layout/fragment_buat_artikel" />
+    <action android:id="@+id/action_global_buatArtikel" app:destination="@id/buatArtikel" />
+    <action android:id="@+id/action_global_homeDocterFragment2" app:destination="@id/homeDocterFragment2" />
 </navigation>

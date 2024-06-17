@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -54,7 +55,11 @@ class LoginFragment : Fragment() {
                                 findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
                             } else if (role == "doctor") {
                                 showToastOnMainThread("Logged in as doctor")
-                                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeDocterFragment())
+                                val intent = Intent(context, main_dokter::class.java)
+                                intent.putExtra("username", username)
+                                startActivity(intent)
+
+                                activity?.finish()
                             }
                         } else {
                             showToastOnMainThread(msg!!)
