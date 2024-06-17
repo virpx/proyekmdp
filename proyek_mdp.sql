@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 17, 2024 at 09:46 AM
+-- Generation Time: Jun 17, 2024 at 03:04 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -62,12 +62,22 @@ CREATE TABLE IF NOT EXISTS `dokter_regis` (
 --
 
 CREATE TABLE IF NOT EXISTS `d_chat` (
-`id_hchat` int(11) NOT NULL,
+`id` int(11) NOT NULL,
+  `id_hchat` int(11) NOT NULL,
   `pengirim` text NOT NULL,
   `penerima` text NOT NULL,
   `isi` text NOT NULL,
-  `attach_foodtrack` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `attach_foodtrack` text NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `d_chat`
+--
+
+INSERT INTO `d_chat` (`id`, `id_hchat`, `pengirim`, `penerima`, `isi`, `attach_foodtrack`) VALUES
+(1, 2, 'yoanesrobah', 'yoanesrobahdokter', 'halo', ''),
+(2, 2, 'yoanesrobahdokter', 'yoanesrobah', 'halo pasien kocak', ''),
+(3, 2, 'yoanesrobah', 'yoanesrobahdokter', '', '1');
 
 -- --------------------------------------------------------
 
@@ -87,7 +97,14 @@ CREATE TABLE IF NOT EXISTS `food_track` (
   `cholesterol` int(11) NOT NULL,
   `sodium` int(11) NOT NULL,
   `date_add` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `food_track`
+--
+
+INSERT INTO `food_track` (`id`, `nama`, `jumlah`, `calories`, `protein`, `sugar`, `carbs`, `fat`, `cholesterol`, `sodium`, `date_add`) VALUES
+(1, 'nasi goreng', 1, 2, 2, 2, 2, 2, 2, 2, '2024-06-17 17:23:50');
 
 -- --------------------------------------------------------
 
@@ -97,7 +114,8 @@ CREATE TABLE IF NOT EXISTS `food_track` (
 
 CREATE TABLE IF NOT EXISTS `h_chat` (
 `id` int(11) NOT NULL,
-  `user` text NOT NULL,
+  `user1` text NOT NULL,
+  `user2` text NOT NULL,
   `selesai` tinyint(1) NOT NULL DEFAULT '0',
   `kesimpulan` text NOT NULL
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
@@ -106,8 +124,8 @@ CREATE TABLE IF NOT EXISTS `h_chat` (
 -- Dumping data for table `h_chat`
 --
 
-INSERT INTO `h_chat` (`id`, `user`, `selesai`, `kesimpulan`) VALUES
-(2, 'yoanesrobah', 0, '');
+INSERT INTO `h_chat` (`id`, `user1`, `user2`, `selesai`, `kesimpulan`) VALUES
+(2, 'yoanesrobah', 'yoanesrobahdokter', 0, '');
 
 -- --------------------------------------------------------
 
@@ -189,7 +207,7 @@ ALTER TABLE `dokter_regis`
 -- Indexes for table `d_chat`
 --
 ALTER TABLE `d_chat`
- ADD PRIMARY KEY (`id_hchat`);
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `food_track`
@@ -234,12 +252,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `d_chat`
 --
 ALTER TABLE `d_chat`
-MODIFY `id_hchat` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `food_track`
 --
 ALTER TABLE `food_track`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `h_chat`
 --
