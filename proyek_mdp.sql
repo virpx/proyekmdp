@@ -175,7 +175,7 @@ ALTER TABLE `artikel`
 -- Indexes for table `dokter_regis`
 --
 ALTER TABLE `dokter_regis`
- ADD PRIMARY KEY (`created_at`);
+ ADD PRIMARY KEY (`username`);
 
 --
 -- Indexes for table `d_chat`
@@ -211,7 +211,7 @@ ALTER TABLE `review`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
- ADD PRIMARY KEY (`created_at`);
+ ADD PRIMARY KEY (`username`);
 
 --
 -- AUTO_INCREMENT for dumped tables

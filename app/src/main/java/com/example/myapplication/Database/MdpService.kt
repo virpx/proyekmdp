@@ -38,4 +38,12 @@ interface MdpService {
     suspend fun admingetlartikel(): MutableList<Admin_class_list_artikel>
     @GET("admin/ldokterregis")
     suspend fun admingetregisdokter(): MutableList<Admin_class_list_regis_dokter>
+    @DELETE("admin/hapusdokterregis/{username}")
+    suspend fun admindeletedokterregis(@Path("username") username: String)
+    @GET("admin/accdokterregis/{username}")
+    suspend fun adminaccdokterregis(@Path("username") username: String)
+    @DELETE("admin/hapusartikel/{id}")
+    suspend fun adminhapusartkel(@Path("id") id: Int)
+    @DELETE("admin/hapususer/{username}")
+    suspend fun adminhapususer(@Path("username") username: String)
 }

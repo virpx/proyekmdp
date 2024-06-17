@@ -164,6 +164,7 @@ app.get("/admin/lartikel", async function (req, res) {
       }
     })
     datakembali.push({
+      id:iterator.id,
       judul: iterator.judul,
       author: usere.fullname,
       view: iterator.view
@@ -177,6 +178,7 @@ app.get("/admin/ldokterregis", async function (req, res) {
   for (const iterator of artikel) {
     if (iterator.specialist != "") {
       datakembali.push({
+        username:iterator.username,
         nama: iterator.fullname,
         sekolahlulus: iterator.sekolah+" ("+iterator.tahun_lulus+")",
         lama_praktik: iterator.lama_praktik,
@@ -185,6 +187,43 @@ app.get("/admin/ldokterregis", async function (req, res) {
     }
   }
   return res.status(200).json(datakembali)
+})
+app.delete("/admin/hapusdokterregis/:username",async function(req,res){
+  const username = req.params.username
+  await Dokterregis.delete({
+    where:{
+      username:username
+    }
+  })
+  return res.status(200).send("sukses")
+})
+app.get("/admin/accdokterregis/:username",async function(req,res){
+  const username = req.params.username
+  const datae = Dokterregis.findOne({
+    where:{
+      username:username
+    }
+  })
+  await User.create(datae)
+  return res.status(200).send("sukses")
+})
+app.delete("/admin/hapusartikel/:id",async function(req,res){
+  const id = req.params.id
+  await Dokterregis.delete({
+    where:{
+      id:id
+    }
+  })
+  return res.status(200).send("sukses")
+})
+app.delete("/admin/hapususer/:username",async function(req,res){
+  const username = req.params.username
+  await User.delete({
+    where:{
+      username:username
+    }
+  })
+  return res.status(200).send("sukses")
 })
 const port = 3000;
 app.listen(port, function () {

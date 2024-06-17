@@ -19,7 +19,7 @@ class admin_list_artikel : Fragment() {
     lateinit var adminadapter: adminadapter_lartikel
     lateinit var layoutManager: RecyclerView.LayoutManager
     var dataartikele = mutableListOf(
-        Admin_class_list_artikel("","",0)
+        Admin_class_list_artikel(-1,"","",0)
     )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +33,18 @@ class admin_list_artikel : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvne = view.findViewById(R.id.rvne)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        adminadapter = adminadapter_lartikel(dataartikele)
+        adminadapter = adminadapter_lartikel(dataartikele,{
+            idartike->
+            ioScope.launch {
+                repository.adminhapusartkel(idartike)
+                getdata()
+            }
+        })
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
+        getdata()
+    }
+    fun getdata(){
         ioScope.launch {
             dataartikele.clear()
             var hasil = repository.admingetlartikel()

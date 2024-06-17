@@ -18,7 +18,7 @@ class admin_list_regis_dokter : Fragment() {
     lateinit var adminadapter: adminadapter_lregisdokter
     lateinit var layoutManager: RecyclerView.LayoutManager
     var datadoktere = mutableListOf(
-        Admin_class_list_regis_dokter("","",0,"")
+        Admin_class_list_regis_dokter("","","",0,"")
     )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,9 +32,22 @@ class admin_list_regis_dokter : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvne = view.findViewById(R.id.rvne)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        adminadapter = adminadapter_lregisdokter(datadoktere)
+        adminadapter = adminadapter_lregisdokter(datadoktere,{username->
+            ioScope.launch {
+                repository.admindeletedokterregis(username)
+                getdata()
+            }
+        },  {username->
+            ioScope.launch {
+                repository.adminaccdokterregis(username)
+                getdata()
+            }
+        })
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
+        getdata();
+    }
+    fun getdata(){
         ioScope.launch {
             datadoktere.clear()
             var hasil = repository.admingetregisdokter()
@@ -44,4 +57,5 @@ class admin_list_regis_dokter : Fragment() {
             }
         }
     }
+
 }

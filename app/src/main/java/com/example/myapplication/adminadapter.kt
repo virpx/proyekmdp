@@ -70,6 +70,7 @@ class adminadapter_lreview(
 
 class adminadapter_lartikel(
     val data: MutableList<Admin_class_list_artikel>,
+    val deleteartikel : ((Int)->Unit),
 ): RecyclerView.Adapter<adminadapter_lartikel.ViewHolder>(){
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val judul:TextView = row.findViewById(R.id.textView41)
@@ -99,7 +100,7 @@ class adminadapter_lartikel(
         holder.author.text = "Author : "+datae.author
         holder.jumlahview.text = "View : "+datae.view.toString()
         holder.btndel.setOnClickListener {
-
+            deleteartikel.invoke(datae.id)
         }
     }
 
@@ -107,6 +108,8 @@ class adminadapter_lartikel(
 
 class adminadapter_lregisdokter(
     val data: MutableList<Admin_class_list_regis_dokter>,
+    val deletedokter : ((String)->Unit),
+    val accdokter : ((String)->Unit)
 ): RecyclerView.Adapter<adminadapter_lregisdokter.ViewHolder>(){
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val nama:TextView = row.findViewById(R.id.textView46)
@@ -135,10 +138,10 @@ class adminadapter_lregisdokter(
         holder.praktik.text = "Lama praktik : "+datae.lama_praktik
         holder.specialist.text = "Specialist : "+datae.specialist
         holder.btndel.setOnClickListener {
-
+            deletedokter.invoke(datae.username)
         }
         holder.btnacc.setOnClickListener {
-
+            accdokter.invoke(datae.username)
         }
     }
 

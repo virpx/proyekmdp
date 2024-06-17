@@ -43,5 +43,17 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun admingetregisdokter(): MutableList<Admin_class_list_regis_dokter>{
         return remoteDataSource.admingetregisdokter()
     }
+    suspend fun admindeletedokterregis(username: String){
+        return remoteDataSource.admindeletedokterregis(username)
+    }
+    suspend fun adminaccdokterregis(username: String){
+        return remoteDataSource.adminaccdokterregis(username)
+    }
+    suspend fun adminhapusartkel(id: Int){
+        return remoteDataSource.adminhapusartkel(id)
+    }
+    suspend fun adminhapususer(username: String){
+        return remoteDataSource.adminhapususer(username)
+    }
 
 }

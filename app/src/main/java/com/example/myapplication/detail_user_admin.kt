@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ class detail_user_admin : Fragment() {
     lateinit var rvne: RecyclerView
     lateinit var adminadapter: adminadapter_lreview
     lateinit var layoutManager: RecyclerView.LayoutManager
+    lateinit var usernamee:String
     var datareview = mutableListOf(
         Admin_class_review_user("","")
     )
@@ -32,7 +34,7 @@ class detail_user_admin : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val usernamee = detail_user_adminArgs?.fromBundle(arguments as Bundle)?.username
+        usernamee = detail_user_adminArgs?.fromBundle(arguments as Bundle)?.username!!
         rvne = view.findViewById(R.id.recyclerView3)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         adminadapter = adminadapter_lreview(datareview)
@@ -48,6 +50,14 @@ class detail_user_admin : Fragment() {
                 view.findViewById<TextView>(R.id.textView39).text = datauser.fullname
                 if(datauser.specialist == ""){
                     view.findViewById<TextView>(R.id.textView40).text = "Standard"
+                }
+            }
+        }
+        view.findViewById<Button>(R.id.button2).setOnClickListener {
+            ioScope.launch {
+                repository.adminhapususer(usernamee)
+                requireActivity().runOnUiThread {
+                    findNavController().navigate(R.id.action_global_admin_list_user)
                 }
             }
         }
