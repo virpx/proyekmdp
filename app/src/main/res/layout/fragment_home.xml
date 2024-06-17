@@ -23,9 +23,10 @@
         android:id="@+id/bottomNavigationView2"
         android:layout_width="410dp"
         android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/nav_menu"/>
+        app:menu="@menu/nav_menu" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewHome"

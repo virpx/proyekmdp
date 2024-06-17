@@ -65,4 +65,6 @@ interface MdpService {
     @POST("/dokter/uploadartikel")
     suspend fun uploadArtikel(@Body artikel: Artikel): Artikel
 
+    @PUT("dokter/{username}")
+    suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User
 }

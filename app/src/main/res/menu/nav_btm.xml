@@ -2,13 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/dokter_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Home"
-        android:icon="@drawable/baseline_home_24" />
+        android:icon="@drawable/baseline_home_24"
+        android:title="Home" />
     <item
+        android:id="@+id/dokter_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:title="Profile"
-        android:icon="@drawable/baseline_person_24" />
+        android:icon="@drawable/baseline_person_24"
+        android:title="Profile" />
 </menu>

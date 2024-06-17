@@ -97,12 +97,13 @@ class DokterFragment : Fragment() {
                 specialist = specialist,
                 sekolah = sekolah,
                 tahun_lulus = tahunlulus,
-                lama_praktik = lamapraktik
+                lama_praktik = lamapraktik,
+                foto_profile = ""
             )
             repository.createUser(newUser)
             showToastOnMainThread("Registration Successful")
-            findNavController().navigate(DokterFragmentDirections.actionGlobalLoginFragment())
         }
+        findNavController().navigate(DokterFragmentDirections.actionGlobalLoginFragment())
     }
 
     private fun validateInputs(): Boolean {

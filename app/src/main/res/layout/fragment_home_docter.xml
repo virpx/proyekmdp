@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:tooltipText="Chat"
-    tools:context=".HomeDocterFragment">
+    tools:context=".Doctor.HomeDocterFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -29,8 +29,8 @@
 
             <ImageView
                 android:id="@+id/imageView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
                 tools:src="@tools:sample/avatars" />
         </LinearLayout>
 
@@ -70,6 +70,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="5.0 out of 5.0 | 30 Reviewer" />
+
+            <Button
+                android:id="@+id/btnLogoutDokter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Logout" />
         </LinearLayout>
     </LinearLayout>
 

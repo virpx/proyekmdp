@@ -82,4 +82,8 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun uploadArtikel(artikel:Artikel){
         val newData = remoteDataSource.uploadArtikel(artikel)
     }
+
+    suspend fun updateDokterProfile(user: User) {
+        val updateData = remoteDataSource.updateDokterProfile(user.username, user)
+    }
 }

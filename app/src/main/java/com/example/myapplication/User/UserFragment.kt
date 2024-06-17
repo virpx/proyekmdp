@@ -72,7 +72,7 @@ class UserFragment : Fragment() {
                         specialist = "",
                         sekolah = "",
                         tahun_lulus = "",
-                        lama_praktik = 0
+                        lama_praktik = 0,
                     )
                     repository.createUser(newUser)
                     showToastOnMainThread("Registration Successful")

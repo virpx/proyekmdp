@@ -59,6 +59,7 @@ app.post("/users", async function (req, res) {
     sekolah,
     tahun_lulus,
     lama_praktik,
+    foto_profile,
   } = req.body;
   try {
     let user = await User.findByPk(username);
@@ -78,6 +79,7 @@ app.post("/users", async function (req, res) {
       tahun_lulus,
       lama_praktik,
       created_at,
+      foto_profile,
     });
     return res.status(201).send(user);
   } catch (error) {
@@ -86,7 +88,17 @@ app.post("/users", async function (req, res) {
 });
 
 app.put("/users/:username", async function (req, res) {
-  const { email, fullname, password, gender, specialist } = req.body;
+  const {
+    email,
+    fullname,
+    password,
+    gender,
+    specialist,
+    sekolah,
+    tahun_lulus,
+    lama_praktik,
+    foto_profile,
+  } = req.body;
   const username = req.params.username;
   try {
     const user = await User.findByPk(username);
@@ -101,6 +113,11 @@ app.put("/users/:username", async function (req, res) {
       password: hashedPassword,
       gender,
       specialist,
+      sekolah,
+      tahun_lulus,
+      lama_praktik,
+      created_at,
+      foto_profile,
     });
     return res.status(200).send(user);
   } catch (error) {
@@ -445,6 +462,28 @@ app.post("/dokter/uploadartikel", async (req, res) => {
     return res.status(500).send({ msg: "Internal Server Error" });
   }
 });
+
+app.put("/dokter/:username", async function (req, res) {
+  const { foto_profile, email, fullname } = req.body;
+  const username = req.params.username;
+  try {
+    const user = await User.findByPk(username);
+    if (!user) {
+      return res.status(404).send({ msg: "Not found" });
+    }
+
+    await user.update({
+      foto_profile,
+      email,
+      fullname,
+    });
+    return res.status(200).send(user);
+  } catch (error) {
+    return res.status(500).send({ msg: "Server error", error: error.message });
+  }
+});
+
+app.get("/dokter/profile", async (req, res) => {});
 
 const port = 3000;
 app.listen(port, function () {

@@ -1,15 +1,20 @@
-package com.example.myapplication
+package com.example.myapplication.Doctor
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.FragmentHomeDocterBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeDocterFragment : Fragment() {
     private lateinit var binding: FragmentHomeDocterBinding
@@ -30,9 +35,19 @@ class HomeDocterFragment : Fragment() {
 
         ioScope.launch {
             val users = repository.getUserByUsername(main_dokter.activeUser!!)
-            binding.NamaTVDokter.text = "Dr. ${users.fullname}"
-            binding.specialistTvDokter.text = users.specialist
-            binding.lamapraktikTvDokter.text = "${users.lama_praktik} years experiences"
+            //the coroutine scope ioScope is using Dispatchers.IO, which is not the main thread. UI updates must be performed on the main thread.
+            withContext(Dispatchers.Main) {
+                binding.NamaTVDokter.text = "Dr. ${users.fullname}"
+                binding.specialistTvDokter.text = users.specialist
+                binding.lamapraktikTvDokter.text = "${users.lama_praktik} years experiences"
+
+                if (users?.foto_profile != "") {
+                    val base64Image = users?.foto_profile ?: ""
+                    val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
+                    val bitmap = BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+                    binding.imageView17.setImageBitmap(bitmap)
+                }
+            }
         }
 
         binding.newArticleIV.setOnClickListener {
@@ -51,6 +66,12 @@ class HomeDocterFragment : Fragment() {
                 HomeDocterFragmentDirections
                     .actionGlobalFragmentUserListchat()
             )
+        }
+
+        binding.btnLogoutDokter.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
         }
     }
 }
