@@ -28,6 +28,7 @@
         app:menu="@menu/nav_menu"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewHome"
         android:layout_width="409dp"
         android:layout_height="609dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"

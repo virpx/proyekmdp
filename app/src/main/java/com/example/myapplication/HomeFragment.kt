@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
         artikelList = mutableListOf() // Initialize the list
 
         // Initialize RecyclerView
-        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView = view.findViewById(R.id.recyclerViewHome)
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = homeuserAdapter(artikelList)
         recyclerView.adapter = adapter
