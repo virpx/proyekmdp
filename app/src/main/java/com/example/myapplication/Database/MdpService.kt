@@ -5,6 +5,7 @@ import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
+import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -52,4 +53,6 @@ interface MdpService {
     suspend fun admingetdashboard(): Admin_class_dashboard
     @GET("getlistchat/{username}")
     suspend fun usergetlistchat(@Path("username") username: String):MutableList<Classuniversal_chat>
+    @GET("getisichat/{idhchat}")
+    suspend fun usergetbubble(@Path("idhchat") idhchat: Int):MutableList<Classuniversal_bubble>
 }

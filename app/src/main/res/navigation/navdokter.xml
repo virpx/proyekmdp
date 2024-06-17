@@ -9,7 +9,11 @@
         android:id="@+id/fragment_chat_main"
         android:name="com.example.myapplication.fragment_chat_main"
         android:label="fragment_chat_main"
-        tools:layout="@layout/fragment_chat_main" />
+        tools:layout="@layout/fragment_chat_main" >
+        <argument
+            android:name="idhcat"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/fragment_user_listchat"
         android:name="com.example.myapplication.fragment_user_listchat"

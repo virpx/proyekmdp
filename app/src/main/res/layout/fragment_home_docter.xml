@@ -88,7 +88,7 @@
         android:id="@+id/newArticleIV"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/ArticleLogo"
+        android:src="@drawable/article"
         android:tooltipText="My Article"
         app:layout_constraintBottom_toTopOf="@+id/textView61"
         app:layout_constraintEnd_toEndOf="parent"

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Database.MockDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,7 +20,7 @@ class fragment_user_listchat : Fragment() {
     lateinit var adminadapter: chatlist_adapter
     lateinit var layoutManager: RecyclerView.LayoutManager
     var datachate = mutableListOf(
-        Classuniversal_chat("","","")
+        Classuniversal_chat(-1,"","","")
     )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,16 +32,17 @@ class fragment_user_listchat : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvne = view.findViewById(R.id.rvlistuser)
+        rvne = view.findViewById(R.id.rvne)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         adminadapter = chatlist_adapter(datachate,{username->
-
+            val action = fragment_user_listchatDirections.actionGlobalFragmentChatMain(username)
+            findNavController().navigate(action)
         })
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
         ioScope.launch {
             datachate.clear()
-            var hasil = repository.usergetlistchat()
+            var hasil = repository.usergetlistchat(MockDB.usernamelogin)
             datachate.addAll(hasil)
             requireActivity().runOnUiThread {
                 adminadapter.notifyDataSetChanged()

@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/bgchat"
     android:orientation="vertical"
     android:padding="20dp">
 
     <LinearLayout
+        android:id="@+id/c_isi_penerima"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chat_receive"
@@ -25,6 +25,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/c_isi_pengirim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chat_sender"
@@ -42,6 +43,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/c_food_pengirim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chat_sender"
@@ -85,6 +87,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/c_food_penerima"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/chat_receive"

@@ -21,13 +21,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initRepository(baseContext)
         setContentView(R.layout.activity_main)
-//        val intent = Intent(this, admin_main::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, main_dokter::class.java)
+        startActivity(intent)
     }
 
     companion object{
         lateinit var Repository: DefaultRepository
-
         fun initRepository(context: Context){
 ////            context.deleteDatabase("proyek_mdp")
             val roomDb = Room.databaseBuilder(
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://192.168.1.9:3000/")
                 .build()
 
             Repository = DefaultRepository(

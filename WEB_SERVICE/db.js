@@ -44,10 +44,13 @@ const sequelize = new Sequelize('proyek_mdp', 'root', '', {
 });
 
 const DChat = sequelize.define('DChat', {
-  id_hchat: {
+  id:{
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
+  },
+  id_hchat: {
+    type: DataTypes.INTEGER,
   },
   pengirim: {
     type: DataTypes.TEXT,
@@ -62,7 +65,7 @@ const DChat = sequelize.define('DChat', {
     allowNull: false
   },
   attach_foodtrack: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.TEXT,
     allowNull: false
   }
 }, {
@@ -114,7 +117,7 @@ const FoodTrack = sequelize.define('FoodTrack', {
     allowNull: false
   },
   date_add: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING,
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
   }
