@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FragmentLoginBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
@@ -16,6 +18,9 @@ import kotlinx.coroutines.Dispatchers
 class HomeFragment : Fragment() {
 
     lateinit var container: FragmentContainerView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: homeuserAdapter
+    private lateinit var artikelList: MutableList<User_class_list_artikel>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -76,6 +81,14 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
+        artikelList = mutableListOf() // Initialize the list
+
+        // Initialize RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = homeuserAdapter(artikelList)
+        recyclerView.adapter = adapter
+        adapter.notifyDataSetChanged()
 
     }
 

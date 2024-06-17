@@ -6,6 +6,7 @@ import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
 import com.example.myapplication.Classuniversal_chat
+import com.example.myapplication.User_class_list_artikel
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
 
@@ -64,4 +65,7 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         return remoteDataSource.usergetlistchat(username)
     }
 
+    suspend fun usergetartikel(): MutableList<User_class_list_artikel>{
+        return remoteDataSource.usergetartikel()
+    }
 }

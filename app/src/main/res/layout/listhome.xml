@@ -28,7 +28,8 @@
         android:id="@+id/textView50"
         android:layout_width="208dp"
         android:layout_height="17dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="44dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/imageView13"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,10 +39,9 @@
         android:layout_width="376dp"
         android:layout_height="79dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView50" />
+        tools:layout_editor_absoluteY="61dp" />
 
     <Button
         android:id="@+id/button3"
@@ -60,4 +60,15 @@
         android:text="dislike"
         app:layout_constraintStart_toEndOf="@+id/button3"
         app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="208dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView13"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
