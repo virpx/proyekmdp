@@ -1,4 +1,7 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const mysql = require("mysql");
+const multer = require("multer");
 const {
   DChat,
   FoodTrack,
@@ -12,8 +15,12 @@ const {
 const { Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const app = express();
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
+app.use(express.json({ limit: "50mb" }));
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+const created_at = Date.now();
 
 app.get("/users", async function (req, res) {
   const q = req.query.q || "";
@@ -58,7 +65,7 @@ app.post("/users", async function (req, res) {
     if (user) {
       return res.status(400).send({ msg: "Duplicate username" });
     }
-    let created_at = Date.now();
+
     const hashedPassword = await bcrypt.hash(password, 10);
     user = await User.create({
       username,
@@ -281,42 +288,71 @@ app.get("/admin/homedashboard", async function (req, res) {
     userperbulan: userperbulan,
   });
 });
+
 app.get("/getlistchat/:username", async function (req, res) {
-  const username = req.params.username
+  const username = req.params.username;
   const getchat = await HChat.findAll({
-    where:{
-      [Op.and]:[
+    where: {
+      [Op.and]: [
         {
-          [Op.or]: [
-            { user1: username },
-            { user2: username }
-          ]
-        },{
-          selesai:0
-        }
-      ]
-    }
-  })
-  var keluaran = []
+          [Op.or]: [{ user1: username }, { user2: username }],
+        },
+        {
+          selesai: 0,
+        },
+      ],
+    },
+  });
+  var keluaran = [];
   for (const iterator of getchat) {
-    var namauser = iterator.user1
-    if(iterator.user1 == username){
-      namauser = iterator.user2
+    var namauser = iterator.user1;
+    if (iterator.user1 == username) {
+      namauser = iterator.user2;
     }
     const getnama = await User.findOne({
-      where:{
-        username:namauser
-      }
-    })
-    namauser = getnama.fullname
+      where: {
+        username: namauser,
+      },
+    });
+    namauser = getnama.fullname;
     keluaran.push({
-      gambar:"",
-      username:username,
-      nama:namauser
-    })
+      gambar: "",
+      username: username,
+      nama: namauser,
+    });
   }
-  return res.status(200).send(keluaran)
+  return res.status(200).send(keluaran);
 });
+
+app.post("/dokter/uploadartikel", async (req, res) => {
+  try {
+    if (!req.body || !req.body) {
+      return res.status(404).send({
+        msg: "Invalid request. Make sure all required fields are provided, including the base64 encoded image.",
+      });
+    }
+
+    const { judul, penulis, isi, view } = req.body;
+    const image = req.body.image;
+
+    const newArtikel = await Artikel.create({
+      judul: judul,
+      penulis: penulis,
+      isi: isi,
+      image: image,
+      view: view,
+      created_at: new Date(),
+    });
+
+    return res.status(200).send({
+      msg: "Article uploaded successfully",
+    });
+  } catch (error) {
+    console.error("Error uploading article:", error);
+    return res.status(500).send({ msg: "Internal Server Error" });
+  }
+});
+
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

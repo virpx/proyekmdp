@@ -7,6 +7,7 @@ import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.User_class_list_artikel
+import com.example.myapplication.Doctor.Artikel
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
 
@@ -65,7 +66,11 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         return remoteDataSource.usergetlistchat(username)
     }
 
-    suspend fun usergetartikel(): MutableList<User_class_list_artikel>{
+    suspend fun usergetartikel(): MutableList<User_class_list_artikel> {
         return remoteDataSource.usergetartikel()
+    }
+
+    suspend fun uploadArtikel(artikel:Artikel){
+        val newData = remoteDataSource.uploadArtikel(artikel)
     }
 }
