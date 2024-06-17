@@ -20,9 +20,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initRepository(baseContext)
-//        setContentView(R.layout.activity_main)
-        val intent = Intent(this, admin_main::class.java)
-        startActivity(intent)
+        setContentView(R.layout.activity_main)
+//        val intent = Intent(this, admin_main::class.java)
+//        startActivity(intent)
     }
 
     companion object{
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("http://192.168.1.9:3000/")
+                .baseUrl("http://10.0.2.2:3000/")
                 .build()
 
             Repository = DefaultRepository(

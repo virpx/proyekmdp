@@ -14,7 +14,6 @@
         android:text="Not a Doctor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRegisterD" />
 
@@ -27,7 +26,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/usernameETD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,7 +38,6 @@
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/emailETD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -53,7 +50,6 @@
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/fullnameETD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/usernameETD" />
 
@@ -64,11 +60,10 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintBottom_toTopOf="@+id/cpasswordETD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cpasswordETD" />
+        app:layout_constraintTop_toBottomOf="@+id/fullnameETD" />
 
     <EditText
         android:id="@+id/cpasswordETD"
@@ -77,11 +72,10 @@
         android:ems="10"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/passwordETD"
+        app:layout_constraintBottom_toTopOf="@+id/specialistSpinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/specialistSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordETD" />
 
     <Button
         android:id="@+id/btnRegisterD"
@@ -90,7 +84,6 @@
         android:text="Register"
         app:layout_constraintBottom_toTopOf="@+id/btnToRegisterU"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -101,9 +94,8 @@
         android:ems="10"
         android:hint="Full Name"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/specialistSpinner"
+        app:layout_constraintBottom_toTopOf="@+id/passwordETD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailETD" />
 
@@ -114,9 +106,8 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/btnRegisterD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordETD">
+        app:layout_constraintTop_toBottomOf="@+id/lamapraktikET">
 
         <RadioButton
             android:id="@+id/lakiRB2"
@@ -139,10 +130,45 @@
         android:id="@+id/specialistSpinner"
         android:layout_width="317dp"
         android:layout_height="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/cpasswordETD"
+        app:layout_constraintBottom_toTopOf="@+id/sekolahET"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullnameETD" />
+        app:layout_constraintTop_toBottomOf="@+id/cpasswordETD" />
+
+    <EditText
+        android:id="@+id/sekolahET"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Sekolah"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/tahunlulusET"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/specialistSpinner" />
+
+    <EditText
+        android:id="@+id/tahunlulusET"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Tahun Lulus"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/lamapraktikET"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sekolahET" />
+
+    <EditText
+        android:id="@+id/lamapraktikET"
+        android:layout_width="307dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Lama Praktik"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tahunlulusET" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
