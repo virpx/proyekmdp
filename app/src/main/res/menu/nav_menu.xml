@@ -2,18 +2,22 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/app"
         android:layout_width="346dp"
         android:layout_height="wrap_content"
         android:title="My Applications" />
     <item
+        android:id="@+id/app2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="   " />
     <item
+        android:id="@+id/app3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:title="   " />
     <item
+        android:id="@+id/chats"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/chat_alt_3_svgrepo_com"
