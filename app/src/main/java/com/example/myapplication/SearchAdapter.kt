@@ -8,13 +8,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-data class SearchItem(
-    val imageResId: Int,
-    val title: String
-)
+//data class SearchAdapter(
+//    val imageResId: Int,
+//    val title: String
+//)
 
 class SearchAdapter(private val data: MutableList<User_class_list_dokter>) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
+    private var filteredData: MutableList<User_class_list_dokter> = data
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView20)
@@ -37,5 +38,17 @@ class SearchAdapter(private val data: MutableList<User_class_list_dokter>) :
 
     override fun getItemCount(): Int {
         return data.size
+    }
+
+    fun filter(query: String) {
+        filteredData = if (query.isEmpty()) {
+            data
+        } else {
+            val filteredList = data.filter {
+                it.username.contains(query, ignoreCase = true)
+            }
+            filteredList.toMutableList()
+        }
+        notifyDataSetChanged()
     }
 }
