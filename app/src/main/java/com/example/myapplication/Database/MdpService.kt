@@ -8,6 +8,7 @@ import com.example.myapplication.Admin_class_review_user
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.User_class_list_artikel
 import com.example.myapplication.Doctor.Artikel
+import com.example.myapplication.User_class_list_dokter
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -56,7 +57,8 @@ interface MdpService {
     suspend fun usergetlistchat(@Path("username") username: String):MutableList<Classuniversal_chat>
     @GET("user/artikel")
     suspend fun usergetartikel(): MutableList<User_class_list_artikel>
-
+    @GET("user/dokter")
+    suspend fun getdokters(): MutableList<User_class_list_dokter>
     @POST("/dokter/uploadartikel")
     suspend fun uploadArtikel(@Body artikel: Artikel): Artikel
 
