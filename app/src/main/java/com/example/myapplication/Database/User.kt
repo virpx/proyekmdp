@@ -16,4 +16,7 @@ data class User (
     @ColumnInfo(name = "password") var password:String,
     @ColumnInfo(name = "gender") var gender:String,
     @ColumnInfo(name = "specialist") var specialist:String,
+    @ColumnInfo(name = "sekolah") var sekolah:String,
+    @ColumnInfo(name = "tahun_lulus") var tahun_lulus:String,
+    @ColumnInfo(name = "lama_praktik") var lama_praktik:Int,
 )

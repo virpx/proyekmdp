@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Doctor.DokterFragmentDirections
 import com.example.myapplication.databinding.FragmentLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -50,8 +51,10 @@ class LoginFragment : Fragment() {
                             val role = response["role"]
                             if (role == "patient") {
                                 showToastOnMainThread("Logged in as patient")
+                                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
                             } else if (role == "doctor") {
                                 showToastOnMainThread("Logged in as doctor")
+                                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeDocterFragment())
                             }
                         } else {
                             showToastOnMainThread(msg!!)

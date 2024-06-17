@@ -10,10 +10,11 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="409dp"
         android:layout_height="81dp"
-        android:layout_marginTop="652dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/nav_btm"/>
+        app:layout_constraintVertical_bias="1.0"
+        app:menu="@menu/nav_btm" />
 </androidx.constraintlayout.widget.ConstraintLayout>
