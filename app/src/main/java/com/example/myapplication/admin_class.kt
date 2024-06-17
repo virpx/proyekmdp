@@ -22,3 +22,6 @@ class Admin_class_list_regis_dokter(
 ){
 
 }
+class Admin_class_dashboard(val jumlahuser:Int,val jumlahartikel:Int,val userperbulan:List<Int>){
+
+}

@@ -190,7 +190,7 @@ app.get("/admin/ldokterregis", async function (req, res) {
 })
 app.delete("/admin/hapusdokterregis/:username",async function(req,res){
   const username = req.params.username
-  await Dokterregis.delete({
+  await Dokterregis.destroy({
     where:{
       username:username
     }
@@ -199,17 +199,34 @@ app.delete("/admin/hapusdokterregis/:username",async function(req,res){
 })
 app.get("/admin/accdokterregis/:username",async function(req,res){
   const username = req.params.username
-  const datae = Dokterregis.findOne({
+  const datae = await Dokterregis.findOne({
     where:{
       username:username
     }
   })
-  await User.create(datae)
+  console.log(datae)
+  await User.create({
+    username:datae.username,
+    email:datae.email,
+    fullname:datae.fullname,
+    password:datae.password,
+    gender:datae.gender,
+    specialist:datae.specialist,
+    sekolah:datae.sekolah,
+    tahun_lulus:datae.tahun_lulus,
+    lama_praktik:datae.lama_praktik,
+    created_at:datae.created_at
+  })
+  await Dokterregis.destroy({
+    where:{
+      username:username
+    }
+  })
   return res.status(200).send("sukses")
 })
 app.delete("/admin/hapusartikel/:id",async function(req,res){
   const id = req.params.id
-  await Dokterregis.delete({
+  await Artikel.destroy({
     where:{
       id:id
     }
@@ -218,12 +235,28 @@ app.delete("/admin/hapusartikel/:id",async function(req,res){
 })
 app.delete("/admin/hapususer/:username",async function(req,res){
   const username = req.params.username
-  await User.delete({
+  await User.destroy({
     where:{
       username:username
     }
   })
   return res.status(200).send("sukses")
+})
+app.get("/admin/homedashboard",async function(req,res){
+  const jumlahuser = await User.findAll()
+  const jumlahartikel = await Artikel.findAll()
+  const userperbulan = [0,0,0,0,0,0,0,0,0,0,0,0]
+  for (const iterator of jumlahuser) {
+    if((new Date(iterator.created_at).getFullYear == (new Date()).getFullYear)){
+      userperbulan[(new Date(iterator.created_at)).getMonth()]+=1
+      console.log(iterator.fullname)
+    }
+  }
+  return res.status(200).json({
+    jumlahuser:jumlahuser.length,
+    jumlahartikel:jumlahartikel.length,
+    userperbulan:userperbulan
+  })
 })
 const port = 3000;
 app.listen(port, function () {

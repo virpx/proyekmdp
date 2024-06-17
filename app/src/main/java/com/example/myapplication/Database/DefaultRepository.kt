@@ -1,5 +1,6 @@
 package com.example.myapplication.Database
 
+import com.example.myapplication.Admin_class_dashboard
 import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
@@ -54,6 +55,9 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     }
     suspend fun adminhapususer(username: String){
         return remoteDataSource.adminhapususer(username)
+    }
+    suspend fun admingetdashboard(): Admin_class_dashboard {
+        return remoteDataSource.admingetdashboard()
     }
 
 }

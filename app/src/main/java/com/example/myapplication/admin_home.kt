@@ -5,30 +5,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.github.mikephil.charting.charts.BarChart
+import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.data.BarData
+import com.github.mikephil.charting.data.BarDataSet
+import com.github.mikephil.charting.data.BarEntry
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [admin_home.newInstance] factory method to
- * create an instance of this fragment.
- */
 class admin_home : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private val repository = MainActivity.Repository
+    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,23 +28,40 @@ class admin_home : Fragment() {
         return inflater.inflate(R.layout.fragment_admin_home, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment admin_home.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            admin_home().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ioScope.launch {
+            var hasil = repository.admingetdashboard()
+            requireActivity().runOnUiThread {
+                view.findViewById<TextView>(R.id.textView30).text = hasil.jumlahuser.toString()
+                view.findViewById<TextView>(R.id.textView33).text = hasil.jumlahartikel.toString()
+                var xvalues = arrayListOf("January","February","March","April","May","June","July","August","September","October","November","December")
+                val barChart: BarChart = view.findViewById(R.id.chart)
+                barChart.axisRight.setDrawLabels(false)
+                val entries = ArrayList<BarEntry>().apply {
+                    add(BarEntry(0f, hasil.userperbulan[0].toFloat()))
+                    add(BarEntry(1f, hasil.userperbulan[1].toFloat()))
+                    add(BarEntry(2f, hasil.userperbulan[2].toFloat()))
+                    add(BarEntry(3f, hasil.userperbulan[3].toFloat()))
+                    add(BarEntry(4f, hasil.userperbulan[4].toFloat()))
+                    add(BarEntry(5f, hasil.userperbulan[5].toFloat()))
+                    add(BarEntry(6f, hasil.userperbulan[6].toFloat()))
+                    add(BarEntry(7f, hasil.userperbulan[7].toFloat()))
+                    add(BarEntry(8f, hasil.userperbulan[8].toFloat()))
+                    add(BarEntry(9f, hasil.userperbulan[9].toFloat()))
+                    add(BarEntry(10f, hasil.userperbulan[10].toFloat()))
+                    add(BarEntry(11f, hasil.userperbulan[11].toFloat()))
+                }
+                val dataSet:BarDataSet = BarDataSet(entries,"")
+                val barData:BarData = BarData(dataSet);
+                barChart.setData(barData);
+                barChart.xAxis.apply {
+                    valueFormatter = IndexAxisValueFormatter(xvalues)
+                    position = XAxis.XAxisPosition.BOTTOM
+                    granularity = 1f
+                    isGranularityEnabled = true
                 }
             }
+        }
     }
 }

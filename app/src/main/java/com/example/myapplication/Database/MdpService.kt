@@ -1,5 +1,6 @@
 package com.example.myapplication.Database
 
+import com.example.myapplication.Admin_class_dashboard
 import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
@@ -46,4 +47,6 @@ interface MdpService {
     suspend fun adminhapusartkel(@Path("id") id: Int)
     @DELETE("admin/hapususer/{username}")
     suspend fun adminhapususer(@Path("username") username: String)
+    @GET("admin/homedashboard")
+    suspend fun admingetdashboard(): Admin_class_dashboard
 }
