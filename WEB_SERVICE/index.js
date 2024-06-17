@@ -293,103 +293,129 @@ app.get("/getlistchat/:username", async function (req, res) {
     where: {
       [Op.and]: [
         {
-          [Op.or]: [
-            { user1: username },
-            { user2: username }
-          ]
-        }, {
-          selesai: 0
-        }
-      ]
-    }
-  })
-  var keluaran = []
+          [Op.or]: [{ user1: username }, { user2: username }],
+        },
+        {
+          selesai: 0,
+        },
+      ],
+    },
+  });
+  var keluaran = [];
   for (const iterator of getchat) {
-    var namauser = iterator.user1
+    var namauser = iterator.user1;
     if (iterator.user1 == username) {
-      namauser = iterator.user2
+      namauser = iterator.user2;
     }
     const getnama = await User.findOne({
       where: {
-        username: namauser
-      }
-    })
-    namauser = getnama.fullname
+        username: namauser,
+      },
+    });
+    namauser = getnama.fullname;
     keluaran.push({
       idhcat: iterator.id,
       gambar: "",
       username: username,
-      nama: namauser
-    })
+      nama: namauser,
+    });
   }
   return res.status(200).send(keluaran);
 });
 function formatDate(isoString) {
   // Create a Date object from the ISO string
   const date = new Date(isoString);
-  
+
   // Define month names
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
   // Extract day, month, year, and time from the Date object
   const day = date.getUTCDate();
   const month = monthNames[date.getUTCMonth()];
   const year = date.getUTCFullYear();
   const hours = date.getUTCHours();
   const minutes = date.getUTCMinutes();
-  
+
   // Format the time to ensure two digits for hours and minutes
-  const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-  
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
+
   // Construct the final formatted string
   return `${day} ${month} ${year} ${formattedTime}`;
 }
 app.get("/getisichat/:idhchat", async function (req, res) {
-  const hcatid = req.params.idhchat
+  const hcatid = req.params.idhchat;
   const hasil = await DChat.findAll({
     where: {
-      id_hchat: hcatid
-    }
-  })
-  var keluaran = []
+      id_hchat: hcatid,
+    },
+  });
+  var keluaran = [];
   for (const iterator of hasil) {
-    attach_food = []
+    attach_food = [];
     if (iterator.isi == "") {
-      var datafoodtrack = iterator.attach_foodtrack.split(",")
+      var datafoodtrack = iterator.attach_foodtrack.split(",");
       for (const iterator2 of datafoodtrack) {
         const fooddata = await FoodTrack.findOne({
           where: {
-            id: iterator2
-          }
-        })
-        attach_food.push(fooddata)
-        attach_food[attach_food.length-1].date_add = formatDate(attach_food[attach_food.length-1].date_add)
+            id: iterator2,
+          },
+        });
+        attach_food.push(fooddata);
+        attach_food[attach_food.length - 1].date_add = formatDate(
+          attach_food[attach_food.length - 1].date_add
+        );
       }
-    }else{
-      attach_food.push({ "id": 0, "nama": "", "jumlah": 0, "calories": 0, "protein": 0, "sugar": 0, "carbs": 0, "fat": 0, "cholesterol": 0, "sodium": 0, "date_add": "" })
+    } else {
+      attach_food.push({
+        id: 0,
+        nama: "",
+        jumlah: 0,
+        calories: 0,
+        protein: 0,
+        sugar: 0,
+        carbs: 0,
+        fat: 0,
+        cholesterol: 0,
+        sodium: 0,
+        date_add: "",
+      });
     }
     const data1 = await User.findOne({
       where: {
-        username: iterator.pengirim
-      }
-    })
+        username: iterator.pengirim,
+      },
+    });
     const data2 = await User.findOne({
       where: {
-        username: iterator.penerima
-      }
-    })
+        username: iterator.penerima,
+      },
+    });
     keluaran.push({
       nama_pengirim: data1.fullname,
       nama_penerima: data2.fullname,
       pengirim: iterator.pengirim,
       penerima: iterator.penerima,
       isi: iterator.isi,
-      attach_foodtrack: attach_food
-    })
+      attach_foodtrack: attach_food,
+    });
   }
-  return res.status(200).send(keluaran)
-})
+  return res.status(200).send(keluaran);
+});
 
 app.post("/dokter/uploadartikel", async (req, res) => {
   try {

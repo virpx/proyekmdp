@@ -69,9 +69,9 @@ class UserFragment : Fragment() {
                         fullname = fullName,
                         password = password,
                         gender = gender,
-                        specialist = " ",
-                        sekolah = " ",
-                        tahun_lulus = " ",
+                        specialist = "",
+                        sekolah = "",
+                        tahun_lulus = "",
                         lama_praktik = 0
                     )
                     repository.createUser(newUser)
