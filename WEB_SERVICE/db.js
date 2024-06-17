@@ -49,6 +49,14 @@ const DChat = sequelize.define('DChat', {
     primaryKey: true,
     autoIncrement: true
   },
+  pengirim: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  penerima: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
   isi: {
     type: DataTypes.TEXT,
     allowNull: false
@@ -122,11 +130,11 @@ const HChat = sequelize.define('HChat', {
     primaryKey: true,
     autoIncrement: true
   },
-  pengirim: {
+  user1: {
     type: DataTypes.TEXT,
     allowNull: false
   },
-  penerima: {
+  user2: {
     type: DataTypes.TEXT,
     allowNull: false
   },

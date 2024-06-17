@@ -48,7 +48,6 @@ class admin_list_user : Fragment() {
             pilih = 0
             getdatauser()
         }
-        rvne.findViewById<RecyclerView>(R.id.rvlistuser)
         layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
         adminadapter = adminadapter_luser(datausere,{username->
             val action = admin_list_userDirections.actionGlobalDetailUserAdmin(username)

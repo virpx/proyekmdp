@@ -5,6 +5,7 @@ import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
+import com.example.myapplication.Classuniversal_chat
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
 
@@ -58,6 +59,9 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     }
     suspend fun admingetdashboard(): Admin_class_dashboard {
         return remoteDataSource.admingetdashboard()
+    }
+    suspend fun usergetlistchat(username: String): MutableList<Classuniversal_chat>   {
+        return remoteDataSource.usergetlistchat(username)
     }
 
 }

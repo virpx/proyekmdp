@@ -281,6 +281,42 @@ app.get("/admin/homedashboard", async function (req, res) {
     userperbulan: userperbulan,
   });
 });
+app.get("/getlistchat/:username", async function (req, res) {
+  const username = req.params.username
+  const getchat = await HChat.findAll({
+    where:{
+      [Op.and]:[
+        {
+          [Op.or]: [
+            { user1: username },
+            { user2: username }
+          ]
+        },{
+          selesai:0
+        }
+      ]
+    }
+  })
+  var keluaran = []
+  for (const iterator of getchat) {
+    var namauser = iterator.user1
+    if(iterator.user1 == username){
+      namauser = iterator.user2
+    }
+    const getnama = await User.findOne({
+      where:{
+        username:namauser
+      }
+    })
+    namauser = getnama.fullname
+    keluaran.push({
+      gambar:"",
+      username:username,
+      nama:namauser
+    })
+  }
+  return res.status(200).send(keluaran)
+});
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);
