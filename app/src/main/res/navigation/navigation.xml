@@ -38,14 +38,4 @@
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile" /><action android:id="@+id/action_global_userFragment" app:destination="@id/userFragment"/>
     <action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment" />
-    <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.example.myapplication.ChatFragment"
-        android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" />
-<<<<<<< Updated upstream
-=======
-    <action android:id="@+id/action_global_profileDocterFragment" />
->>>>>>> Stashed changes
-    <action android:id="@+id/action_global_chatFragment" app:destination="@id/chatFragment"/>
 </navigation>
