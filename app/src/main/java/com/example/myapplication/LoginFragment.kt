@@ -71,6 +71,9 @@ class LoginFragment : Fragment() {
             }
         }
 
+        binding.forgotpwTv.setOnClickListener {
+            findNavController().navigate(LoginFragmentDirections.actionGlobalForgotPasswordFragment())
+        }
     }
 
     private fun showToastOnMainThread(message: String) {

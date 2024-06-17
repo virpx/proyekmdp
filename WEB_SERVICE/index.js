@@ -483,7 +483,43 @@ app.put("/dokter/:username", async function (req, res) {
   }
 });
 
-app.get("/dokter/profile", async (req, res) => {});
+app.post("/sendotp", async (req, res) => {
+  let { email, otp } = req.body;
+  const findUser = await User.findOne({ email: email });
+  if (!findUser) {
+    return res
+      .status(400)
+      .json({ message: "Account not found, you have to register first" });
+  }
+  const transporter = nodemailer.createTransport({
+    host: "smtp.office365.com",
+    port: 587,
+    auth: {
+      user: "learnfocusontarget@outlook.com",
+      pass: "noreplylearnfocus222Q",
+    },
+    tls: {
+      rejectUnauthorized: true,
+    },
+  });
+  transporter.sendMail(
+    {
+      from: "learnfocusontarget@outlook.com", // verified sender email
+      to: email, // recipient email
+      subject: "Verification Code (OTP) to Reset Password", // Subject line
+      text: "Verification Code (OTP) is " + otp, // plain text body
+      // html: "<b>Hello world!</b>", // html body
+    },
+    function (error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    }
+  );
+  return res.status(200).json({ message: "Code sent to " + email });
+});
 
 const port = 3000;
 app.listen(port, function () {
