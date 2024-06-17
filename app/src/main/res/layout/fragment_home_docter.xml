@@ -31,6 +31,7 @@
                 android:id="@+id/imageView17"
                 android:layout_width="125dp"
                 android:layout_height="125dp"
+                app:srcCompat="@drawable/baseline_person_24"
                 tools:src="@tools:sample/avatars" />
         </LinearLayout>
 
