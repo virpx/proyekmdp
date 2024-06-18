@@ -11,6 +11,7 @@ import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.User_class_list_artikel
 import com.example.myapplication.Doctor.Artikel
+import com.example.myapplication.KirimOtp
 import com.example.myapplication.User_class_list_dokter
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -79,4 +80,10 @@ interface MdpService {
 
     @PUT("dokter/{username}")
     suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User
+
+    @POST("sendotp")
+    suspend fun sendotp(@Body dataotp:KirimOtp):KirimOtp
+
+    @PUT("changepassword/{email}")
+    suspend fun changePassword(@Path("email")email:String, @Body password:String)
 }
