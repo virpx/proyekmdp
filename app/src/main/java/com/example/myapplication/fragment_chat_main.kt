@@ -42,6 +42,8 @@ class fragment_chat_main : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if(MockDB.userloginrole == 1){
             view.findViewById<ImageView>(R.id.imageView9).visibility = View.INVISIBLE
+        }else{
+            view.findViewById<ImageView>(R.id.imageView5).visibility = View.GONE
         }
         idhcat = fragment_chat_mainArgs?.fromBundle(arguments as Bundle)?.idhcat!!
         var usernamelawan = fragment_chat_mainArgs?.fromBundle(arguments as Bundle)?.username!!
@@ -73,6 +75,10 @@ class fragment_chat_main : Fragment() {
         }
         view.findViewById<ImageView>(R.id.imageView9).setOnClickListener {
             val action = fragment_chat_mainDirections.actionGlobalChatChooseFoodTrack(usernamelawan,idhcat)
+            findNavController().navigate(action)
+        }
+        view.findViewById<ImageView>(R.id.imageView5).setOnClickListener {
+            val action = fragment_chat_mainDirections.actionGlobalEndchat(idhcat)
             findNavController().navigate(action)
         }
     }

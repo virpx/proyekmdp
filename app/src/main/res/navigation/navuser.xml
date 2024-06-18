@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navdokter"
-    app:startDestination="@id/blankFragment">
+    app:startDestination="@id/fragment_user_listchat">
 
     <fragment
         android:id="@+id/fragment_chat_main"
@@ -96,5 +96,19 @@
         android:id="@+id/showfoodtrack"
         android:name="com.example.myapplication.showfoodtrack"
         android:label="fragment_showfoodtrack"
+<<<<<<< Updated upstream
         tools:layout="@layout/fragment_showfoodtrack" /><action android:id="@+id/action_global_showfoodtrack" app:destination="@id/showfoodtrack"/>
+=======
+        tools:layout="@layout/fragment_showfoodtrack" />
+    <action android:id="@+id/action_global_showfoodtrack" app:destination="@id/showfoodtrack" />
+    <fragment
+        android:id="@+id/endchat"
+        android:name="com.example.myapplication.endchat"
+        android:label="fragment_endchat"
+        tools:layout="@layout/fragment_endchat" >
+        <argument
+            android:name="idhchat"
+            app:argType="integer" />
+    </fragment><action android:id="@+id/action_global_endchat" app:destination="@id/endchat"/>
+>>>>>>> Stashed changes
 </navigation>

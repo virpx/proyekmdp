@@ -36,6 +36,7 @@ class fragment_user_listchat : Fragment() {
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         adminadapter = chatlist_adapter(datachate,{idhchat,username,namachat->
             MockDB.namaopenchat = namachat
+            MockDB.usernamechatopen = username
             val action = fragment_user_listchatDirections.actionGlobalFragmentChatMain(idhchat,username)
             findNavController().navigate(action)
         })

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2024 at 07:30 PM
+-- Generation Time: Jun 18, 2024 at 07:37 PM
 -- Server version: 5.6.20
 -- PHP Version: 5.5.15
 
@@ -94,6 +94,7 @@ INSERT INTO `d_chat` (`id`, `id_hchat`, `pengirim`, `penerima`, `isi`, `attach_f
 
 CREATE TABLE IF NOT EXISTS `food_track` (
 `id` int(11) NOT NULL,
+  `username` text NOT NULL,
   `nama` text NOT NULL,
   `jumlah` int(11) NOT NULL,
   `calories` int(11) NOT NULL,
@@ -104,7 +105,14 @@ CREATE TABLE IF NOT EXISTS `food_track` (
   `cholesterol` int(11) NOT NULL,
   `sodium` int(11) NOT NULL,
   `date_add` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `food_track`
+--
+
+INSERT INTO `food_track` (`id`, `username`, `nama`, `jumlah`, `calories`, `protein`, `sugar`, `carbs`, `fat`, `cholesterol`, `sodium`, `date_add`) VALUES
+(1, 'yoanesrobah', 'nasi goreng', 1, 2, 2, 2, 2, 2, 2, 2, '2024-06-17 17:23:50');
 
 -- --------------------------------------------------------
 
@@ -264,7 +272,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `food_track`
 --
 ALTER TABLE `food_track`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `h_chat`
 --
