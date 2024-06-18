@@ -66,11 +66,11 @@
                 android:layout_height="wrap_content"
                 android:text="5 years Experience" />
 
-            <TextView
-                android:id="@+id/jumlahReviewTvDokter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="5.0 out of 5.0 | 30 Reviewer" />
+            <RatingBar
+                android:id="@+id/ratingBarHomeDokter"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/btnLogoutDokter"

@@ -13,7 +13,7 @@ const {
   Artikel,
   Dokterregis,
 } = require("./db");
-const { Op } = require("sequelize");
+const { Sequelize, Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const app = express();
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -695,6 +695,39 @@ app.put("/updateViewArtikel", async function (req, res) {
     return res.status(200).send(artikel);
   } catch (error) {
     return res.status(500).send({ msg: "Server error", error: error.message });
+  }
+});
+
+app.get("/dokter/historyreview/:username_target", async function (req, res) {
+  const username_target = req.params.username_target || "";
+  try {
+    const review = await Review.findAll({
+      where: { username_target: { [Op.eq]: username_target } },
+    });
+    return res.status(200).send(review);
+  } catch (error) {
+    return res.status(500).send({ msg: "server error", error: error.message });
+  }
+});
+
+app.get("/average-rating/:username_target", async (req, res) => {
+  const username_target = req.params.username_target;
+
+  try {
+    const result = await Review.findAll({
+      attributes: [
+        [Sequelize.fn("AVG", Sequelize.col("rating")), "averageRating"],
+      ],
+      where: {
+        username_target: username_target,
+      },
+    });
+
+    const averageRating = result[0].dataValues.averageRating;
+    return res.status(200).json({ username_target, averageRating });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

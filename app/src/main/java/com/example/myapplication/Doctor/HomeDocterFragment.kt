@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Database.MockDB
 import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.FragmentHomeDocterBinding
 import kotlinx.coroutines.CoroutineScope
@@ -35,11 +36,15 @@ class HomeDocterFragment : Fragment() {
 
         ioScope.launch {
             val users = repository.getUserByUsername(main_dokter.activeUser!!)
+            val averageRating = repository.getAverageRating(MockDB.usernamelogin)
             //the coroutine scope ioScope is using Dispatchers.IO, which is not the main thread. UI updates must be performed on the main thread.
             withContext(Dispatchers.Main) {
                 binding.NamaTVDokter.text = "Dr. ${users.fullname}"
                 binding.specialistTvDokter.text = users.specialist
                 binding.lamapraktikTvDokter.text = "${users.lama_praktik} years experiences"
+
+                val rating = averageRating["averageRating"]!!.toFloat() as? Float ?: 0.0f
+                binding.ratingBarHomeDokter.rating = rating
 
                 if (users?.foto_profile != "") {
                     val base64Image = users?.foto_profile ?: ""
@@ -58,7 +63,10 @@ class HomeDocterFragment : Fragment() {
         }
 
         binding.myreview.setOnClickListener {
-
+            findNavController().navigate(
+                HomeDocterFragmentDirections
+                    .actionGlobalHistoryReviewDokterFragment()
+            )
         }
 
         binding.mychat.setOnClickListener {

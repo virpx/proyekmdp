@@ -10,6 +10,7 @@ import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.Doctor.Artikel
+import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.changePw
 import retrofit2.http.Body
@@ -38,34 +39,49 @@ interface MdpService {
 
     @POST("login")
     suspend fun loginUser(@Body loginRequest: Map<String, String>): Map<String, String>
+
     @GET("admin/getluser")
     suspend fun admingetluser(): MutableList<Admin_class_list_user>
+
     @GET("admin/lreview/{username}")
     suspend fun admingetuserreview(@Path("username") username: String): MutableList<Admin_class_review_user>
+
     @GET("admin/lartikel")
     suspend fun admingetlartikel(): MutableList<Admin_class_list_artikel>
+
     @GET("admin/ldokterregis")
     suspend fun admingetregisdokter(): MutableList<Admin_class_list_regis_dokter>
+
     @DELETE("admin/hapusdokterregis/{username}")
     suspend fun admindeletedokterregis(@Path("username") username: String)
+
     @GET("admin/accdokterregis/{username}")
     suspend fun adminaccdokterregis(@Path("username") username: String)
+
     @DELETE("admin/hapusartikel/{id}")
     suspend fun adminhapusartkel(@Path("id") id: Int)
+
     @DELETE("admin/hapususer/{username}")
     suspend fun adminhapususer(@Path("username") username: String)
+
     @GET("admin/homedashboard")
     suspend fun admingetdashboard(): Admin_class_dashboard
+
     @GET("getlistchat/{username}")
-    suspend fun usergetlistchat(@Path("username") username: String):MutableList<Classuniversal_chat>
+    suspend fun usergetlistchat(@Path("username") username: String): MutableList<Classuniversal_chat>
+
     @GET("getisichat/{idhchat}")
-    suspend fun usergetbubble(@Path("idhchat") idhchat: Int):MutableList<Classuniversal_bubble>
+    suspend fun usergetbubble(@Path("idhchat") idhchat: Int): MutableList<Classuniversal_bubble>
+
     @GET("user/artikel")
     suspend fun usergetartikel(): MutableList<Artikel>
+
     @GET("user/dokter")
     suspend fun getdokters(): MutableList<User>
+
     @POST("/dokter/uploadartikel")
     suspend fun uploadArtikel(@Body artikel: Artikel): Artikel
+
     @POST("user/addchatbiasa/{idhchat}/{pengirim}/{penerima}")
     suspend fun sendpesanbiasa(
         @Path("idhchat") idhchat: Int,
@@ -73,6 +89,7 @@ interface MdpService {
         @Path("penerima") penerima: String,
         @Body isi: ChatBody
     )
+
     @GET("user/getfoodtrack/{username}")
     suspend fun getlistfoodtrack(@Path("username") username: String): MutableList<Classuniversal_foodtrack>
 
@@ -80,14 +97,22 @@ interface MdpService {
     suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User
 
     @POST("sendotp")
-    suspend fun sendotp(@Body dataotp:KirimOtp):KirimOtp
+    suspend fun sendotp(@Body dataotp: KirimOtp): KirimOtp
 
     @PUT("changepassword/{email}")
-    suspend fun changePassword(@Path("email")email:String, @Body password:changePw)
+    suspend fun changePassword(@Path("email") email: String, @Body password: changePw)
 
     @PUT("user/{username}")
     suspend fun updateUserProfile(@Path("username") username: String, @Body user: User): User
 
     @PUT("updateViewArtikel")
-    suspend fun updateViewArtikel(@Body artikel:Artikel): Artikel
+    suspend fun updateViewArtikel(@Body artikel: Artikel): Artikel
+
+    @GET("dokter/historyreview/{username_target}")
+    suspend fun gethistoryreview(@Path("username_target") username_target: String): MutableList<Review>
+
+    @GET("/average-rating/{username_target}")
+    suspend fun getAverageRating(@Path("username_target") usernameTarget: String): Map<String,String>
+
+
 }

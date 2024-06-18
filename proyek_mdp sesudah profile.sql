@@ -129,11 +129,15 @@ CREATE TABLE `review` (
   `username_pengirim` text NOT NULL,
   `username_target` text NOT NULL,
   `isi` text NOT NULL,
-  `rating` int NOT NULL,
+  `rating` float NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `review` */
+
+insert  into `review`(`id`,`username_pengirim`,`username_target`,`isi`,`rating`) values 
+(1,'tes','tes2','terimakasih suhu ayong',3.5),
+(2,'tes','tes2','terimakasih suhu ayong2',4);
 
 /*Table structure for table `user` */
 

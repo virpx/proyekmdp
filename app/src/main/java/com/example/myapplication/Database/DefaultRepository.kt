@@ -10,6 +10,7 @@ import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.Doctor.Artikel
+import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.changePw
 
@@ -109,5 +110,13 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
 
     suspend fun updateViewArtikel(artikel:Artikel) {
         val updateData = remoteDataSource.updateViewArtikel(artikel)
+    }
+
+    suspend fun gethistoryreview(username_target: String): MutableList<Review> {
+        return remoteDataSource.gethistoryreview(username_target)
+    }
+
+    suspend fun getAverageRating(username_target: String):Map<String, String>{
+        return remoteDataSource.getAverageRating(username_target)
     }
 }
