@@ -12,3 +12,25 @@ class Classuniversal_bubble(val nama_pengirim:String, val nama_penerima:String,v
 
 }
 data class ChatBody(val isi: String)
+
+class Classuniversal_hasilgizi(
+    val calories:Float,
+    val protein:Float,
+    val sugar:Float,
+    val carbs:Float,
+    val fat:Float,
+    val cholesterol:Float,
+    val sodium:Float
+)
+
+class Bodyaddfoodtrack(
+    val nama:String,
+    val jumlah:Int,
+    val calories:Int,
+    val protein:Int,
+    val sugar:Int,
+    val carbs:Int,
+    val fat:Int,
+    val cholesterol:Int,
+    val sodium:Int,
+)

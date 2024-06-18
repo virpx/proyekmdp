@@ -5,10 +5,16 @@ import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
+import com.example.myapplication.Bodyaddfoodtrack
 import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
+<<<<<<< Updated upstream
+=======
+import com.example.myapplication.Classuniversal_hasilgizi
+import com.example.myapplication.User_class_list_artikel
+>>>>>>> Stashed changes
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
@@ -95,10 +101,11 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun getlistfoodtrack(username: String): MutableList<Classuniversal_foodtrack> {
         return remoteDataSource.getlistfoodtrack(username)
     }
-
+    
     suspend fun sendotp(dataotp:KirimOtp){
         val newData = remoteDataSource.sendotp(dataotp)
     }
+<<<<<<< Updated upstream
 
     suspend fun changePassword(email:String, password:changePw){
         val newData = remoteDataSource.changePassword(email,password)
@@ -118,5 +125,21 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
 
     suspend fun getAverageRating(username_target: String):Map<String, String>{
         return remoteDataSource.getAverageRating(username_target)
+=======
+    
+    suspend fun changePassword(email:String, password:String){
+        val newData = remoteDataSource.changePassword(email,password)
+    }
+    
+    suspend fun sendpesanfoodtrack(idhchat: Int, pengirim: String, penerima: String, isi: String) {
+        val chatBody = ChatBody(isi)
+        val newData = remoteDataSource.sendpesanfoodtrack(idhchat, pengirim, penerima, chatBody)
+    }
+    suspend fun getgizidata(cari:String): Classuniversal_hasilgizi{
+        return remoteDataSource.getgizidata(cari)
+    }
+    suspend fun tambahfoodtrack(username:String,isi: Bodyaddfoodtrack){
+        return remoteDataSource.tambahfoodtrack(username,isi)
+>>>>>>> Stashed changes
     }
 }

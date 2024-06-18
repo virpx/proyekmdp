@@ -5,10 +5,16 @@ import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
+import com.example.myapplication.Bodyaddfoodtrack
 import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
+<<<<<<< Updated upstream
+=======
+import com.example.myapplication.Classuniversal_hasilgizi
+import com.example.myapplication.User_class_list_artikel
+>>>>>>> Stashed changes
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
@@ -92,11 +98,12 @@ interface MdpService {
 
     @GET("user/getfoodtrack/{username}")
     suspend fun getlistfoodtrack(@Path("username") username: String): MutableList<Classuniversal_foodtrack>
-
+    
     @PUT("dokter/{username}")
     suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User
-
+    
     @POST("sendotp")
+<<<<<<< Updated upstream
     suspend fun sendotp(@Body dataotp: KirimOtp): KirimOtp
 
     @PUT("changepassword/{email}")
@@ -116,3 +123,25 @@ interface MdpService {
 
 
 }
+=======
+    suspend fun sendotp(@Body dataotp:KirimOtp):KirimOtp
+    
+    @PUT("changepassword/{email}")
+    suspend fun changePassword(@Path("email")email:String, @Body password:String)
+    
+    @POST("user/addchatfoodtrack/{idhchat}/{pengirim}/{penerima}")
+    suspend fun sendpesanfoodtrack(
+        @Path("idhchat") idhchat: Int,
+        @Path("pengirim") pengirim: String,
+        @Path("penerima") penerima: String,
+        @Body isi: ChatBody
+    )
+    @GET("user/searchfood")
+    suspend fun getgizidata(@Query("cari") cari: String): Classuniversal_hasilgizi
+    @POST("user/addfoodtrack/{username}")
+    suspend fun tambahfoodtrack(
+        @Path("username") username: String,
+        @Body isi: Bodyaddfoodtrack
+    )
+}
+>>>>>>> Stashed changes

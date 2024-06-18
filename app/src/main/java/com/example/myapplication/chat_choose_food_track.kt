@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
@@ -18,6 +20,8 @@ class chat_choose_food_track : Fragment() {
     lateinit var rvne: RecyclerView
     lateinit var adminadapter: list_foodtrack
     lateinit var layoutManager: RecyclerView.LayoutManager
+    lateinit var usernamelawan:String
+    var idhcat = -1
     var datafoodtracke = mutableListOf(
         Classuniversal_foodtrack(-1,"","",0,0,0,0,0,0,0,0,"")
     )
@@ -31,11 +35,18 @@ class chat_choose_food_track : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        usernamelawan = chat_choose_food_trackArgs?.fromBundle(arguments as Bundle)?.usernamelawan!!
+        idhcat = chat_choose_food_trackArgs?.fromBundle(arguments as Bundle)?.idhchat!!
         rvne = view.findViewById(R.id.rvne)
+        var listidpilih = mutableListOf<Int>()
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         adminadapter = list_foodtrack(datafoodtracke,{
             ide,status->
-
+            if(status){
+                listidpilih.add(ide)
+            }else{
+                listidpilih.removeIf { it == ide }
+            }
         })
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
@@ -45,6 +56,21 @@ class chat_choose_food_track : Fragment() {
             datafoodtracke.addAll(hasil)
             requireActivity().runOnUiThread {
                 adminadapter.notifyDataSetChanged()
+            }
+        }
+        view.findViewById<Button>(R.id.button7).setOnClickListener {
+            if(listidpilih.size != 0){
+                var listidpilihbaru = listidpilih.sorted()
+                ioScope.launch {
+                    repository.sendpesanfoodtrack(idhcat,MockDB.usernamelogin,usernamelawan,listidpilihbaru.joinToString(separator = ","))
+                    requireActivity().runOnUiThread {
+                        val action = chat_choose_food_trackDirections.actionGlobalFragmentChatMain(idhcat,usernamelawan)
+                        findNavController().navigate(action)
+                    }
+                }
+            }else{
+                val action = chat_choose_food_trackDirections.actionGlobalFragmentChatMain(idhcat,usernamelawan)
+                findNavController().navigate(action)
             }
         }
     }

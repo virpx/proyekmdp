@@ -65,7 +65,8 @@ class fragment_chat_main : Fragment() {
             }
         }
         view.findViewById<ImageView>(R.id.imageView9).setOnClickListener {
-            findNavController().navigate(R.id.chat_choose_food_track)
+            val action = fragment_chat_mainDirections.actionGlobalChatChooseFoodTrack(usernamelawan,idhcat)
+            findNavController().navigate(action)
         }
     }
     fun getdata(){

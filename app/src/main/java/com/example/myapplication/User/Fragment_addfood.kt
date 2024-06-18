@@ -1,35 +1,35 @@
 package com.example.myapplication.User
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Bodyaddfoodtrack
+import com.example.myapplication.Classuniversal_hasilgizi
+import com.example.myapplication.Database.MockDB
+import com.example.myapplication.MainActivity
 import com.example.myapplication.R
+import com.example.myapplication.adminadapter_lartikel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlin.math.round
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [fragment_addfood.newInstance] factory method to
- * create an instance of this fragment.
- */
 class fragment_addfood : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private val repository = MainActivity.Repository
+    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    lateinit var rvne: RecyclerView
+    lateinit var adminadapter: adminadapter_lartikel
+    lateinit var layoutManager: RecyclerView.LayoutManager
+    var datagizi = Classuniversal_hasilgizi(0f,0f,0f,0f,0f,0f,0f)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,23 +38,62 @@ class fragment_addfood : Fragment() {
         return inflater.inflate(R.layout.fragment_addfood, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_addfood.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            fragment_addfood().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.findViewById<Button>(R.id.button8).setOnClickListener {
+            var namamakanan = view.findViewById<TextView>(R.id.editTextText7).text.toString()
+            var jumlahmakananstr = view.findViewById<TextView>(R.id.editTextNumber).text.toString()
+            if(namamakanan != "" && jumlahmakananstr != ""){
+                view.findViewById<Button>(R.id.button8).isVisible = false
+                ioScope.launch {
+                    Log.d("coba",namamakanan)
+                    datagizi = repository.getgizidata(namamakanan)
+                    requireActivity().runOnUiThread {
+                        var jumlahmakanan = view.findViewById<TextView>(R.id.editTextNumber).text.toString().toFloat()
+                        Toast.makeText(requireContext(), (datagizi.calories).toString(), Toast.LENGTH_SHORT).show()
+                        view.findViewById<TextView>(R.id.editTextNumber7).text = (round(datagizi.calories*jumlahmakanan)).toString()
+                        view.findViewById<TextView>(R.id.editTextNumber8).text = (round(datagizi.protein*jumlahmakanan)).toString()
+                        view.findViewById<TextView>(R.id.editTextNumber9).text = (round(datagizi.sugar*jumlahmakanan)).toString()
+                        view.findViewById<TextView>(R.id.editTextNumber10).text = (round(datagizi.carbs*jumlahmakanan)).toString()
+                        view.findViewById<TextView>(R.id.editTextNumber11).text = (round(datagizi.fat*jumlahmakanan)).toString()
+                        view.findViewById<TextView>(R.id.editTextNumber12).text = (round(datagizi.cholesterol*jumlahmakanan)).toString()
+                        view.findViewById<TextView>(R.id.editTextNumber13).text = (round(datagizi.sodium*jumlahmakanan)).toString()
+                        view.findViewById<Button>(R.id.button8).isVisible =true
+                    }
                 }
             }
+        }
+        view.findViewById<ImageView>(R.id.imageView).setOnClickListener {
+            var namamakanan = view.findViewById<TextView>(R.id.editTextText7).text.toString()
+            var jumlahmakananstr = view.findViewById<TextView>(R.id.editTextNumber).text.toString()
+            if(jumlahmakananstr != "" && namamakanan != "" && view.findViewById<TextView>(R.id.editTextNumber7).text != "" && view.findViewById<TextView>(R.id.editTextNumber8).text != "" && view.findViewById<TextView>(R.id.editTextNumber9).text != "" && view.findViewById<TextView>(R.id.editTextNumber10).text != "" && view.findViewById<TextView>(R.id.editTextNumber11).text != "" && view.findViewById<TextView>(R.id.editTextNumber12).text != "" && view.findViewById<TextView>(R.id.editTextNumber13).text != ""){
+                var jumlahmakanan = view.findViewById<TextView>(R.id.editTextNumber).text.toString().toInt()
+                var kirim = Bodyaddfoodtrack(
+                    namamakanan,
+                    jumlahmakanan,
+                    view.findViewById<TextView>(R.id.editTextNumber7).text.toString().toFloat().toInt(),
+                    view.findViewById<TextView>(R.id.editTextNumber8).text.toString().toFloat().toInt(),
+                    view.findViewById<TextView>(R.id.editTextNumber9).text.toString().toFloat().toInt(),
+                    view.findViewById<TextView>(R.id.editTextNumber10).text.toString().toFloat().toInt(),
+                    view.findViewById<TextView>(R.id.editTextNumber11).text.toString().toFloat().toInt(),
+                    view.findViewById<TextView>(R.id.editTextNumber12).text.toString().toFloat().toInt(),
+                    view.findViewById<TextView>(R.id.editTextNumber13).text.toString().toFloat().toInt()
+                )
+                ioScope.launch {
+                    repository.tambahfoodtrack(MockDB.usernamelogin,kirim)
+                    requireActivity().runOnUiThread {
+                        view.findViewById<TextView>(R.id.editTextText7).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber7).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber8).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber9).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber10).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber11).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber12).text = ""
+                        view.findViewById<TextView>(R.id.editTextNumber13).text = ""
+                    }
+                }
+            }
+        }
     }
 }

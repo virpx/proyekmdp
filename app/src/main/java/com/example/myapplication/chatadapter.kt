@@ -100,7 +100,7 @@ class chatbubble(
 
 class list_foodtrack(
     val data: MutableList<Classuniversal_foodtrack>,
-    var pindahroomchat:((Int,Boolean)->Unit)
+    var cekid:((Int,Boolean)->Unit)
 ): RecyclerView.Adapter<list_foodtrack.ViewHolder>(){
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val checkbox:CheckBox = row.findViewById(R.id.checkBox)
@@ -120,6 +120,9 @@ class list_foodtrack(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var datae = data[position]
         holder.checkbox.text = datae.nama+",jumlah : "+datae.jumlah.toString()+" ("+datae.date_add.toString()+")"
+        holder.checkbox.setOnClickListener {
+            cekid.invoke(datae.id,holder.checkbox.isChecked)
+        }
     }
 
 }
