@@ -5,27 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHistoryReviewDokterBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.myapplication.viewmodel.HistoryReviewDokterViewModel
 
 data class Review(val username_pengirim:String, var username_target:String, var isi:String, var
 rating:Float)
 
 class HistoryReviewDokterFragment : Fragment() {
     private lateinit var binding: FragmentHistoryReviewDokterBinding
-    private val repository = main_dokter.Repository
-    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-
-    private lateinit var recyclerView: RecyclerView
+    private val viewModel: HistoryReviewDokterViewModel by viewModels()
     private lateinit var adapter: HistoryReviewAdapter
-    private lateinit var reviewList: MutableList<Review>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,19 +33,17 @@ class HistoryReviewDokterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ioScope.launch {
-            val fetchedReviewList = repository.gethistoryreview(MockDB.usernamelogin)
+        adapter = HistoryReviewAdapter(emptyList<Review>().toMutableList())
 
-            withContext(Dispatchers.Main) {
-                reviewList = fetchedReviewList
-                adapter = HistoryReviewAdapter(reviewList)
+        viewModel.reviewList.observe(viewLifecycleOwner, Observer { reviews ->
+            adapter.updateData(reviews)
+        })
 
-                recyclerView.adapter = adapter
-                adapter.notifyDataSetChanged()
-            }
-        }
-
-        recyclerView = view.findViewById(R.id.historyReviewDokterRv)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.historyReviewDokterRv)
         recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = adapter
+
+        // Fetch review list
+        viewModel.fetchReviewList(MockDB.usernamelogin)
     }
 }

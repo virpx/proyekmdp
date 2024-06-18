@@ -31,8 +31,8 @@ class main_dokter : AppCompatActivity() {
         val activeUser = intent.getStringExtra("username")
         Companion.activeUser = activeUser
 
-//        container = findViewById(R.id.fragmentContainerView3)
-//        container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_homeDocterFragment2)
+        container = findViewById(R.id.fragmentContainerView3)
+        container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_homeDocterFragment2)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView3)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
@@ -70,7 +70,7 @@ class main_dokter : AppCompatActivity() {
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("http://192.168.1.9:3000/")
+                .baseUrl("http://10.0.2.2:3000/")
                 .build()
 
             Repository = DefaultRepository(
