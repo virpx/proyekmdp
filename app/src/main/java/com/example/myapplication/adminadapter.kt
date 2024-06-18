@@ -6,14 +6,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Database.User
 
 class adminadapter {
 }
 class adminadapter_luser(
-    val data: MutableList<Admin_class_list_user>,
+    var data: MutableList<Admin_class_list_user>,
     var pindahkedetail:((String)->Unit)
 ): RecyclerView.Adapter<adminadapter_luser.ViewHolder>(){
+
+    fun updateData(newData: List<Admin_class_list_user>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val namauser:TextView = row.findViewById(R.id.textView35)
         val username:TextView = row.findViewById(R.id.textView36)
