@@ -1,5 +1,6 @@
 package com.example.myapplication.Database
 
+import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.Doctor.Artikel
 
 object MockDB {
@@ -10,5 +11,6 @@ object MockDB {
     var activeArtikel:Artikel = Artikel("", "", "", 0,"")
     //0 = standar
     //1 = dokter
-    var userloginrole = -1
+    var userloginrole = 0
+    lateinit var datashowfoodtrack:List<Classuniversal_foodtrack>
 }

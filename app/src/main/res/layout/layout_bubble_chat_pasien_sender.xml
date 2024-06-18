@@ -68,6 +68,7 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:id="@+id/btnshow_pengirim"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -112,6 +113,7 @@
             android:textSize="16sp" />
 
         <LinearLayout
+            android:id="@+id/btnshow_penerima"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"

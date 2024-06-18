@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -38,12 +40,17 @@ class fragment_chat_main : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if(MockDB.userloginrole == 1){
+            view.findViewById<ImageView>(R.id.imageView9).visibility = View.INVISIBLE
+        }
         idhcat = fragment_chat_mainArgs?.fromBundle(arguments as Bundle)?.idhcat!!
         var usernamelawan = fragment_chat_mainArgs?.fromBundle(arguments as Bundle)?.username!!
         view.findViewById<TextView>(R.id.textView27).text = MockDB.namaopenchat
         rvne = view.findViewById(R.id.recyclerView2)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        adminadapter = chatbubble(databubble)
+        adminadapter = chatbubble(databubble,{
+            findNavController().navigate(R.id.action_global_showfoodtrack)
+        })
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
         getdata()
