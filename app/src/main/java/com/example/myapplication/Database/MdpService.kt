@@ -87,4 +87,7 @@ interface MdpService {
 
     @PUT("changepassword/{email}")
     suspend fun changePassword(@Path("email")email:String, @Body password:changePw)
+
+    @PUT("user/{username}")
+    suspend fun updateUserProfile(@Path("username") username: String, @Body user: User): User
 }

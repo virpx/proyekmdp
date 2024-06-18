@@ -53,9 +53,14 @@ class LoginFragment : Fragment() {
                         if (msg == "Login successful") {
                             val role = response["role"]
                             if (role == "patient") {
-                                MockDB.usernamelogin = username
                                 showToastOnMainThread("Logged in as patient")
-                                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
+                                MockDB.usernamelogin = username
+                                val intent = Intent(context, main_user::class.java)
+                                intent.putExtra("username", username)
+                                startActivity(intent)
+
+                                activity?.finish()
+
                             } else if (role == "doctor") {
                                 showToastOnMainThread("Logged in as doctor")
                                 MockDB.usernamelogin = username

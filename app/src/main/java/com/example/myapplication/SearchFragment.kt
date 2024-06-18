@@ -37,28 +37,6 @@ class SearchFragment : Fragment() {
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
 
-        val navbatom = view.findViewById<BottomNavigationView>(R.id.BottomNavigationViewSearch)
-        navbatom.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId){
-                R.id.home -> {
-                    // Handle home navigation
-                    findNavController().navigate(R.id.action_global_homeFragment)
-                    true
-                }
-                R.id.search -> {
-                    // Handle dashboard navigation
-                    findNavController().navigate(R.id.action_global_searchFragment)
-                    true
-                }
-                R.id.profile -> {
-                    // Handle notifications navigation
-                    findNavController().navigate(R.id.action_global_myProfileFragment)
-                    true
-                }
-                else -> false
-            }
-        }
-
         // Set up EditText for search
         val searchEditText = view.findViewById<EditText>(R.id.editTextText6)
         searchEditText.addTextChangedListener(object : TextWatcher {

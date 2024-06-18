@@ -11,6 +11,7 @@
         android:id="@+id/editTextText6"
         android:layout_width="307dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
         android:drawableStart="@drawable/baseline_searchs_24"
         android:ems="10"
         android:hint="Search"
@@ -23,18 +24,9 @@
         android:id="@+id/recyclerView"
         android:layout_width="410dp"
         android:layout_height="615dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/BottomNavigationViewSearch"
-        android:layout_width="409dp"
-        android:layout_height="70dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.996"
-        app:menu="@menu/nav_bottom" />
 </androidx.constraintlayout.widget.ConstraintLayout>

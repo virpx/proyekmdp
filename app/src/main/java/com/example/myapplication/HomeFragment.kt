@@ -31,28 +31,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.home -> {
-                    // Handle home navigation
-                    loadFragment(1)
-                    true
-                }
-                R.id.search -> {
-                    // Handle dashboard navigation
-                    loadFragment(2)
-                    true
-                }
-                R.id.profile -> {
-                    // Handle notifications navigation
-                    loadFragment(3)
-                    true
-                }
-                else -> false
-            }
-        }
-
         val bottomNavigationView2 = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView2)
         bottomNavigationView2.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -87,15 +65,6 @@ class HomeFragment : Fragment() {
         adapter = homeuserAdapter(artikelList)
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
-    }
-
-    private fun loadFragment(kode: Int) {
-        val navController = findNavController()
-        when (kode) {
-            1 -> navController.navigate(R.id.action_global_homeFragment)
-            2 -> navController.navigate(R.id.action_global_searchFragment)
-            else -> navController.navigate(R.id.action_global_myProfileFragment)
-        }
     }
 
     private fun topFragment(kode: Int) {

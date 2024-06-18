@@ -104,4 +104,8 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun changePassword(email:String, password:changePw){
         val newData = remoteDataSource.changePassword(email,password)
     }
+
+    suspend fun updateUserProfile(user: User) {
+        val updateData = remoteDataSource.updateUserProfile(user.username, user)
+    }
 }

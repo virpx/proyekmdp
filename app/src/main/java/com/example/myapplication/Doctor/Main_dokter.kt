@@ -32,6 +32,7 @@ class main_dokter : AppCompatActivity() {
         Companion.activeUser = activeUser
 
         container = findViewById(R.id.fragmentContainerView3)
+        container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_homeDocterFragment2)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView3)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->

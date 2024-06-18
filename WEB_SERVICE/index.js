@@ -505,7 +505,7 @@ app.post("/dokter/uploadartikel", async (req, res) => {
 });
 
 app.put("/dokter/:username", async function (req, res) {
-  const { foto_profile, email, fullname } = req.body;
+  const { foto_profile, email, fullname, lama_praktik } = req.body;
   const username = req.params.username;
   try {
     const user = await User.findByPk(username);
@@ -517,6 +517,7 @@ app.put("/dokter/:username", async function (req, res) {
       foto_profile,
       email,
       fullname,
+      lama_praktik,
     });
     return res.status(200).send(user);
   } catch (error) {
@@ -634,6 +635,26 @@ app.put("/changepassword/:email", async function (req, res) {
 
     await user.update({
       password: hashedPassword,
+    });
+    return res.status(200).send(user);
+  } catch (error) {
+    return res.status(500).send({ msg: "Server error", error: error.message });
+  }
+});
+
+app.put("/user/:username", async function (req, res) {
+  const { foto_profile, email, fullname } = req.body;
+  const username = req.params.username;
+  try {
+    const user = await User.findByPk(username);
+    if (!user) {
+      return res.status(404).send({ msg: "Not found" });
+    }
+
+    await user.update({
+      foto_profile,
+      email,
+      fullname,
     });
     return res.status(200).send(user);
   } catch (error) {

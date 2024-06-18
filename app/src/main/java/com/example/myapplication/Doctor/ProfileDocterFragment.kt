@@ -105,6 +105,7 @@ class ProfileDocterFragment : Fragment() {
                 currentUser.foto_profile = base64String
                 currentUser.email = binding.EmailETProfile.text.toString()
                 currentUser.fullname = binding.fullnameETProfile.text.toString()
+                currentUser.lama_praktik = binding.lamapraktikETProfile.text.toString().toInt()
 
                 // Call repository to update user
                 repository.updateDokterProfile(currentUser)
