@@ -3,8 +3,8 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const multer = require("multer");
 const nodemailer = require("nodemailer");
-const { translate } = require('@vitalets/google-translate-api');
-const translatte = require('translatte');
+const { translate } = require("@vitalets/google-translate-api");
+const translatte = require("translatte");
 const {
   DChat,
   FoodTrack,
@@ -17,7 +17,7 @@ const {
 } = require("./db");
 const { Sequelize, Op } = require("sequelize");
 const bcrypt = require("bcrypt");
-const axios = require("axios")
+const axios = require("axios");
 const app = express();
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
@@ -200,6 +200,7 @@ app.get("/admin/lreview/:username", async function (req, res) {
     var databaru = {
       nama: usere.fullname,
       isi: iterator.isi,
+      rating: iterator.rating,
     };
     datareturn.push(databaru);
   }
@@ -579,39 +580,36 @@ app.post(
       attach_foodtrack: "",
     });
     return res.status(200).send("sukses");
-  })
-app.post("/user/addchatbiasa/:idhchat/:pengirim/:penerima", async function (req, res) {
-  const { idhchat, pengirim, penerima } = req.params
-  const {
-    isi
-  } = req.body;
-  await DChat.create({
-    id_hchat: idhchat,
-    pengirim: pengirim,
-    penerima: penerima,
-    isi: isi,
-    attach_foodtrack: ""
-  })
-  return res.status(200).send("sukses")
-})
+  }
+);
+app.post(
+  "/user/addchatbiasa/:idhchat/:pengirim/:penerima",
+  async function (req, res) {
+    const { idhchat, pengirim, penerima } = req.params;
+    const { isi } = req.body;
+    await DChat.create({
+      id_hchat: idhchat,
+      pengirim: pengirim,
+      penerima: penerima,
+      isi: isi,
+      attach_foodtrack: "",
+    });
+    return res.status(200).send("sukses");
+  }
+);
 app.get("/user/getfoodtrack/:username", async function (req, res) {
-  const username = req.params.username
+  const username = req.params.username;
   const datae = await FoodTrack.findAll({
     where: {
-      username: username
+      username: username,
     },
-    order: [
-      ['date_add', 'DESC'],
-    ]
-  })
+    order: [["date_add", "DESC"]],
+  });
   for (const iterator of datae) {
-    iterator.date_add = formatDate2(
-      iterator.date_add
-    );
+    iterator.date_add = formatDate2(iterator.date_add);
   }
-  return res.status(200).send(datae)
-}
-);
+  return res.status(200).send(datae);
+});
 app.get("/user/getfoodtrack/:username", async function (req, res) {
   const username = req.params.username;
   const datae = await FoodTrack.findAll({
@@ -781,15 +779,18 @@ app.post(
   }
 );
 app.get("/user/searchfood", async function (req, res) {
-  const cari = req.query.cari
-  const { text } = await translatte(cari, { to: 'en' });
-  console.log(text)
-  const hasilnya = await axios.get('https://api.calorieninjas.com/v1/nutrition?query=' + text, {
-    headers: {
-      'X-Api-Key': 'cdh3uEi/kHaETOzigLob6w==IDo2pCTu0CyzeB4h'
+  const cari = req.query.cari;
+  const { text } = await translatte(cari, { to: "en" });
+  console.log(text);
+  const hasilnya = await axios.get(
+    "https://api.calorieninjas.com/v1/nutrition?query=" + text,
+    {
+      headers: {
+        "X-Api-Key": "cdh3uEi/kHaETOzigLob6w==IDo2pCTu0CyzeB4h",
+      },
     }
-  })
-  const hasilgizi = hasilnya.data.items
+  );
+  const hasilgizi = hasilnya.data.items;
   var hasildata = {
     calories: 0,
     protein: 0,
@@ -797,22 +798,22 @@ app.get("/user/searchfood", async function (req, res) {
     carbs: 0,
     fat: 0,
     cholesterol: 0,
-    sodium: 0
-  }
+    sodium: 0,
+  };
   for (const iterator of hasilgizi) {
-    hasildata.calories += iterator.calories / 100
-    hasildata.protein += iterator.protein_g / 100
-    hasildata.sugar += iterator.sugar_g / 100
-    hasildata.carbs += iterator.carbohydrates_total_g / 100
-    hasildata.fat += iterator.fat_total_g / 100
-    hasildata.cholesterol += (iterator.cholesterol_mg / 1000) / 100
-    hasildata.sodium += (iterator.sodium_mg / 1000) / 100
+    hasildata.calories += iterator.calories / 100;
+    hasildata.protein += iterator.protein_g / 100;
+    hasildata.sugar += iterator.sugar_g / 100;
+    hasildata.carbs += iterator.carbohydrates_total_g / 100;
+    hasildata.fat += iterator.fat_total_g / 100;
+    hasildata.cholesterol += iterator.cholesterol_mg / 1000 / 100;
+    hasildata.sodium += iterator.sodium_mg / 1000 / 100;
   }
-  console.log(hasildata)
-  return res.status(200).send(hasildata)
-})
+  console.log(hasildata);
+  return res.status(200).send(hasildata);
+});
 app.post("/user/addfoodtrack/:username", async function (req, res) {
-  console.log(req.body)
+  console.log(req.body);
   const {
     nama,
     jumlah,
@@ -822,9 +823,9 @@ app.post("/user/addfoodtrack/:username", async function (req, res) {
     carbs,
     fat,
     cholesterol,
-    sodium
-  } = req.body
-  const username = req.params.username
+    sodium,
+  } = req.body;
+  const username = req.params.username;
   await FoodTrack.create({
     username: username,
     nama: nama,
@@ -835,10 +836,10 @@ app.post("/user/addfoodtrack/:username", async function (req, res) {
     carbs: carbs,
     fat: fat,
     cholesterol: cholesterol,
-    sodium: sodium
-  })
-  return res.status(200).send("sukses")
-})
+    sodium: sodium,
+  });
+  return res.status(200).send("sukses");
+});
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

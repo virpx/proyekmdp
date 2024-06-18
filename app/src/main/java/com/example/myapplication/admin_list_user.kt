@@ -31,7 +31,6 @@ class admin_list_user : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Initialize RecyclerView, adapters, and layout manager
         rvne = view.findViewById(R.id.rvlistuser)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         adminadapter = adminadapter_luser(mutableListOf()) { username ->
@@ -41,7 +40,6 @@ class admin_list_user : Fragment() {
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
 
-        // Set click listeners for your TextViews
         view.findViewById<TextView>(R.id.textView38).setOnClickListener {
             view.findViewById<TextView>(R.id.textView38).setTypeface(null, Typeface.BOLD)
             view.findViewById<TextView>(R.id.textView37).setTypeface(null, Typeface.NORMAL)
@@ -56,12 +54,10 @@ class admin_list_user : Fragment() {
             viewModel.fetchData(pilih)
         }
 
-        // Observe LiveData from ViewModel
         viewModel.userData.observe(viewLifecycleOwner, Observer { users ->
             adminadapter.updateData(users)
         })
 
-        // Initial data fetch
         viewModel.fetchData(pilih)
     }
 }
