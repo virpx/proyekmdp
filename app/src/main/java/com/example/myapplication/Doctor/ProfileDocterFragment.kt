@@ -17,7 +17,6 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.example.myapplication.Database.User
-import com.example.myapplication.Doctor.main_dokter
 import com.example.myapplication.databinding.FragmentProfileDocterBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

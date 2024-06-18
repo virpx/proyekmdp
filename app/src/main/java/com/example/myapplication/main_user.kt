@@ -1,8 +1,8 @@
 package com.example.myapplication
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.findNavController
@@ -10,7 +10,6 @@ import androidx.room.Room
 import com.example.myapplication.Database.AppDatabase
 import com.example.myapplication.Database.DefaultRepository
 import com.example.myapplication.Database.MdpService
-import com.example.myapplication.Doctor.main_dokter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.GsonBuilder
 import com.squareup.moshi.Moshi
