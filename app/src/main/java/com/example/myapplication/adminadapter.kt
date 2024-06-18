@@ -82,9 +82,14 @@ class adminadapter_lreview(
 }
 
 class adminadapter_lartikel(
-    val data: MutableList<Admin_class_list_artikel>,
+    var data: MutableList<Admin_class_list_artikel>,
     val deleteartikel : ((Int)->Unit),
 ): RecyclerView.Adapter<adminadapter_lartikel.ViewHolder>(){
+
+    fun updateData(newData: List<Admin_class_list_artikel>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val judul:TextView = row.findViewById(R.id.textView41)
         val author:TextView = row.findViewById(R.id.textView44)
@@ -120,10 +125,16 @@ class adminadapter_lartikel(
 }
 
 class adminadapter_lregisdokter(
-    val data: MutableList<Admin_class_list_regis_dokter>,
+    var data: MutableList<Admin_class_list_regis_dokter>,
     val deletedokter : ((String)->Unit),
     val accdokter : ((String)->Unit)
 ): RecyclerView.Adapter<adminadapter_lregisdokter.ViewHolder>(){
+
+    fun updateData(newData: List<Admin_class_list_regis_dokter>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val nama:TextView = row.findViewById(R.id.textView46)
         val sekolahlulus:TextView = row.findViewById(R.id.textView47)

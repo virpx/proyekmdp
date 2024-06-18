@@ -135,4 +135,8 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun tambahfoodtrack(username:String,isi: Bodyaddfoodtrack){
         return remoteDataSource.tambahfoodtrack(username,isi)
     }
+
+    suspend fun createDokter(user: User) {
+        val newData = remoteDataSource.createDokter(user)
+    }
 }

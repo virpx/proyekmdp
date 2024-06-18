@@ -132,4 +132,7 @@ interface MdpService {
         @Path("username") username: String,
         @Body isi: Bodyaddfoodtrack
     )
+
+    @POST("registerdokter")
+    suspend fun createDokter(@Body user: User): User
 }

@@ -840,6 +840,51 @@ app.post("/user/addfoodtrack/:username", async function (req, res) {
   });
   return res.status(200).send("sukses");
 });
+
+app.post("/registerdokter", async function (req, res) {
+  const {
+    username,
+    email,
+    fullname,
+    password,
+    gender,
+    specialist,
+    sekolah,
+    tahun_lulus,
+    lama_praktik,
+    foto_profile,
+  } = req.body;
+  try {
+    let user = await User.findByPk(username);
+    if (user) {
+      return res.status(400).send({ msg: "Duplicate username" });
+    }
+
+    let dokter = await Dokterregis.findByPk(username);
+    if (dokter) {
+      return res.status(400).send({ msg: "Please Wait For Confirmation" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user = await Dokterregis.create({
+      username,
+      email,
+      fullname,
+      password: hashedPassword,
+      gender,
+      specialist,
+      sekolah,
+      tahun_lulus,
+      lama_praktik,
+      created_at,
+      foto_profile,
+    });
+    return res.status(201).send(user);
+  } catch (error) {
+    return res.status(500).send({ msg: "Server error", error: error.message });
+  }
+});
+
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);
