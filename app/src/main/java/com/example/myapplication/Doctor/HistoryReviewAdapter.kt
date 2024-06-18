@@ -9,8 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 
 class HistoryReviewAdapter(
-    val data: MutableList<Review>,
+    var data: MutableList<Review>,
 ) : RecyclerView.Adapter<HistoryReviewAdapter.HomeViewHolder>() {
+
+    fun updateData(newData: List<Review>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
 
 
     class HomeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

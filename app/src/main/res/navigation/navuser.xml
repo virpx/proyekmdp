@@ -92,4 +92,9 @@
         android:label="fragment_history_review_dokter"
         tools:layout="@layout/fragment_history_review_dokter" />
     <action android:id="@+id/action_global_historyReviewDokterFragment" app:destination="@id/historyReviewDokterFragment" />
+    <fragment
+        android:id="@+id/showfoodtrack"
+        android:name="com.example.myapplication.showfoodtrack"
+        android:label="fragment_showfoodtrack"
+        tools:layout="@layout/fragment_showfoodtrack" /><action android:id="@+id/action_global_showfoodtrack" app:destination="@id/showfoodtrack"/>
 </navigation>
