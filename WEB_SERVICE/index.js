@@ -662,6 +662,42 @@ app.put("/user/:username", async function (req, res) {
   }
 });
 
+app.get("/user/artikel", async function (req, res) {
+  try {
+    const artikel = await Artikel.findAll();
+    if (!artikel) {
+      return res.status(404).send({ msg: "not found" });
+    } else {
+      return res.status(200).send(artikel);
+    }
+  } catch (error) {
+    return res.status(500).send({ msg: "server error", error: error.message });
+  }
+});
+
+app.put("/updateViewArtikel", async function (req, res) {
+  const { judul, penulis, isi } = req.body;
+  try {
+    const artikel = await Artikel.findOne({
+      where: {
+        judul: { [Op.eq]: judul },
+        penulis: { [Op.eq]: penulis },
+        isi: { [Op.eq]: isi },
+      },
+    });
+    if (!artikel) {
+      return res.status(404).send({ msg: "Not found" });
+    }
+
+    await artikel.update({
+      view: artikel.view + 1,
+    });
+    return res.status(200).send(artikel);
+  } catch (error) {
+    return res.status(500).send({ msg: "Server error", error: error.message });
+  }
+});
+
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

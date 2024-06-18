@@ -9,10 +9,8 @@ import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
-import com.example.myapplication.User_class_list_artikel
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.KirimOtp
-import com.example.myapplication.User_class_list_dokter
 import com.example.myapplication.changePw
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
@@ -75,10 +73,10 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         return remoteDataSource.usergetbubble(id)
     }
 
-    suspend fun usergetartikel(): MutableList<User_class_list_artikel> {
+    suspend fun usergetartikel(): MutableList<Artikel> {
         return remoteDataSource.usergetartikel()
     }
-    suspend fun getdokters(): MutableList<User_class_list_dokter> {
+    suspend fun getdokters(): MutableList<User> {
         val allArticles = getdokters()
         return allArticles.filter { it.specialist != null }.toMutableList()
     }
@@ -107,5 +105,9 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
 
     suspend fun updateUserProfile(user: User) {
         val updateData = remoteDataSource.updateUserProfile(user.username, user)
+    }
+
+    suspend fun updateViewArtikel(artikel:Artikel) {
+        val updateData = remoteDataSource.updateViewArtikel(artikel)
     }
 }

@@ -64,4 +64,9 @@
         android:name="com.example.myapplication.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile" /><action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment"/>
+    <fragment
+        android:id="@+id/bacaArtikelFragment"
+        android:name="com.example.myapplication.User.BacaArtikelFragment"
+        android:label="fragment_baca_artikel"
+        tools:layout="@layout/fragment_baca_artikel" /><action android:id="@+id/action_global_bacaArtikelFragment" app:destination="@id/bacaArtikelFragment"/>
 </navigation>

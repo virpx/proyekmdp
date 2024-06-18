@@ -7,15 +7,16 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Database.User
 
 //data class SearchAdapter(
 //    val imageResId: Int,
 //    val title: String
 //)
 
-class SearchAdapter(private val data: MutableList<User_class_list_dokter>) :
+class SearchAdapter(private val data: MutableList<User>) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-    private var filteredData: MutableList<User_class_list_dokter> = data
+    private var filteredData: MutableList<User> = data
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageView20)
