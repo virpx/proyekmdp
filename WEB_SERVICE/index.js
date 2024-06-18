@@ -320,20 +320,24 @@ app.get("/getlistchat/:username", async function (req, res) {
   });
   var keluaran = [];
   for (const iterator of getchat) {
-    var namauser = iterator.user1;
+    var username_lawan = iterator.user1;
     if (iterator.user1 == username) {
-      namauser = iterator.user2;
+      username_lawan = iterator.user2;
     }
     const getnama = await User.findOne({
       where: {
-        username: namauser,
+        username: username_lawan,
       },
     });
-    namauser = getnama.fullname;
+    if (getnama.specialist != "") {
+      namauser = "Dr "+getnama.fullname;
+    } else {
+      namauser = getnama.fullname;
+    }
     keluaran.push({
       idhcat: iterator.id,
       gambar: "",
-      username: username,
+      username: username_lawan,
       nama: namauser,
     });
   }
@@ -374,6 +378,41 @@ function formatDate(isoString) {
   // Construct the final formatted string
   return `${day} ${month} ${year} ${formattedTime}`;
 }
+function formatDate2(isoString) {
+  // Create a Date object from the ISO string
+  const date = new Date(isoString);
+
+  // Define month names
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // Extract day, month, year, and time from the Date object
+  const day = date.getUTCDate();
+  const month = monthNames[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+  const hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+
+  // Format the time to ensure two digits for hours and minutes
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
+
+  // Construct the final formatted string
+  return `${day} ${month} ${year}`;
+}
 app.get("/getisichat/:idhchat", async function (req, res) {
   const hcatid = req.params.idhchat;
   const hasil = await DChat.findAll({
@@ -400,6 +439,7 @@ app.get("/getisichat/:idhchat", async function (req, res) {
     } else {
       attach_food.push({
         id: 0,
+        username: "",
         nama: "",
         jumlah: 0,
         calories: 0,
@@ -462,6 +502,7 @@ app.post("/dokter/uploadartikel", async (req, res) => {
     return res.status(500).send({ msg: "Internal Server Error" });
   }
 });
+<<<<<<< Updated upstream
 
 app.put("/dokter/:username", async function (req, res) {
   const { foto_profile, email, fullname } = req.body;
@@ -521,6 +562,39 @@ app.post("/sendotp", async (req, res) => {
   return res.status(200).json({ message: "Code sent to " + email });
 });
 
+=======
+app.post("/user/addchatbiasa/:idhchat/:pengirim/:penerima", async function (req, res) {
+  const { idhchat, pengirim, penerima } = req.params
+  const {
+    isi
+  } = req.body;
+  await DChat.create({
+    id_hchat: idhchat,
+    pengirim: pengirim,
+    penerima: penerima,
+    isi: isi,
+    attach_foodtrack: ""
+  })
+  return res.status(200).send("sukses")
+})
+app.get("/user/getfoodtrack/:username",async function(req,res){
+  const username = req.params.username
+  const datae = await FoodTrack.findAll({
+    where:{
+      username:username
+    },
+    order:[
+      ['date_add', 'DESC'],
+    ]
+  })
+  for (const iterator of datae) {
+    iterator.date_add = formatDate2(
+      iterator.date_add
+    );
+  }
+  return res.status(200).send(datae)
+})
+>>>>>>> Stashed changes
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

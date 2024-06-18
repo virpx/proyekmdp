@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navdokter"
-    app:startDestination="@id/homeDocterFragment2">
+    app:startDestination="@id/fragment_user_listchat">
 
     <fragment
         android:id="@+id/fragment_chat_main"
@@ -13,6 +13,9 @@
         <argument
             android:name="idhcat"
             app:argType="integer" />
+        <argument
+            android:name="username"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragment_user_listchat"
@@ -34,9 +37,16 @@
     <action android:id="@+id/action_global_buatArtikel" app:destination="@id/buatArtikel" />
     <action android:id="@+id/action_global_homeDocterFragment2" app:destination="@id/homeDocterFragment2" />
     <fragment
+<<<<<<< Updated upstream:app/src/main/res/navigation/navdokter.xml
         android:id="@+id/profileDocterFragment"
         android:name="com.example.myapplication.Doctor.ProfileDocterFragment"
         android:label="fragment_profile_docter"
         tools:layout="@layout/fragment_profile_docter" />
     <action android:id="@+id/action_global_profileDocterFragment" app:destination="@id/profileDocterFragment" />
+=======
+        android:id="@+id/chat_choose_food_track"
+        android:name="com.example.myapplication.chat_choose_food_track"
+        android:label="fragment_chat_choose_food_track"
+        tools:layout="@layout/fragment_chat_choose_food_track" /><action android:id="@+id/action_global_chat_choose_food_track" app:destination="@id/chat_choose_food_track"/>
+>>>>>>> Stashed changes:app/src/main/res/navigation/navuser.xml
 </navigation>

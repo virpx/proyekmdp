@@ -5,8 +5,10 @@ import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
+import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
+import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.User_class_list_artikel
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.User_class_list_dokter
@@ -82,8 +84,17 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun uploadArtikel(artikel:Artikel){
         val newData = remoteDataSource.uploadArtikel(artikel)
     }
+<<<<<<< Updated upstream
 
     suspend fun updateDokterProfile(user: User) {
         val updateData = remoteDataSource.updateDokterProfile(user.username, user)
+=======
+    suspend fun sendpesanbiasa(idhchat: Int, pengirim: String, penerima: String, isi: String) {
+        val chatBody = ChatBody(isi)
+        val newData = remoteDataSource.sendpesanbiasa(idhchat, pengirim, penerima, chatBody)
+    }
+    suspend fun getlistfoodtrack(username: String): MutableList<Classuniversal_foodtrack> {
+        return remoteDataSource.getlistfoodtrack(username)
+>>>>>>> Stashed changes
     }
 }

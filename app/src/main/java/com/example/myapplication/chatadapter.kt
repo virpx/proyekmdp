@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,7 +12,7 @@ import com.example.myapplication.Database.MockDB
 
 class chatlist_adapter(
     val data: MutableList<Classuniversal_chat>,
-    var pindahroomchat:((Int)->Unit)
+    var pindahroomchat:((Int,String,String)->Unit)
 ): RecyclerView.Adapter<chatlist_adapter.ViewHolder>(){
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val namauser: TextView = row.findViewById(R.id.textView52)
@@ -32,7 +33,7 @@ class chatlist_adapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var datae = data[position]
         holder.itemView.setOnClickListener {
-            pindahroomchat.invoke(datae.idhcat)
+            pindahroomchat.invoke(datae.idhcat,datae.username,datae.nama)
         }
         holder.namauser.text = datae.nama
     }
@@ -93,6 +94,32 @@ class chatbubble(
         }
         holder.isi_penerima.text = datae.isi
         holder.container_isi_pengirim
+    }
+
+}
+
+class list_foodtrack(
+    val data: MutableList<Classuniversal_foodtrack>,
+    var pindahroomchat:((Int,Boolean)->Unit)
+): RecyclerView.Adapter<list_foodtrack.ViewHolder>(){
+    class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
+        val checkbox:CheckBox = row.findViewById(R.id.checkBox)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context)
+        return ViewHolder(itemView.inflate(
+            R.layout.layout_chat_list_food_track_send, parent ,false
+        ))
+    }
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        var datae = data[position]
+        holder.checkbox.text = datae.nama+",jumlah : "+datae.jumlah.toString()+" ("+datae.date_add.toString()+")"
     }
 
 }

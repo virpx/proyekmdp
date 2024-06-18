@@ -5,14 +5,17 @@ import com.example.myapplication.Admin_class_list_artikel
 import com.example.myapplication.Admin_class_list_regis_dokter
 import com.example.myapplication.Admin_class_list_user
 import com.example.myapplication.Admin_class_review_user
+import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
+import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.User_class_list_artikel
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.User_class_list_dokter
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Headers
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -64,6 +67,15 @@ interface MdpService {
     suspend fun getdokters(): MutableList<User_class_list_dokter>
     @POST("/dokter/uploadartikel")
     suspend fun uploadArtikel(@Body artikel: Artikel): Artikel
+    @POST("user/addchatbiasa/{idhchat}/{pengirim}/{penerima}")
+    suspend fun sendpesanbiasa(
+        @Path("idhchat") idhchat: Int,
+        @Path("pengirim") pengirim: String,
+        @Path("penerima") penerima: String,
+        @Body isi: ChatBody
+    )
+    @GET("user/getfoodtrack/{username}")
+    suspend fun getlistfoodtrack(@Path("username") username: String): MutableList<Classuniversal_foodtrack>
 
     @PUT("dokter/{username}")
     suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User

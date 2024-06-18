@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         initRepository(baseContext)
         setContentView(R.layout.activity_main)
-//        val intent = Intent(this, main_dokter::class.java)
-//        startActivity(intent)
+        val intent = Intent(this, main_dokter::class.java)
+        startActivity(intent)
     }
 
     companion object{
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://10.10.1.49:3000/")
                 .build()
 
             Repository = DefaultRepository(

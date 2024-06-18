@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+<<<<<<< Updated upstream
 import com.example.myapplication.Doctor.main_dokter
+=======
+import com.example.myapplication.Database.MockDB
+import com.example.myapplication.Doctor.DokterFragmentDirections
+>>>>>>> Stashed changes
 import com.example.myapplication.databinding.FragmentLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -51,10 +56,12 @@ class LoginFragment : Fragment() {
                         if (msg == "Login successful") {
                             val role = response["role"]
                             if (role == "patient") {
+                                MockDB.usernamelogin = username
                                 showToastOnMainThread("Logged in as patient")
                                 findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
                             } else if (role == "doctor") {
                                 showToastOnMainThread("Logged in as doctor")
+                                MockDB.usernamelogin = username
                                 val intent = Intent(context, main_dokter::class.java)
                                 intent.putExtra("username", username)
                                 startActivity(intent)

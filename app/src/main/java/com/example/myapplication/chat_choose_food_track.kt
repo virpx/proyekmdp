@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
@@ -13,38 +12,37 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class fragment_user_listchat : Fragment() {
+class chat_choose_food_track : Fragment() {
     private val repository = MainActivity.Repository
     private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     lateinit var rvne: RecyclerView
-    lateinit var adminadapter: chatlist_adapter
+    lateinit var adminadapter: list_foodtrack
     lateinit var layoutManager: RecyclerView.LayoutManager
-    var datachate = mutableListOf(
-        Classuniversal_chat(-1,"","","")
+    var datafoodtracke = mutableListOf(
+        Classuniversal_foodtrack(-1,"","",0,0,0,0,0,0,0,0,"")
     )
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_listchat, container, false)
+        return inflater.inflate(R.layout.fragment_chat_choose_food_track, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvne = view.findViewById(R.id.rvne)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        adminadapter = chatlist_adapter(datachate,{idhchat,username,namachat->
-            MockDB.namaopenchat = namachat
-            val action = fragment_user_listchatDirections.actionGlobalFragmentChatMain(idhchat,username)
-            findNavController().navigate(action)
+        adminadapter = list_foodtrack(datafoodtracke,{
+            ide,status->
+
         })
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
         ioScope.launch {
-            datachate.clear()
-            var hasil = repository.usergetlistchat(MockDB.usernamelogin)
-            datachate.addAll(hasil)
+            datafoodtracke.clear()
+            var hasil = repository.getlistfoodtrack(MockDB.usernamelogin)
+            datafoodtracke.addAll(hasil)
             requireActivity().runOnUiThread {
                 adminadapter.notifyDataSetChanged()
             }
