@@ -562,37 +562,34 @@ app.post("/sendotp", async (req, res) => {
   return res.status(200).json({ message: "Code sent to " + email });
 });
 
-app.post("/user/addchatbiasa/:idhchat/:pengirim/:penerima", async function (req, res) {
-  const { idhchat, pengirim, penerima } = req.params
-  const {
-    isi
-  } = req.body;
-  await DChat.create({
-    id_hchat: idhchat,
-    pengirim: pengirim,
-    penerima: penerima,
-    isi: isi,
-    attach_foodtrack: ""
-  })
-  return res.status(200).send("sukses")
-})
-app.get("/user/getfoodtrack/:username",async function(req,res){
-  const username = req.params.username
-  const datae = await FoodTrack.findAll({
-    where:{
-      username:username
-    },
-    order:[
-      ['date_add', 'DESC'],
-    ]
-  })
-  for (const iterator of datae) {
-    iterator.date_add = formatDate2(
-      iterator.date_add
-    );
+app.post(
+  "/user/addchatbiasa/:idhchat/:pengirim/:penerima",
+  async function (req, res) {
+    const { idhchat, pengirim, penerima } = req.params;
+    const { isi } = req.body;
+    await DChat.create({
+      id_hchat: idhchat,
+      pengirim: pengirim,
+      penerima: penerima,
+      isi: isi,
+      attach_foodtrack: "",
+    });
+    return res.status(200).send("sukses");
   }
-  return res.status(200).send(datae)
-})
+);
+app.get("/user/getfoodtrack/:username", async function (req, res) {
+  const username = req.params.username;
+  const datae = await FoodTrack.findAll({
+    where: {
+      username: username,
+    },
+    order: [["date_add", "DESC"]],
+  });
+  for (const iterator of datae) {
+    iterator.date_add = formatDate2(iterator.date_add);
+  }
+  return res.status(200).send(datae);
+});
 app.post(
   "/user/addchatbiasa/:idhchat/:pengirim/:penerima",
   async function (req, res) {

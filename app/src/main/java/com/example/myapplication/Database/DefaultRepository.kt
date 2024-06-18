@@ -13,6 +13,7 @@ import com.example.myapplication.User_class_list_artikel
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.User_class_list_dokter
+import com.example.myapplication.changePw
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
 
@@ -100,7 +101,7 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         val newData = remoteDataSource.sendotp(dataotp)
     }
 
-    suspend fun changePassword(email:String, password:String){
+    suspend fun changePassword(email:String, password:changePw){
         val newData = remoteDataSource.changePassword(email,password)
     }
 }

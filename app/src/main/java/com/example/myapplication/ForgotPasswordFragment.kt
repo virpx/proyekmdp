@@ -8,23 +8,24 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.myapplication.databinding.FragmentForgotPasswordBinding
-import com.example.myapplication.databinding.FragmentLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
-data class KirimOtp(val otp:String, var email:String)
+data class KirimOtp(val otp: String, var email: String)
+data class changePw(val password: String)
 
 class ForgotPasswordFragment : Fragment() {
 
-    private lateinit var binding:FragmentForgotPasswordBinding
+    private lateinit var binding: FragmentForgotPasswordBinding
     private val repository = MainActivity.Repository
     private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     var otp = ""
-    var email =""
+    var email = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +49,6 @@ class ForgotPasswordFragment : Fragment() {
         binding.newPwET.visibility = EditText.INVISIBLE
 
         binding.btnOTP.setOnClickListener {
-            val otpLength = 6
-            otp = generateOtp(otpLength)
             email = binding.editTextEmail.text.toString()
 
             if (email.isEmpty()) {
@@ -63,9 +62,17 @@ class ForgotPasswordFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            ioScope.launch {
-                repository.sendotp(KirimOtp(otp,email))
-                showToastOnMainThread("Code sent to ${email}")
+            lifecycleScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val otpLength = 6
+                    otp = generateOtp(otpLength)
+                    try {
+                        repository.sendotp(KirimOtp(otp, email))
+                        showToastOnMainThread("Code sent to $email")
+                    } catch (e: Exception) {
+                        showToastOnMainThread("Failed to send OTP")
+                    }
+                }
             }
         }
 
@@ -77,7 +84,7 @@ class ForgotPasswordFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if(codeotp == otp){
+            if (codeotp == otp) {
                 binding.editTextEmail.visibility = EditText.INVISIBLE
                 binding.codeOTPET.visibility = EditText.INVISIBLE
                 binding.btnSubmitOTP.visibility = Button.INVISIBLE
@@ -120,7 +127,8 @@ class ForgotPasswordFragment : Fragment() {
             }
 
             ioScope.launch {
-                repository.changePassword(email,password)
+                var pw = changePw(password)
+                repository.changePassword(email, pw)
 
                 showToastOnMainThread("Password Changed")
             }
