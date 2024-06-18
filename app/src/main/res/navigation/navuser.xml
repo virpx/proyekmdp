@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navdokter"
-    app:startDestination="@id/fragment_user_listchat">
+    app:startDestination="@id/blankFragment">
 
     <fragment
         android:id="@+id/fragment_chat_main"
@@ -106,5 +106,6 @@
         <argument
             android:name="idhchat"
             app:argType="integer" />
-    </fragment><action android:id="@+id/action_global_endchat" app:destination="@id/endchat"/>
+    </fragment>
+    <action android:id="@+id/action_global_endchat" app:destination="@id/endchat" />
 </navigation>

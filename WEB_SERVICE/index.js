@@ -754,9 +754,12 @@ app.get("/average-rating/:username_target", async (req, res) => {
         username_target: username_target,
       },
     });
-
     const averageRating = result[0].dataValues.averageRating;
-    return res.status(200).json({ username_target, averageRating });
+    if (!averageRating) {
+      return res.status(200).json({ username_target, averageRating:0 });
+    } else {
+      return res.status(200).json({ username_target, averageRating });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Internal Server Error" });
@@ -886,19 +889,21 @@ app.post("/registerdokter", async function (req, res) {
 });
 app.get("/dokter/reviewuser/:idhcat/:usernamelawan/:username", async function (req, res) {
   const { idhcat, usernamelawan, username } = req.params
-  const { isi,rating,kesimpulan } = req.query
+  const { isi, rating, kesimpulan } = req.query
   await Review.create({
     username_pengirim: username,
     username_target: usernamelawan,
     isi: isi,
-    rating:rating,
+    rating: rating,
   })
   await HChat.update(
-    { selesai: 1,
-    kesimpulan:kesimpulan },
+    {
+      selesai: 1,
+      kesimpulan: kesimpulan
+    },
     {
       where: {
-        id:idhcat
+        id: idhcat
       },
     },)
   return res.status(200).send("sukses")
