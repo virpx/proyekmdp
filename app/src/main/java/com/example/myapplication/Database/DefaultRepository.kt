@@ -10,11 +10,7 @@ import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
-<<<<<<< Updated upstream
-=======
 import com.example.myapplication.Classuniversal_hasilgizi
-import com.example.myapplication.User_class_list_artikel
->>>>>>> Stashed changes
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
@@ -105,7 +101,6 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun sendotp(dataotp:KirimOtp){
         val newData = remoteDataSource.sendotp(dataotp)
     }
-<<<<<<< Updated upstream
 
     suspend fun changePassword(email:String, password:changePw){
         val newData = remoteDataSource.changePassword(email,password)
@@ -123,10 +118,9 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         return remoteDataSource.gethistoryreview(username_target)
     }
 
-    suspend fun getAverageRating(username_target: String):Map<String, String>{
+    suspend fun getAverageRating(username_target: String):Map<String, String> {
         return remoteDataSource.getAverageRating(username_target)
-=======
-    
+    }
     suspend fun changePassword(email:String, password:String){
         val newData = remoteDataSource.changePassword(email,password)
     }
@@ -140,6 +134,5 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     }
     suspend fun tambahfoodtrack(username:String,isi: Bodyaddfoodtrack){
         return remoteDataSource.tambahfoodtrack(username,isi)
->>>>>>> Stashed changes
     }
 }

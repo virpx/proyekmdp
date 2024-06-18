@@ -566,7 +566,6 @@ app.post("/sendotp", async (req, res) => {
   return res.status(200).json({ message: "Code sent to " + email });
 });
 
-<<<<<<< Updated upstream
 app.post(
   "/user/addchatbiasa/:idhchat/:pengirim/:penerima",
   async function (req, res) {
@@ -580,7 +579,7 @@ app.post(
       attach_foodtrack: "",
     });
     return res.status(200).send("sukses");
-=======
+  })
 app.post("/user/addchatbiasa/:idhchat/:pengirim/:penerima", async function (req, res) {
   const { idhchat, pengirim, penerima } = req.params
   const {
@@ -609,8 +608,8 @@ app.get("/user/getfoodtrack/:username", async function (req, res) {
     iterator.date_add = formatDate2(
       iterator.date_add
     );
->>>>>>> Stashed changes
   }
+}
 );
 app.get("/user/getfoodtrack/:username", async function (req, res) {
   const username = req.params.username;
@@ -675,7 +674,6 @@ app.put("/changepassword/:email", async function (req, res) {
     return res.status(500).send({ msg: "Server error", error: error.message });
   }
 });
-<<<<<<< Updated upstream
 
 app.put("/user/:username", async function (req, res) {
   const { foto_profile, email, fullname } = req.body;
@@ -766,7 +764,6 @@ app.get("/average-rating/:username_target", async (req, res) => {
   }
 });
 
-=======
 app.post(
   "/user/addchatfoodtrack/:idhchat/:pengirim/:penerima",
   async function (req, res) {
@@ -841,7 +838,6 @@ app.post("/user/addfoodtrack/:username", async function (req, res) {
   })
   return res.status(200).send("sukses")
 })
->>>>>>> Stashed changes
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

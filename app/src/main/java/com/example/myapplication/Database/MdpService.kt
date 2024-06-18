@@ -10,11 +10,7 @@ import com.example.myapplication.ChatBody
 import com.example.myapplication.Classuniversal_bubble
 import com.example.myapplication.Classuniversal_chat
 import com.example.myapplication.Classuniversal_foodtrack
-<<<<<<< Updated upstream
-=======
 import com.example.myapplication.Classuniversal_hasilgizi
-import com.example.myapplication.User_class_list_artikel
->>>>>>> Stashed changes
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
@@ -103,7 +99,6 @@ interface MdpService {
     suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User
     
     @POST("sendotp")
-<<<<<<< Updated upstream
     suspend fun sendotp(@Body dataotp: KirimOtp): KirimOtp
 
     @PUT("changepassword/{email}")
@@ -120,12 +115,6 @@ interface MdpService {
 
     @GET("/average-rating/{username_target}")
     suspend fun getAverageRating(@Path("username_target") usernameTarget: String): Map<String,String>
-
-
-}
-=======
-    suspend fun sendotp(@Body dataotp:KirimOtp):KirimOtp
-    
     @PUT("changepassword/{email}")
     suspend fun changePassword(@Path("email")email:String, @Body password:String)
     
@@ -144,4 +133,3 @@ interface MdpService {
         @Body isi: Bodyaddfoodtrack
     )
 }
->>>>>>> Stashed changes
