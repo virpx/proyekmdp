@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.Database.MockDB
 import com.example.myapplication.Doctor.main_dokter
 import com.example.myapplication.databinding.FragmentLoginBinding
 import com.example.myapplication.viewmodel.LoginViewModel
@@ -61,16 +62,25 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToMainScreen(role: String, username: String) {
+        MockDB.usernamelogin = username
         val intent = when (role) {
-            "patient" -> Intent(context, main_user::class.java)
+            "patient" ->Intent(context, main_user::class.java)
             "doctor" -> Intent(context, main_dokter::class.java)
+            else -> null
+        }
+        when (role) {
+            "patient" ->{
+                MockDB.userloginrole = 0
+            }
+            "doctor" -> {
+                MockDB.userloginrole = 1
+            }
             else -> null
         }
         intent?.putExtra("username", username)
         startActivity(intent!!)
         activity?.finish()
     }
-
     private fun showToast(message: String) {
         requireActivity().runOnUiThread {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

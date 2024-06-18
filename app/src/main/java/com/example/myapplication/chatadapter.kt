@@ -119,7 +119,7 @@ class list_foodtrack(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var datae = data[position]
-        holder.checkbox.text = datae.nama+",jumlah : "+datae.jumlah.toString()+" ("+datae.date_add.toString()+")"
+        holder.checkbox.text = datae.nama+",jumlah : "+datae.jumlah.toString()+"g ("+datae.date_add.toString()+")"
         holder.checkbox.setOnClickListener {
             cekid.invoke(datae.id,holder.checkbox.isChecked)
         }

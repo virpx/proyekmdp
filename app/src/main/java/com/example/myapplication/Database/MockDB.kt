@@ -8,4 +8,7 @@ object MockDB {
     var namaopenchat:String = ""
     var gambaropenchat:String = ""
     var activeArtikel:Artikel = Artikel("", "", "", 0,"")
+    //0 = standar
+    //1 = dokter
+    var userloginrole = -1
 }

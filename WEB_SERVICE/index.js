@@ -609,6 +609,7 @@ app.get("/user/getfoodtrack/:username", async function (req, res) {
       iterator.date_add
     );
   }
+  return res.status(200).send(datae)
 }
 );
 app.get("/user/getfoodtrack/:username", async function (req, res) {
