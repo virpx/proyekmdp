@@ -139,7 +139,7 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun createDokter(user: User) {
         val newData = remoteDataSource.createDokter(user)
     }
-    suspend fun endchatdokter(idhcat:Int,usernamelawan:String,username:String,isi: String,rating:Float) {
-        val newData = remoteDataSource.endchatdokter(idhcat,usernamelawan,username,isi,rating)
+    suspend fun endchatdokter(idhcat:Int,usernamelawan:String,username:String,isi: String,rating:Float,kesimpulan:String) {
+        val newData = remoteDataSource.endchatdokter(idhcat,usernamelawan,username,isi,rating,kesimpulan)
     }
 }

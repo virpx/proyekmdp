@@ -29,12 +29,13 @@ class endchat : Fragment() {
         var idhcat = endchatArgs?.fromBundle(arguments as Bundle)?.idhchat!!
         view.findViewById<Button>(R.id.button).setOnClickListener {
             var reviewuser = view.findViewById<TextView>(R.id.editTextText).text.toString()
+            var kesimpulan = view.findViewById<TextView>(R.id.editTextText2).text.toString()
             var ratinguser = view.findViewById<TextView>(R.id.editTextNumberDecimal).text.toString()
-            if(reviewuser != "" && ratinguser != ""){
+            if(reviewuser != "" && ratinguser != "" && kesimpulan != ""){
                 var ratinguserr = view.findViewById<TextView>(R.id.editTextNumberDecimal).text.toString().toFloat()
                 if(ratinguserr >=1 && ratinguserr<=5){
                     ioScope.launch {
-                        repository.endchatdokter(idhcat,MockDB.usernamechatopen,MockDB.usernamelogin,reviewuser,ratinguserr)
+                        repository.endchatdokter(idhcat,MockDB.usernamechatopen,MockDB.usernamelogin,reviewuser,ratinguserr,kesimpulan)
                         requireActivity().runOnUiThread {
                             findNavController().navigate(R.id.action_global_fragment_user_listchat)
                         }

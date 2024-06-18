@@ -7,6 +7,14 @@
     tools:context=".endchat">
 
     <EditText
+        android:id="@+id/editTextText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Masukkan Kesimpulan"
+        android:inputType="text" />
+
+    <EditText
         android:id="@+id/editTextNumberDecimal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -886,15 +886,16 @@ app.post("/registerdokter", async function (req, res) {
 });
 app.get("/dokter/reviewuser/:idhcat/:usernamelawan/:username", async function (req, res) {
   const { idhcat, usernamelawan, username } = req.params
-  const { isi,rating } = req.query
+  const { isi,rating,kesimpulan } = req.query
   await Review.create({
     username_pengirim: username,
     username_target: usernamelawan,
     isi: isi,
-    rating:rating
+    rating:rating,
   })
   await HChat.update(
-    { selesai: 1 },
+    { selesai: 1,
+    kesimpulan:kesimpulan },
     {
       where: {
         id:idhcat

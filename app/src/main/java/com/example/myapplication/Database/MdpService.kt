@@ -135,5 +135,5 @@ interface MdpService {
     @POST("registerdokter")
     suspend fun createDokter(@Body user: User): User
     @GET("dokter/reviewuser/{idhcat}/{usernamelawan}/{username}")
-    suspend fun endchatdokter(@Path("idhcat") idhcat:Int,@Path("usernamelawan") usernamelawan:String,@Path("username") username:String,@Query("isi") isi: String,@Query("rating") rating: Float)
+    suspend fun endchatdokter(@Path("idhcat") idhcat:Int,@Path("usernamelawan") usernamelawan:String,@Path("username") username:String,@Query("isi") isi: String,@Query("rating") rating: Float,@Query("kesimpulan") kesimpulan: String)
 }

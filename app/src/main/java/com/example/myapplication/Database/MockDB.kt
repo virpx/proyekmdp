@@ -11,6 +11,6 @@ object MockDB {
     var activeArtikel:Artikel = Artikel("", "", "", 0,"")
     //0 = standar
     //1 = dokter
-    var userloginrole = 0
+    var userloginrole = 1
     lateinit var datashowfoodtrack:List<Classuniversal_foodtrack>
 }

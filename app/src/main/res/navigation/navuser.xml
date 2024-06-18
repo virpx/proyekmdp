@@ -96,9 +96,6 @@
         android:id="@+id/showfoodtrack"
         android:name="com.example.myapplication.showfoodtrack"
         android:label="fragment_showfoodtrack"
-<<<<<<< Updated upstream
-        tools:layout="@layout/fragment_showfoodtrack" /><action android:id="@+id/action_global_showfoodtrack" app:destination="@id/showfoodtrack"/>
-=======
         tools:layout="@layout/fragment_showfoodtrack" />
     <action android:id="@+id/action_global_showfoodtrack" app:destination="@id/showfoodtrack" />
     <fragment
@@ -110,5 +107,4 @@
             android:name="idhchat"
             app:argType="integer" />
     </fragment><action android:id="@+id/action_global_endchat" app:destination="@id/endchat"/>
->>>>>>> Stashed changes
 </navigation>
