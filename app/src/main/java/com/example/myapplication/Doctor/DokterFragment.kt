@@ -100,7 +100,7 @@ class DokterFragment : Fragment() {
                 lama_praktik = lamapraktik,
                 foto_profile = ""
             )
-            repository.createUser(newUser)
+            repository.createDokter(newUser)
             showToastOnMainThread("Registration Successful")
         }
         findNavController().navigate(DokterFragmentDirections.actionGlobalLoginFragment())

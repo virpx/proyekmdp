@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
@@ -47,17 +48,23 @@ class adminadapter_luser(
 }
 
 class adminadapter_lreview(
-    val data: MutableList<Admin_class_review_user>,
+    var data: MutableList<Admin_class_review_user>,
 ): RecyclerView.Adapter<adminadapter_lreview.ViewHolder>(){
+
+    fun updateData(newData: List<Admin_class_review_user>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
-        val namauser:TextView = row.findViewById(R.id.textView42)
-        val isi:TextView = row.findViewById(R.id.textView43)
+        val namauser: TextView= itemView.findViewById(R.id.usernameTvReviewHistory)
+        val rating: RatingBar = itemView.findViewById(R.id.ratingBarHistoryReview)
+        val isi: TextView = itemView.findViewById(R.id.isiTvReviewHistory)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
         return ViewHolder(itemView.inflate(
-            R.layout.layout_admin_user_review, parent ,false
+            R.layout.layout_history_review_dokter, parent ,false
         ))
     }
 
@@ -69,14 +76,20 @@ class adminadapter_lreview(
         var datae = data[position]
         holder.namauser.text = datae.nama
         holder.isi.text = datae.isi
+        holder.rating.rating = datae.rating.toString().toFloat()
     }
 
 }
 
 class adminadapter_lartikel(
-    val data: MutableList<Admin_class_list_artikel>,
+    var data: MutableList<Admin_class_list_artikel>,
     val deleteartikel : ((Int)->Unit),
 ): RecyclerView.Adapter<adminadapter_lartikel.ViewHolder>(){
+
+    fun updateData(newData: List<Admin_class_list_artikel>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val judul:TextView = row.findViewById(R.id.textView41)
         val author:TextView = row.findViewById(R.id.textView44)
@@ -112,10 +125,16 @@ class adminadapter_lartikel(
 }
 
 class adminadapter_lregisdokter(
-    val data: MutableList<Admin_class_list_regis_dokter>,
+    var data: MutableList<Admin_class_list_regis_dokter>,
     val deletedokter : ((String)->Unit),
     val accdokter : ((String)->Unit)
 ): RecyclerView.Adapter<adminadapter_lregisdokter.ViewHolder>(){
+
+    fun updateData(newData: List<Admin_class_list_regis_dokter>) {
+        data = newData.toMutableList()
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val nama:TextView = row.findViewById(R.id.textView46)
         val sekolahlulus:TextView = row.findViewById(R.id.textView47)

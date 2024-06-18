@@ -13,12 +13,10 @@ class AdminListUserViewModel : ViewModel() {
     private val repository = MainActivity.Repository
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
-    // LiveData to hold the list of users
     private val _userData = MutableLiveData<List<Admin_class_list_user>>()
     val userData: LiveData<List<Admin_class_list_user>>
         get() = _userData
 
-    // Function to fetch user data from repository
     fun fetchData(pilih: Int) {
         ioScope.launch {
             val hasil = repository.admingetluser()
