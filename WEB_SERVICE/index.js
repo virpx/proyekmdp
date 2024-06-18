@@ -502,7 +502,6 @@ app.post("/dokter/uploadartikel", async (req, res) => {
     return res.status(500).send({ msg: "Internal Server Error" });
   }
 });
-<<<<<<< Updated upstream
 
 app.put("/dokter/:username", async function (req, res) {
   const { foto_profile, email, fullname } = req.body;
@@ -562,7 +561,6 @@ app.post("/sendotp", async (req, res) => {
   return res.status(200).json({ message: "Code sent to " + email });
 });
 
-=======
 app.post("/user/addchatbiasa/:idhchat/:pengirim/:penerima", async function (req, res) {
   const { idhchat, pengirim, penerima } = req.params
   const {
@@ -594,7 +592,6 @@ app.get("/user/getfoodtrack/:username",async function(req,res){
   }
   return res.status(200).send(datae)
 })
->>>>>>> Stashed changes
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-<<<<<<< Updated upstream
 import com.example.myapplication.Doctor.main_dokter
-=======
 import com.example.myapplication.Database.MockDB
 import com.example.myapplication.Doctor.DokterFragmentDirections
->>>>>>> Stashed changes
 import com.example.myapplication.databinding.FragmentLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

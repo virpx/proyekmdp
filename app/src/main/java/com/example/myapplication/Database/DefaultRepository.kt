@@ -84,17 +84,14 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun uploadArtikel(artikel:Artikel){
         val newData = remoteDataSource.uploadArtikel(artikel)
     }
-<<<<<<< Updated upstream
-
     suspend fun updateDokterProfile(user: User) {
         val updateData = remoteDataSource.updateDokterProfile(user.username, user)
-=======
+    }
     suspend fun sendpesanbiasa(idhchat: Int, pengirim: String, penerima: String, isi: String) {
         val chatBody = ChatBody(isi)
         val newData = remoteDataSource.sendpesanbiasa(idhchat, pengirim, penerima, chatBody)
     }
     suspend fun getlistfoodtrack(username: String): MutableList<Classuniversal_foodtrack> {
         return remoteDataSource.getlistfoodtrack(username)
->>>>>>> Stashed changes
     }
 }

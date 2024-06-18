@@ -86,6 +86,10 @@ const FoodTrack = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
+    username:{
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     nama: {
       type: DataTypes.TEXT,
       allowNull: false,
@@ -128,57 +132,10 @@ const FoodTrack = sequelize.define(
       defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
     },
   },
-<<<<<<< Updated upstream
   {
     tableName: "food_track",
     timestamps: false,
     charset: "latin1",
-=======
-  username: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  nama: {
-    type: DataTypes.TEXT,
-    allowNull: false
-  },
-  jumlah: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  calories: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  protein: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  sugar: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  carbs: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  fat: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  cholesterol: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  sodium: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  date_add: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
->>>>>>> Stashed changes
   }
 );
 
