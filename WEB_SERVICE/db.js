@@ -86,7 +86,7 @@ const FoodTrack = sequelize.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    username:{
+    username: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -217,6 +217,10 @@ const Review = sequelize.define(
     },
     isi: {
       type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    rating: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
