@@ -28,6 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BottomNavigationViewSearch"
         android:layout_width="409dp"
         android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"

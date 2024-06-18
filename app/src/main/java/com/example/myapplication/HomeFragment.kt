@@ -5,32 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.databinding.FragmentLoginBinding
+import com.example.myapplication.databinding.FragmentHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-
 
 class HomeFragment : Fragment() {
 
-    lateinit var container: FragmentContainerView
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: homeuserAdapter
     private lateinit var artikelList: MutableList<User_class_list_artikel>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
 
         val bottomNavigationView = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
@@ -89,36 +87,29 @@ class HomeFragment : Fragment() {
         adapter = homeuserAdapter(artikelList)
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
-
     }
 
-    private fun loadFragment(kode:Int) {
-        if (kode == 1) {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_homeFragment)
-        } else if (kode == 2) {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_searchFragment)
-        } else {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_myProfileFragment)
+    private fun loadFragment(kode: Int) {
+        val navController = findNavController()
+        when (kode) {
+            1 -> navController.navigate(R.id.action_global_homeFragment)
+            2 -> navController.navigate(R.id.action_global_searchFragment)
+            else -> navController.navigate(R.id.action_global_myProfileFragment)
         }
     }
 
-    private fun topFragment(kode:Int) {
-        if (kode == 1) {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_homeFragment)
-        } else if (kode == 2) {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_homeFragment)
+    private fun topFragment(kode: Int) {
+        val navController = findNavController()
+        when (kode) {
+            1 -> navController.navigate(R.id.action_global_homeFragment)
+            2 -> navController.navigate(R.id.action_global_homeFragment)
+            3 -> navController.navigate(R.id.action_global_homeFragment)
+//            4 -> navController.navigate(R.id.action_global_chatFragment)
         }
-        else if (kode == 3) {
-            container.getFragment<Fragment>().findNavController()
-                .navigate(R.id.action_global_homeFragment)
-        }else {
-//            container.getFragment<Fragment>().findNavController()
-//                .navigate(R.id.action_global_chatFragment)
-        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

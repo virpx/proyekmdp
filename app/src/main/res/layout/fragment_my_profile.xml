@@ -88,6 +88,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/BottomNavigationViewProfileUser"
         android:layout_width="409dp"
         android:layout_height="81dp"
         android:layout_marginTop="648dp"

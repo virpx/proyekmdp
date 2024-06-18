@@ -14,12 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-
 class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SearchAdapter
     private val searchItemList = mutableListOf<User_class_list_dokter>()
-    lateinit var container: FragmentContainerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,22 +37,22 @@ class SearchFragment : Fragment() {
         recyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
 
-        val navbatom = view.findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+        val navbatom = view.findViewById<BottomNavigationView>(R.id.BottomNavigationViewSearch)
         navbatom.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId){
                 R.id.home -> {
                     // Handle home navigation
-                    container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_homeFragment)
+                    findNavController().navigate(R.id.action_global_homeFragment)
                     true
                 }
                 R.id.search -> {
                     // Handle dashboard navigation
-                    container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_searchFragment)
+                    findNavController().navigate(R.id.action_global_searchFragment)
                     true
                 }
                 R.id.profile -> {
                     // Handle notifications navigation
-                    container.getFragment<Fragment>().findNavController().navigate(R.id.action_global_myProfileFragment)
+                    findNavController().navigate(R.id.action_global_myProfileFragment)
                     true
                 }
                 else -> false
