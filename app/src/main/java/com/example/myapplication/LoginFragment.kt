@@ -7,30 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.myapplication.Database.MockDB
 import com.example.myapplication.Doctor.main_dokter
 import com.example.myapplication.databinding.FragmentLoginBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.example.myapplication.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
-    private val repository = MainActivity.Repository
-    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout using DataBindingUtil
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         binding.btnRegister.setOnClickListener {
             findNavController().navigate(LoginFragmentDirections.actionGlobalUserFragment())
@@ -41,38 +39,17 @@ class LoginFragment : Fragment() {
             val password = binding.passwordET.text.toString()
 
             if (username.isEmpty() || password.isEmpty()) {
-                showToastOnMainThread("Username and password must not be empty")
+                showToast("Username and password must not be empty")
             } else {
-                ioScope.launch {
-                    try {
-                        val loginRequest = mapOf("username" to username, "password" to password)
-                        val response = repository.loginUser(loginRequest)
-                        val msg = response["msg"]
-
-                        if (msg == "Login successful") {
-                            val role = response["role"]
-                            if (role == "patient") {
-                                showToastOnMainThread("Logged in as patient")
-                                MockDB.usernamelogin = username
-                                val intent = Intent(context, main_user::class.java)
-                                intent.putExtra("username", username)
-                                startActivity(intent)
-
-                                activity?.finish()
-                            } else if (role == "doctor") {
-                                showToastOnMainThread("Logged in as doctor")
-                                MockDB.usernamelogin = username
-                                val intent = Intent(context, main_dokter::class.java)
-                                intent.putExtra("username", username)
-                                startActivity(intent)
-
-                                activity?.finish()
-                            }
-                        } else {
-                            showToastOnMainThread(msg!!)
+                viewModel.loginUser(username, password) { result ->
+                    when (result) {
+                        is LoginViewModel.LoginResult.Success -> {
+                            showToast(result.message)
+                            navigateToMainScreen(result.role, username)
                         }
-                    } catch (e: Exception) {
-                        showToastOnMainThread("Login failed: ${e.message}")
+                        is LoginViewModel.LoginResult.Error -> {
+                            showToast(result.errorMessage)
+                        }
                     }
                 }
             }
@@ -83,8 +60,19 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showToastOnMainThread(message: String) {
-        CoroutineScope(Dispatchers.Main).launch {
+    private fun navigateToMainScreen(role: String, username: String) {
+        val intent = when (role) {
+            "patient" -> Intent(context, main_user::class.java)
+            "doctor" -> Intent(context, main_dokter::class.java)
+            else -> null
+        }
+        intent?.putExtra("username", username)
+        startActivity(intent!!)
+        activity?.finish()
+    }
+
+    private fun showToast(message: String) {
+        requireActivity().runOnUiThread {
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         }
     }
