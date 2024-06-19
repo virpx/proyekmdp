@@ -766,19 +766,23 @@ app.get("/average-rating/:username_target", async (req, res) => {
   }
 });
 
-app.get("/user/doctor", async function(req, res) {
+app.get("/user/doctor", async function (req, res) {
   try {
     const allDoctors = await User.findAll({
       where: {
         specialist: {
-          [Op.ne]: ""
-        }
-      }
+          [Op.ne]: "",
+        },
+      },
     });
-    res.status(200).json({ status: 200, data: allDoctors });
+    res.status(200).json(allDoctors);
   } catch (error) {
-    console.error('Error fetching doctors:', error);
-    res.status(500).json({ status: 500, message: 'Error fetching doctors', error: error.message });
+    console.error("Error fetching doctors:", error);
+    res.status(500).json({
+      status: 500,
+      message: "Error fetching doctors",
+      error: error.message,
+    });
   }
 });
 

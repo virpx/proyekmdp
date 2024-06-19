@@ -78,7 +78,7 @@ interface MdpService {
     @GET("user/artikel")
     suspend fun usergetartikel(): MutableList<Artikel>
 
-    @GET("user/dokter")
+    @GET("user/doctor")
     suspend fun getdokters(): MutableList<User>
 
     @POST("/dokter/uploadartikel")

@@ -36,50 +36,54 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewSearch)
         recyclerView.layoutManager = LinearLayoutManager(context)
         adapter = SearchAdapter(searchItemList)
+        recyclerView.adapter = adapter
 
+        // Fetch data from repository
+        fetchData()
+
+        // Set up EditText for search
+        val searchEditText = view.findViewById<EditText>(R.id.editTextText6)
+        searchEditText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // No-op
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No-op
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter(s.toString())
+            }
+        })
+    }
+
+    private fun fetchData() {
         ioScope.launch {
             try {
                 val dok = repository.getdokters()
-                println(dok)
                 withContext(Dispatchers.Main) {
-                    searchItemList = dok.toMutableList()
-                    adapter = SearchAdapter(searchItemList)
-                    recyclerView.adapter = adapter
+                    searchItemList.clear()
+                    searchItemList.addAll(dok)
                     adapter.notifyDataSetChanged()
                 }
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
-                    // Handle HTTP errors here, e.g., show a Toast or Snackbar
-                    Toast.makeText(context, "Failed to load data: ${e.message}", Toast.LENGTH_LONG).show()
+                    showToast("Failed to load data: ${e.message}")
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    // Handle general errors here
-                    Toast.makeText(context, "An error occurred: ${e.message}", Toast.LENGTH_LONG).show()
+                    showToast("An error occurred: ${e.message}")
                 }
             }
         }
+    }
 
-        // Initialize RecyclerView
-
-
-        // Set up EditText for search
-//        val searchEditText = view.findViewById<EditText>(R.id.editTextText6)
-//        searchEditText.addTextChangedListener(object : TextWatcher {
-//            override fun afterTextChanged(s: Editable?) {
-//                // No-op
-//            }
-//
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                // No-op
-//            }
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//                adapter.filter(s.toString())
-//            }
-//        })
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }
