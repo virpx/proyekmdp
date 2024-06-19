@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.User
 
 import android.Manifest
 import android.content.Intent
@@ -16,8 +16,11 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.myapplication.Database.User
+import com.example.myapplication.MainActivity
 import com.example.myapplication.databinding.FragmentMyProfileBinding
+import com.example.myapplication.main_user
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -126,7 +129,11 @@ class MyProfileFragment : Fragment() {
         }
 
         binding.historyIV.setOnClickListener {
+            findNavController().navigate(MyProfileFragmentDirections.actionGlobalHistoryMakananFragment())
+        }
 
+        binding.historyTvUser.setOnClickListener {
+            findNavController().navigate(MyProfileFragmentDirections.actionGlobalHistoryMakananFragment())
         }
 
     }

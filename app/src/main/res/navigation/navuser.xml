@@ -73,7 +73,7 @@
     <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
     <fragment
         android:id="@+id/myProfileFragment"
-        android:name="com.example.myapplication.MyProfileFragment"
+        android:name="com.example.myapplication.User.MyProfileFragment"
         android:label="fragment_my_profile"
         tools:layout="@layout/fragment_my_profile" /><action android:id="@+id/action_global_myProfileFragment" app:destination="@id/myProfileFragment"/>
     <fragment
@@ -108,4 +108,9 @@
             app:argType="integer" />
     </fragment>
     <action android:id="@+id/action_global_endchat" app:destination="@id/endchat" />
+    <fragment
+        android:id="@+id/historyMakananFragment"
+        android:name="com.example.myapplication.User.HistoryMakananFragment"
+        android:label="fragment_history_makanan"
+        tools:layout="@layout/fragment_history_makanan" /><action android:id="@+id/action_global_historyMakananFragment" app:destination="@id/historyMakananFragment"/>
 </navigation>
