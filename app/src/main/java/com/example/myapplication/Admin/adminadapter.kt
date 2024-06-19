@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Admin
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 
 class adminadapter {
 }

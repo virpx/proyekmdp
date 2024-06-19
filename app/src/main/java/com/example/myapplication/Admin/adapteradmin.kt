@@ -1,12 +1,11 @@
+package com.example.myapplication.Admin
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.Admin_class_list_user
-import com.example.myapplication.Admin_class_review_user
 import com.example.myapplication.R
 
 class adapteradmin_listuser(

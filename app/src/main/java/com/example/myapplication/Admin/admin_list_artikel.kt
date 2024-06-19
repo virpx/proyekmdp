@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Admin
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.viewmodel.AdminListArtikelViewModel
 
 class admin_list_artikel : Fragment() {

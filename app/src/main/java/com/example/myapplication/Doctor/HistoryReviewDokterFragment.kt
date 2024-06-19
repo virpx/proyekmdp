@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
-import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHistoryReviewDokterBinding
 import com.example.myapplication.viewmodel.HistoryReviewDokterViewModel
 
-data class Review(val username_pengirim:String, var username_target:String, var isi:String, var
-rating:Float)
+data class Review(val username_pengirim: String, var username_target: String, var isi: String, var rating: Float)
 
 class HistoryReviewDokterFragment : Fragment() {
     private lateinit var binding: FragmentHistoryReviewDokterBinding
@@ -27,6 +26,8 @@ class HistoryReviewDokterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHistoryReviewDokterBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -39,11 +40,17 @@ class HistoryReviewDokterFragment : Fragment() {
             adapter.updateData(reviews)
         })
 
-        val recyclerView = view.findViewById<RecyclerView>(R.id.historyReviewDokterRv)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
+        binding.historyReviewDokterRv.layoutManager = LinearLayoutManager(context)
+        binding.historyReviewDokterRv.adapter = adapter
 
-        // Fetch review list
         viewModel.fetchReviewList(MockDB.usernamelogin)
+    }
+}
+
+@BindingAdapter("reviewList")
+fun bindReviewList(recyclerView: RecyclerView, reviews: List<Review>?) {
+    val adapter = recyclerView.adapter as? HistoryReviewAdapter
+    if (adapter != null && reviews != null) {
+        adapter.updateData(reviews)
     }
 }

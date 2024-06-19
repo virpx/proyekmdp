@@ -3,7 +3,7 @@ package com.example.myapplication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.myapplication.Admin_class_list_artikel
+import com.example.myapplication.Admin.Admin_class_list_artikel
 import com.example.myapplication.MainActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

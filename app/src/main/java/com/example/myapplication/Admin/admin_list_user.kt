@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Admin
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.viewmodel.AdminListUserViewModel
 
 class admin_list_user : Fragment() {

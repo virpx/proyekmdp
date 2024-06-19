@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin_list_artikel" >
+    tools:context=".Admin.admin_list_artikel" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvne"

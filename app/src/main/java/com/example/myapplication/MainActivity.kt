@@ -1,14 +1,12 @@
 package com.example.myapplication
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.example.myapplication.Database.AppDatabase
 import com.example.myapplication.Database.DefaultRepository
 import com.example.myapplication.Database.MdpService
-import com.example.myapplication.Doctor.main_dokter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("http://192.168.1.9:3000/")
+                .baseUrl("http://10.0.2.2:3000/")
                 .build()
 
             Repository = DefaultRepository(

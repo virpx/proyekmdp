@@ -7,7 +7,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".admin_home">
+    tools:context=".Admin.admin_home">
 
     <TextView
         android:id="@+id/textView32"

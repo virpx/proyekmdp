@@ -17,7 +17,7 @@ import com.example.myapplication.Classuniversal_hasilgizi
 import com.example.myapplication.Database.MockDB
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
-import com.example.myapplication.adminadapter_lartikel
+import com.example.myapplication.Admin.adminadapter_lartikel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -1,17 +1,13 @@
-package com.example.myapplication
+package com.example.myapplication.Admin
 
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.findNavController
+import com.example.myapplication.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener
 
 class admin_main : AppCompatActivity() {
     lateinit var container: FragmentContainerView
@@ -20,7 +16,7 @@ class admin_main : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_main)
         container = findViewById(R.id.fragmentContainerView2)
-        findViewById<BottomNavigationView>(R.id.bottomadmin).setOnItemSelectedListener{item->
+        findViewById<BottomNavigationView>(R.id.bottomadmin).setOnItemSelectedListener{ item->
             when(item.itemId){
                 R.id.home_admin ->{
                     loadFragment(1)

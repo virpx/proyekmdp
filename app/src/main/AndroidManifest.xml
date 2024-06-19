@@ -23,7 +23,7 @@
             android:name=".Doctor.main_dokter"
             android:exported="false" />
         <activity
-            android:name=".admin_main"
+            android:name=".Admin.admin_main"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

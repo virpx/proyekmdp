@@ -1,4 +1,4 @@
-package com.example.myapplication
+package com.example.myapplication.Admin
 
 class Admin_class {
 }
