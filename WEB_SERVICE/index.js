@@ -766,6 +766,22 @@ app.get("/average-rating/:username_target", async (req, res) => {
   }
 });
 
+app.get("/user/doctor", async function(req, res) {
+  try {
+    const allDoctors = await User.findAll({
+      where: {
+        specialist: {
+          [Op.ne]: ""
+        }
+      }
+    });
+    res.status(200).json({ status: 200, data: allDoctors });
+  } catch (error) {
+    console.error('Error fetching doctors:', error);
+    res.status(500).json({ status: 500, message: 'Error fetching doctors', error: error.message });
+  }
+});
+
 app.post(
   "/user/addchatfoodtrack/:idhchat/:pengirim/:penerima",
   async function (req, res) {

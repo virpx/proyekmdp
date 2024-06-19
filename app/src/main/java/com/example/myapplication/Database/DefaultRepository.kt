@@ -80,8 +80,7 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         return remoteDataSource.usergetartikel()
     }
     suspend fun getdokters(): MutableList<User> {
-        val allArticles = getdokters()
-        return allArticles.filter { it.specialist != null }.toMutableList()
+        return remoteDataSource.getdokters().filter { it.specialist != "" }.toMutableList()
     }
 
     suspend fun uploadArtikel(artikel:Artikel){

@@ -19,7 +19,7 @@ class SearchAdapter(private val data: MutableList<User>) :
     private var filteredData: MutableList<User> = data
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.imageView20)
+        
         val titleTextView: TextView = itemView.findViewById(R.id.textView56)
         val chatButton: Button = itemView.findViewById(R.id.button6)
     }
