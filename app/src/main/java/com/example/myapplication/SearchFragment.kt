@@ -53,7 +53,7 @@ class SearchFragment : Fragment() {
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // No-op
+                // Nop
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -69,7 +69,7 @@ class SearchFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     searchItemList.clear()
                     searchItemList.addAll(dok)
-                    adapter.notifyDataSetChanged()
+                    adapter.filter("") // Update adapter with the full list
                 }
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
@@ -87,3 +87,4 @@ class SearchFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }
+

@@ -14,14 +14,12 @@ import com.example.myapplication.Database.User
 //    val title: String
 //)
 
-class SearchAdapter(private val data: MutableList<User>) :
+class SearchAdapter(var data: MutableList<User>) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-    private var filteredData: MutableList<User> = data
+    private var filteredList: List<User> = data.toList()
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        
         val titleTextView: TextView = itemView.findViewById(R.id.textView56)
-        val chatButton: Button = itemView.findViewById(R.id.button6)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -32,9 +30,7 @@ class SearchAdapter(private val data: MutableList<User>) :
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val item = data[position]
         holder.titleTextView.text = item.username
-        holder.chatButton.setOnClickListener {
-            // Handle chat button click
-        }
+
     }
 
     override fun getItemCount(): Int {
@@ -42,14 +38,23 @@ class SearchAdapter(private val data: MutableList<User>) :
     }
 
     fun filter(query: String) {
-        filteredData = if (query.isEmpty()) {
+        filteredList = if (query.isEmpty()) {
             data
         } else {
             val filteredList = data.filter {
                 it.username.contains(query, ignoreCase = true)
             }
             filteredList.toMutableList()
+
         }
+        data = filteredList.toMutableList()
         notifyDataSetChanged()
+    }
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nameTextView: TextView = itemView.findViewById(R.id.textView56)
+
+        fun bind(user: User) {
+            nameTextView.text = user.username
+        }
     }
 }
