@@ -4,33 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.R
+import com.example.myapplication.databinding.FragmentAdminListRegisDokterBinding
 import com.example.myapplication.viewmodel.AdminListRegisDokterViewModel
 
 class admin_list_regis_dokter : Fragment() {
+    private lateinit var binding: FragmentAdminListRegisDokterBinding
     private val viewModel: AdminListRegisDokterViewModel by viewModels()
-    lateinit var rvne: RecyclerView
-    lateinit var adminadapter: adminadapter_lregisdokter
-    lateinit var layoutManager: RecyclerView.LayoutManager
-    var datadoktere = mutableListOf<Admin_class_list_regis_dokter>()
+    private lateinit var adapter: adminadapter_lregisdokter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_admin_list_regis_dokter, container, false)
+    ): View {
+        binding = FragmentAdminListRegisDokterBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvne = view.findViewById(R.id.rvne)
-        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adminadapter = adminadapter_lregisdokter(datadoktere, { username ->
+
+        adapter = adminadapter_lregisdokter(emptyList<Admin_class_list_regis_dokter>().toMutableList(), { username ->
             viewModel.deleteDoctor(username) {
                 viewModel.fetchDoctors()
             }
@@ -39,15 +40,22 @@ class admin_list_regis_dokter : Fragment() {
                 viewModel.fetchDoctors()
             }
         })
-        rvne.adapter = adminadapter
-        rvne.layoutManager = layoutManager
 
-        // Observe LiveData from ViewModel
+        binding.rvne.layoutManager = LinearLayoutManager(context)
+        binding.rvne.adapter = adapter
+
         viewModel.doctors.observe(viewLifecycleOwner, Observer { doctors ->
-            adminadapter.updateData(doctors)
+            adapter.updateData(doctors)
         })
 
-        // Fetch doctors
         viewModel.fetchDoctors()
+    }
+}
+
+@BindingAdapter("doctorList")
+fun bindDoctorList(recyclerView: RecyclerView, doctors: List<Admin_class_list_regis_dokter>?) {
+    val adapter = recyclerView.adapter as? adminadapter_lregisdokter
+    if (adapter != null && doctors != null) {
+        adapter.updateData(doctors)
     }
 }

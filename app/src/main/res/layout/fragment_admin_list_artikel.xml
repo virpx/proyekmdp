@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".Admin.admin_list_artikel" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvne"
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.viewmodel.AdminListArtikelViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</LinearLayout>
+        android:layout_height="match_parent"
+        tools:context=".Admin.admin_list_artikel">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvne"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:reviewList="@{viewModel.articles}" />
+    </LinearLayout>
+</layout>
