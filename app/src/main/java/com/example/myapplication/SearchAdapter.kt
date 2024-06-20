@@ -14,9 +14,10 @@ import com.example.myapplication.Database.User
 //    val title: String
 //)
 
-class SearchAdapter(var data: MutableList<User>) :
+class SearchAdapter(private var data: MutableList<User>) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
-    private var filteredList: List<User> = data.toList()
+
+    private var originalList: List<User> = data.toList()
 
     class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView = itemView.findViewById(R.id.textView56)
@@ -30,31 +31,26 @@ class SearchAdapter(var data: MutableList<User>) :
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val item = data[position]
         holder.titleTextView.text = item.username
-
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    fun filter(query: String) {
-        filteredList = if (query.isEmpty()) {
-            data
-        } else {
-            val filteredList = data.filter {
-                it.username.contains(query, ignoreCase = true)
-            }
-            filteredList.toMutableList()
-
-        }
-        data = filteredList.toMutableList()
+    fun updateList(newData: List<User>) {
+        originalList = newData.toList()
+        data = newData.toMutableList()
         notifyDataSetChanged()
     }
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.textView56)
 
-        fun bind(user: User) {
-            nameTextView.text = user.username
+    fun filter(query: String) {
+        data = if (query.isEmpty()) {
+            originalList.toMutableList()
+        } else {
+            originalList.filter {
+                it.username.contains(query, ignoreCase = true)
+            }.toMutableList()
         }
+        notifyDataSetChanged()
     }
 }

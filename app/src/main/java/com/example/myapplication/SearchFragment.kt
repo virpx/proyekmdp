@@ -21,6 +21,7 @@ import retrofit2.HttpException
 class SearchFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: SearchAdapter
+    private lateinit var searchEditText: EditText
     private var searchItemList = mutableListOf<User>()
     private val repository = main_user.Repository
     private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
@@ -42,24 +43,24 @@ class SearchFragment : Fragment() {
         adapter = SearchAdapter(searchItemList)
         recyclerView.adapter = adapter
 
-        // Fetch data from repository
-        fetchData()
-
         // Set up EditText for search
-        val searchEditText = view.findViewById<EditText>(R.id.editTextText6)
+        searchEditText = view.findViewById(R.id.editTextText6)
         searchEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 // No-op
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Nop
+                // No-op
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 adapter.filter(s.toString())
             }
         })
+
+        // Fetch data from repository
+        fetchData()
     }
 
     private fun fetchData() {
@@ -69,7 +70,7 @@ class SearchFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     searchItemList.clear()
                     searchItemList.addAll(dok)
-                    adapter.filter("") // Update adapter with the full list
+                    adapter.updateList(searchItemList)
                 }
             } catch (e: HttpException) {
                 withContext(Dispatchers.Main) {
