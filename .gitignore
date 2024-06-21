@@ -13,4 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-WEB_SERVICE/proccess.env
+WEB_SERVICE/.env

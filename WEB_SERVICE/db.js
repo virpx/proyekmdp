@@ -37,8 +37,9 @@
 //   sequelize,
 //   User,
 // };
+const dotenv = require("dotenv");
+dotenv.config(); // Load environment variables from .env file
 const { Sequelize, DataTypes } = require("sequelize");
-require("dotenv").config(); // Load environment variables from .env file
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,
