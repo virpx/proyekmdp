@@ -14,7 +14,7 @@ import com.example.myapplication.Database.User
 //    val title: String
 //)
 
-class SearchAdapter(private var data: MutableList<User>, private val onItemClick: (User) -> Unit) :
+class SearchAdapter(private var data: MutableList<User>, var onItemClick:((String,String,String,String,String,Int)->Unit)) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     private var originalList: List<User> = data.toList()
@@ -32,7 +32,7 @@ class SearchAdapter(private var data: MutableList<User>, private val onItemClick
         val item = data[position]
         holder.titleTextView.text = item.username
         holder.itemView.setOnClickListener {
-            onItemClick(item)
+            onItemClick.invoke(item.username, item.fullname, item.email,item.sekolah,item.specialist,item.lama_praktik)
         }
     }
 

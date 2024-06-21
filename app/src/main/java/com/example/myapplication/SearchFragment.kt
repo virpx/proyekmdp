@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Database.MockDB
 import com.example.myapplication.Database.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,9 +42,10 @@ class SearchFragment : Fragment() {
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewSearch)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = SearchAdapter(searchItemList) { user ->
+        adapter = SearchAdapter(searchItemList) { username,fullname, email,sekolah,specialist,lama_praktik ->
             // Handle item click
-            val action = R.id.action_global_profilFragment
+//            MockDB. = username
+            val action = SearchFragmentDirections.actionGlobalProfilFragment(username,fullname, email,sekolah,specialist,lama_praktik)
             findNavController().navigate(action)
         }
         recyclerView.adapter = adapter

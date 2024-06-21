@@ -939,6 +939,61 @@ app.post("/dokter/addrecipe/:idhcat", async function (req, res) {
   }
   return res.status(200).send("sukses")
 })
+
+app.get("/user/h_chat/:user1", async (req, res) => {
+  const { user1 } = req.params;
+
+  try {
+    const h_chats = await HChat.findAll({
+      where: {
+        user1: { [Op.eq]: user1 },
+        selesai: { [Op.eq]: true },
+      },
+    });
+
+    const user2Usernames = h_chats.map((chat) => chat.user2);
+
+    const users = await User.findAll({
+      where: {
+        username: { [Op.in]: user2Usernames },
+      },
+    });
+
+    const result = h_chats.map((chat) => {
+      const user2Details = users.find((user) => user.username === chat.user2);
+      return {
+        username: user2Details.username,
+        fullName: user2Details.fullname,
+        fotoProfile: user2Details.foto_profile,
+        kesimpulan: chat.kesimpulan,
+      };
+    });
+
+    // Return the combined result
+    return res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while fetching the data" });
+  }
+});
+
+app.get("/user/resep/:user2/:kesimpulan", async (req, res) => {
+  const { kesimpulan, user2 } = req.params;
+
+  const hchat = await HChat.findOne({
+    where: { kesimpulan: { [Op.eq]: kesimpulan }, user2: { [Op.eq]: user2 } },
+  });
+
+  const resep = await Resep.findAll({
+    where: { id_hchat: { [Op.eq]: hchat.id } },
+    attributes: ["nama_obat", "deskripsi_obat"],
+  });
+
+  return res.status(200).json(resep);
+});
+
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

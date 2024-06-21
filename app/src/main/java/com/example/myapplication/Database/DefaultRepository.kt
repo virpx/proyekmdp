@@ -15,6 +15,8 @@ import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.Recipesend
+import com.example.myapplication.User.HChat
+import com.example.myapplication.User.Resep
 import com.example.myapplication.changePw
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
@@ -154,5 +156,13 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     }
     suspend fun inserlogindb(data:LoginDB){
         return localDataSource.userDao().insertlogin(data)
+
+    suspend fun getHchat(username:String): MutableList<HChat>{
+        return remoteDataSource.getHchat(username)
+    }
+
+    suspend fun getResep(username: String,kesimpulan: String)
+            : MutableList<Resep>{
+        return remoteDataSource.getResep(username, kesimpulan)
     }
 }

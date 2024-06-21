@@ -2,6 +2,7 @@ package com.example.myapplication.Database
 
 import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.Doctor.Artikel
+import com.example.myapplication.User.HChat
 
 object MockDB {
     var usernamelogin:String = "yoanesrobah"
@@ -13,4 +14,6 @@ object MockDB {
     //1 = dokter
     var userloginrole = 1
     lateinit var datashowfoodtrack:List<Classuniversal_foodtrack>
+
+    var currenthchat:HChat = HChat("","","", "")
 }

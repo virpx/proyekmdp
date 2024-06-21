@@ -15,6 +15,8 @@ import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.Recipesend
+import com.example.myapplication.User.HChat
+import com.example.myapplication.User.Resep
 import com.example.myapplication.changePw
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -95,10 +97,10 @@ interface MdpService {
 
     @GET("user/getfoodtrack/{username}")
     suspend fun getlistfoodtrack(@Path("username") username: String): MutableList<Classuniversal_foodtrack>
-    
+
     @PUT("dokter/{username}")
     suspend fun updateDokterProfile(@Path("username") username: String, @Body user: User): User
-    
+
     @POST("sendotp")
     suspend fun sendotp(@Body dataotp: KirimOtp): KirimOtp
 
@@ -115,10 +117,11 @@ interface MdpService {
     suspend fun gethistoryreview(@Path("username_target") username_target: String): MutableList<Review>
 
     @GET("/average-rating/{username_target}")
-    suspend fun getAverageRating(@Path("username_target") usernameTarget: String): Map<String,String>
+    suspend fun getAverageRating(@Path("username_target") usernameTarget: String): Map<String, String>
+
     @PUT("changepassword/{email}")
-    suspend fun changePassword(@Path("email")email:String, @Body password:String)
-    
+    suspend fun changePassword(@Path("email") email: String, @Body password: String)
+
     @POST("user/addchatfoodtrack/{idhchat}/{pengirim}/{penerima}")
     suspend fun sendpesanfoodtrack(
         @Path("idhchat") idhchat: Int,
@@ -126,17 +129,36 @@ interface MdpService {
         @Path("penerima") penerima: String,
         @Body isi: ChatBody
     )
+
     @GET("user/searchfood")
     suspend fun getgizidata(@Query("cari") cari: String): Classuniversal_hasilgizi
+
     @POST("user/addfoodtrack/{username}")
     suspend fun tambahfoodtrack(
         @Path("username") username: String,
         @Body isi: Bodyaddfoodtrack
-    )    
+    )
+
     @POST("registerdokter")
     suspend fun createDokter(@Body user: User): User
+
     @GET("dokter/reviewuser/{idhcat}/{usernamelawan}/{username}")
     suspend fun endchatdokter(@Path("idhcat") idhcat:Int,@Path("usernamelawan") usernamelawan:String,@Path("username") username:String,@Query("isi") isi: String,@Query("rating") rating: Float,@Query("kesimpulan") kesimpulan: String)
     @POST("dokter/addrecipe/{idhcat}")
     suspend fun dokteraddresep(@Path("idhcat") idhcat:Int,@Body isi: List<Recipesend>)
+    suspend fun endchatdokter(
+        @Path("idhcat") idhcat: Int,
+        @Path("usernamelawan") usernamelawan: String,
+        @Path("username") username: String,
+        @Query("isi") isi: String,
+        @Query("rating") rating: Float,
+        @Query("kesimpulan") kesimpulan: String
+    )
+
+    @GET("user/h_chat/{user1}")
+    suspend fun getHchat(@Path("user1") username: String): MutableList<HChat>
+
+    @GET("user/resep/{user2}/{kesimpulan}")
+    suspend fun getResep(@Path("user2") username: String, @Path("kesimpulan") kesimpulan: String)
+            : MutableList<Resep>
 }
