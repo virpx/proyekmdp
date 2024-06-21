@@ -16,6 +16,9 @@
         <argument
             android:name="username"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragment_chat_main_self"
+            app:destination="@id/fragment_chat_main" />
     </fragment>
     <fragment
         android:id="@+id/fragment_user_listchat"
@@ -117,5 +120,25 @@
         android:id="@+id/profilFragment"
         android:name="com.example.myapplication.ProfilFragment"
         android:label="fragment_profil"
-        tools:layout="@layout/fragment_profil" /><action android:id="@+id/action_global_profilFragment" app:destination="@id/profilFragment"/>
+        tools:layout="@layout/fragment_profil" >
+        <argument
+            android:name="username"
+            app:argType="string" />
+        <argument
+            android:name="fullname"
+            app:argType="string" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="sekolah"
+            app:argType="string" />
+        <argument
+            android:name="specialist"
+            app:argType="string" />
+        <argument
+            android:name="lama_praktik"
+            app:argType="integer" />
+    </fragment>
+    <action android:id="@+id/action_global_profilFragment" app:destination="@id/profilFragment" />
 </navigation>
