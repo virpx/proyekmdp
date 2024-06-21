@@ -14,7 +14,7 @@ import com.example.myapplication.Database.User
 //    val title: String
 //)
 
-class SearchAdapter(private var data: MutableList<User>) :
+class SearchAdapter(private var data: MutableList<User>, private val onItemClick: (User) -> Unit) :
     RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
 
     private var originalList: List<User> = data.toList()
@@ -31,6 +31,9 @@ class SearchAdapter(private var data: MutableList<User>) :
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val item = data[position]
         holder.titleTextView.text = item.username
+        holder.itemView.setOnClickListener {
+            onItemClick(item)
+        }
     }
 
     override fun getItemCount(): Int {

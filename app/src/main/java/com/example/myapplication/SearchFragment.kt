@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.User
@@ -40,7 +41,11 @@ class SearchFragment : Fragment() {
         // Initialize RecyclerView
         recyclerView = view.findViewById(R.id.recyclerViewSearch)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        adapter = SearchAdapter(searchItemList)
+        adapter = SearchAdapter(searchItemList) { user ->
+            // Handle item click
+            val action = R.id.action_global_profilFragment
+            findNavController().navigate(action)
+        }
         recyclerView.adapter = adapter
 
         // Set up EditText for search
