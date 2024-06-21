@@ -5,10 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.myapplication.Database.MockDB
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-
+data class Hcat (var id:Int, var user1:String, var user2:String, var selesai:Int, var
+kesimpulan:String)
 class ProfilFragment : Fragment() {
 
     private val args: ProfilFragmentArgs by navArgs()
@@ -18,6 +25,9 @@ class ProfilFragment : Fragment() {
     private lateinit var lm: TextView
     private lateinit var sp: TextView
     private lateinit var em: TextView
+    private lateinit var gochat: Button
+    private val repository = MainActivity.Repository
+    private val ioScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +46,7 @@ class ProfilFragment : Fragment() {
         lm = view.findViewById(R.id.textView75)
         sp = view.findViewById(R.id.textView76)
         em = view.findViewById(R.id.textView77)
+        gochat = view.findViewById(R.id.button5)
         val username = args.username
         val fullname = args.fullname
         val sekolah = args.sekolah
@@ -48,5 +59,25 @@ class ProfilFragment : Fragment() {
         lm.text = lamaPraktik.toString()
         sp.text = specialist
         em.text = email
+        var ids = ""
+        var idhcat = ""
+        gochat.setOnClickListener(){
+            ioScope.launch {
+                var newHcat = Hcat(
+                    id = id.toInt()+1,
+                    user1 = "",
+                    user2 = username,
+                    selesai = 0,
+                    kesimpulan = ""
+                )
+                repository.createHcat(newHcat)
+                ids = newHcat.id.toString()
+            }
+            MockDB.namaopenchat = username
+            idhcat = ids
+            val action = ProfilFragmentDirections.actionGlobalFragmentChatMain(idhcat.toInt(),username)
+            findNavController().navigate(action)
+        }
+
     }
 }

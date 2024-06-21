@@ -13,6 +13,7 @@ import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.Classuniversal_hasilgizi
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
+import com.example.myapplication.Hcat
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.Recipesend
 import com.example.myapplication.User.HChat
@@ -154,9 +155,9 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun deletelogindb(){
         return localDataSource.userDao().dellogin()
     }
-    suspend fun inserlogindb(data:LoginDB){
+    suspend fun inserlogindb(data:LoginDB) {
         return localDataSource.userDao().insertlogin(data)
-
+    }
     suspend fun getHchat(username:String): MutableList<HChat>{
         return remoteDataSource.getHchat(username)
     }
@@ -165,4 +166,10 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
             : MutableList<Resep>{
         return remoteDataSource.getResep(username, kesimpulan)
     }
+
+    suspend fun createHcat(newHcat: Hcat) {
+        val newData = remoteDataSource.createHcat(newHcat)
+    }
+
+
 }

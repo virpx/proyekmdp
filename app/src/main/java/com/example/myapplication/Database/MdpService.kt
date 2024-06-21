@@ -13,6 +13,7 @@ import com.example.myapplication.Classuniversal_foodtrack
 import com.example.myapplication.Classuniversal_hasilgizi
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
+import com.example.myapplication.Hcat
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.Recipesend
 import com.example.myapplication.User.HChat
@@ -143,9 +144,6 @@ interface MdpService {
     suspend fun createDokter(@Body user: User): User
 
     @GET("dokter/reviewuser/{idhcat}/{usernamelawan}/{username}")
-    suspend fun endchatdokter(@Path("idhcat") idhcat:Int,@Path("usernamelawan") usernamelawan:String,@Path("username") username:String,@Query("isi") isi: String,@Query("rating") rating: Float,@Query("kesimpulan") kesimpulan: String)
-    @POST("dokter/addrecipe/{idhcat}")
-    suspend fun dokteraddresep(@Path("idhcat") idhcat:Int,@Body isi: List<Recipesend>)
     suspend fun endchatdokter(
         @Path("idhcat") idhcat: Int,
         @Path("usernamelawan") usernamelawan: String,
@@ -154,6 +152,9 @@ interface MdpService {
         @Query("rating") rating: Float,
         @Query("kesimpulan") kesimpulan: String
     )
+    @POST("dokter/addrecipe/{idhcat}")
+    suspend fun dokteraddresep(@Path("idhcat") idhcat:Int,@Body isi: List<Recipesend>)
+
 
     @GET("user/h_chat/{user1}")
     suspend fun getHchat(@Path("user1") username: String): MutableList<HChat>
@@ -161,4 +162,7 @@ interface MdpService {
     @GET("user/resep/{user2}/{kesimpulan}")
     suspend fun getResep(@Path("user2") username: String, @Path("kesimpulan") kesimpulan: String)
             : MutableList<Resep>
+
+    @POST("chats/add")
+    suspend fun createHcat(@Body hcat: Hcat): Hcat
 }

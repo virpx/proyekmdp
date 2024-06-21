@@ -129,4 +129,14 @@
         app:layout_constraintStart_toEndOf="@+id/textView72"
         app:layout_constraintTop_toBottomOf="@+id/textView76" />
 
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="384dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="288dp"
+        android:text="Chat Dokter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
