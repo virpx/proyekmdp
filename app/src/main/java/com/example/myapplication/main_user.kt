@@ -30,8 +30,11 @@ class main_user : AppCompatActivity() {
         Companion.activeUser = activeUser
 
         container = findViewById(R.id.fragmentContainerView4)
+//        container.getFragment<Fragment>().findNavController().navigate(R.id
+//            .action_global_homeFragment)
+
         container.getFragment<Fragment>().findNavController().navigate(R.id
-            .action_global_homeFragment)
+            .action_global_historyKesimpulanFragment)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationViewUser)
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->

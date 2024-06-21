@@ -141,4 +141,14 @@
             app:argType="integer" />
     </fragment>
     <action android:id="@+id/action_global_profilFragment" app:destination="@id/profilFragment" />
+    <fragment
+        android:id="@+id/historyKesimpulanFragment"
+        android:name="com.example.myapplication.User.HistoryKesimpulanFragment"
+        android:label="fragment_history_kesimpulan"
+        tools:layout="@layout/fragment_history_kesimpulan" />
+    <fragment
+        android:id="@+id/historyResepFragment"
+        android:name="com.example.myapplication.User.HistoryResepFragment"
+        android:label="fragment_history_resep"
+        tools:layout="@layout/fragment_history_resep" /><action android:id="@+id/action_global_historyResepFragment" app:destination="@id/historyResepFragment"/><action android:id="@+id/action_global_historyKesimpulanFragment" app:destination="@id/historyKesimpulanFragment"/>
 </navigation>
