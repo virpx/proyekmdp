@@ -77,7 +77,7 @@ class main_user : AppCompatActivity() {
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("http://10.0.2.2:3000/")
+                .baseUrl("http://10.10.2.195:3000/")
                 .build()
 
             Repository = DefaultRepository(

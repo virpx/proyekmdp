@@ -1,18 +1,26 @@
 package com.example.myapplication
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
+import java.io.ByteArrayInputStream
+import java.util.Timer
+import java.util.TimerTask
 
 class chatlist_adapter(
     val data: MutableList<Classuniversal_chat>,
-    var pindahroomchat:((Int,String,String)->Unit)
+    var pindahroomchat:((Int,String,String,String)->Unit)
 ): RecyclerView.Adapter<chatlist_adapter.ViewHolder>(){
     class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
         val namauser: TextView = row.findViewById(R.id.textView52)
@@ -29,13 +37,23 @@ class chatlist_adapter(
     override fun getItemCount(): Int {
         return data.size
     }
-
+    private fun base64ToBitmap(base64Str: String): Bitmap? {
+        return try {
+            val decodedBytes = Base64.decode(base64Str, Base64.DEFAULT)
+            BitmapFactory.decodeStream(ByteArrayInputStream(decodedBytes))
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            null
+        }
+    }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var datae = data[position]
         holder.itemView.setOnClickListener {
-            pindahroomchat.invoke(datae.idhcat,datae.username,datae.nama)
+            pindahroomchat.invoke(datae.idhcat,datae.username,datae.nama,datae.gambar)
         }
         holder.namauser.text = datae.nama
+        val bitmap = base64ToBitmap(datae.gambar)
+        holder.profileuser.setImageBitmap(bitmap)
     }
 
 }
@@ -173,6 +191,44 @@ class showfoodtracke(
         holder.t5.text = "fat: "+datae.fat
         holder.t6.text = "cholesterol: "+datae.cholesterol
         holder.t7.text = "sodium: "+datae.sodium
+    }
+
+}
+
+
+class addrecipe(
+    val data: List<Recipesend>,
+    var dispatchchange: ((Int,String,String)->Unit),
+    var del: ((Int)->Unit)
+): RecyclerView.Adapter<addrecipe.ViewHolder>(){
+    class ViewHolder(val row: View) : RecyclerView.ViewHolder(row){
+        val namaobat = row.findViewById<TextView>(R.id.editTextText4)
+        val deskripsiobat = row.findViewById<TextView>(R.id.editTextText5)
+        val del = row.findViewById<Button>(R.id.button4)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemView = LayoutInflater.from(parent.context)
+        return ViewHolder(itemView.inflate(
+            R.layout.layout_add_recipe, parent ,false
+        ))
+    }
+
+    override fun getItemCount(): Int {
+        return data.size
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val timer = Timer()
+        timer.scheduleAtFixedRate(object : TimerTask() {
+            override fun run() {
+                dispatchchange.invoke(position, holder.namaobat.text.toString(), holder.deskripsiobat.text.toString())
+            }
+        }, 500, 500)
+        holder.del.setOnClickListener {
+            timer.cancel()
+            del.invoke(position)
+        }
     }
 
 }

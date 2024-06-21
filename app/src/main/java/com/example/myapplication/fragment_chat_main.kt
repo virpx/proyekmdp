@@ -1,7 +1,10 @@
 package com.example.myapplication
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.opengl.Visibility
 import android.os.Bundle
+import android.util.Base64
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +19,7 @@ import com.example.myapplication.Database.MockDB
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayInputStream
 import java.util.Timer
 import java.util.TimerTask
 
@@ -25,6 +29,7 @@ class fragment_chat_main : Fragment() {
     lateinit var rvne: RecyclerView
     lateinit var adminadapter: chatbubble
     lateinit var layoutManager: RecyclerView.LayoutManager
+    lateinit var timer:Timer
     var idhcat:Int = -1
     var pilih = 0;
     var databubble = mutableListOf(
@@ -37,7 +42,15 @@ class fragment_chat_main : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat_main, container, false)
     }
-
+    private fun base64ToBitmap(base64Str: String): Bitmap? {
+        return try {
+            val decodedBytes = Base64.decode(base64Str, Base64.DEFAULT)
+            BitmapFactory.decodeStream(ByteArrayInputStream(decodedBytes))
+        } catch (e: IllegalArgumentException) {
+            e.printStackTrace()
+            null
+        }
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if(MockDB.userloginrole == 1){
@@ -48,6 +61,8 @@ class fragment_chat_main : Fragment() {
         idhcat = fragment_chat_mainArgs?.fromBundle(arguments as Bundle)?.idhcat!!
         var usernamelawan = fragment_chat_mainArgs?.fromBundle(arguments as Bundle)?.username!!
         view.findViewById<TextView>(R.id.textView27).text = MockDB.namaopenchat
+        val bitmap = base64ToBitmap(MockDB.gambaropenchat)
+        view.findViewById<ImageView>(R.id.imageView4).setImageBitmap(bitmap)
         rvne = view.findViewById(R.id.recyclerView2)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
         adminadapter = chatbubble(databubble,{
@@ -56,11 +71,12 @@ class fragment_chat_main : Fragment() {
         rvne.adapter = adminadapter
         rvne.layoutManager = layoutManager
         getdata()
-        Timer().schedule(object : TimerTask() {
+        timer = Timer()
+        timer.scheduleAtFixedRate(object : TimerTask() {
             override fun run() {
                 getdata()
             }
-        }, 2000)
+        }, 500, 500)
         view.findViewById<ImageView>(R.id.imageView6).setOnClickListener {
             var isichat = view.findViewById<TextView>(R.id.editTextText11).text.toString()
             if(isichat!= ""){
@@ -87,8 +103,12 @@ class fragment_chat_main : Fragment() {
             databubble.clear()
             var hasil = repository.usergetbubble(idhcat)
             databubble.addAll(hasil)
-            requireActivity().runOnUiThread {
-                adminadapter.notifyDataSetChanged()
+            try {
+                requireActivity().runOnUiThread {
+                    adminadapter.notifyDataSetChanged()
+                }
+            }catch (e:IllegalStateException){
+                timer.cancel()
             }
         }
     }

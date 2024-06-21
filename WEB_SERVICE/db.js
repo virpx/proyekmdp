@@ -51,6 +51,16 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
   }
 );
+// const sequelize = new Sequelize(
+//   "proyek_mdp",
+//   "root",
+//   "",
+//   {
+//     host: "localhost",
+//     dialect: "mysql",
+//     port: "3306",
+//   }
+// );
 
 const DChat = sequelize.define(
   "DChat",

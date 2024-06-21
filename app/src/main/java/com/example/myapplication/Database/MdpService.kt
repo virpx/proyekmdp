@@ -14,6 +14,7 @@ import com.example.myapplication.Classuniversal_hasilgizi
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
+import com.example.myapplication.Recipesend
 import com.example.myapplication.changePw
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -136,4 +137,6 @@ interface MdpService {
     suspend fun createDokter(@Body user: User): User
     @GET("dokter/reviewuser/{idhcat}/{usernamelawan}/{username}")
     suspend fun endchatdokter(@Path("idhcat") idhcat:Int,@Path("usernamelawan") usernamelawan:String,@Path("username") username:String,@Query("isi") isi: String,@Query("rating") rating: Float,@Query("kesimpulan") kesimpulan: String)
+    @POST("dokter/addrecipe/{idhcat}")
+    suspend fun dokteraddresep(@Path("idhcat") idhcat:Int,@Body isi: List<Recipesend>)
 }

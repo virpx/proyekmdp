@@ -14,6 +14,7 @@ import com.example.myapplication.Classuniversal_hasilgizi
 import com.example.myapplication.Doctor.Artikel
 import com.example.myapplication.Doctor.Review
 import com.example.myapplication.KirimOtp
+import com.example.myapplication.Recipesend
 import com.example.myapplication.changePw
 
 class DefaultRepository(private val localDataSource:AppDatabase, private val remoteDataSource:MdpService){
@@ -134,11 +135,24 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun tambahfoodtrack(username:String,isi: Bodyaddfoodtrack){
         return remoteDataSource.tambahfoodtrack(username,isi)
     }
-
+    
     suspend fun createDokter(user: User) {
         val newData = remoteDataSource.createDokter(user)
     }
     suspend fun endchatdokter(idhcat:Int,usernamelawan:String,username:String,isi: String,rating:Float,kesimpulan:String) {
         val newData = remoteDataSource.endchatdokter(idhcat,usernamelawan,username,isi,rating,kesimpulan)
+    }
+    suspend fun dokteraddresep(idhcat:Int,isi: List<Recipesend>){
+        return remoteDataSource.dokteraddresep(idhcat,isi)
+    }
+
+    suspend fun getlogindb():List<LoginDB>{
+        return localDataSource.userDao().getlogin()
+    }
+    suspend fun deletelogindb(){
+        return localDataSource.userDao().dellogin()
+    }
+    suspend fun inserlogindb(data:LoginDB){
+        return localDataSource.userDao().insertlogin(data)
     }
 }

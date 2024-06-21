@@ -341,7 +341,7 @@ app.get("/getlistchat/:username", async function (req, res) {
     }
     keluaran.push({
       idhcat: iterator.id,
-      gambar: "",
+      gambar: getnama.foto_profile,
       username: username_lawan,
       nama: namauser,
     });
@@ -907,32 +907,38 @@ app.post("/registerdokter", async function (req, res) {
     return res.status(500).send({ msg: "Server error", error: error.message });
   }
 });
-app.get(
-  "/dokter/reviewuser/:idhcat/:usernamelawan/:username",
-  async function (req, res) {
-    const { idhcat, usernamelawan, username } = req.params;
-    const { isi, rating, kesimpulan } = req.query;
-    await Review.create({
-      username_pengirim: username,
-      username_target: usernamelawan,
-      isi: isi,
-      rating: rating,
-    });
-    await HChat.update(
-      {
-        selesai: 1,
-        kesimpulan: kesimpulan,
+app.get("/dokter/reviewuser/:idhcat/:usernamelawan/:username", async function (req, res) {
+  const { idhcat, usernamelawan, username } = req.params
+  const { isi, rating, kesimpulan } = req.query
+  await Review.create({
+    username_pengirim: username,
+    username_target: usernamelawan,
+    isi: isi,
+    rating: rating,
+  })
+  await HChat.update(
+    {
+      selesai: 1,
+      kesimpulan: kesimpulan
+    },
+    {
+      where: {
+        id: idhcat
       },
-      {
-        where: {
-          id: idhcat,
-        },
-      }
-    );
-    return res.status(200).send("sukses");
+    },)
+  return res.status(200).send("sukses")
+})
+app.post("/dokter/addrecipe/:idhcat", async function (req, res) {
+  const idhchat = req.params.idhcat
+  for (const iterator of req.body) {
+    await Resep.create({
+      id_hchat: idhchat,
+      nama_obat: iterator.nama_obat,
+      deskripsi_obat: iterator.deskripsi_obat
+    })
   }
-);
-
+  return res.status(200).send("sukses")
+})
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

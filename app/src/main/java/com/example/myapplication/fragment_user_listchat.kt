@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.CoroutineStart
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.ByteArrayInputStream
+import android.util.Base64
 
 class fragment_user_listchat : Fragment() {
     private val repository = MainActivity.Repository
@@ -34,9 +39,10 @@ class fragment_user_listchat : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rvne = view.findViewById(R.id.rvne)
         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL,false)
-        adminadapter = chatlist_adapter(datachate,{idhchat,username,namachat->
+        adminadapter = chatlist_adapter(datachate,{idhchat,username,namachat,profilelawan->
             MockDB.namaopenchat = namachat
             MockDB.usernamechatopen = username
+            MockDB.gambaropenchat = profilelawan
             val action = fragment_user_listchatDirections.actionGlobalFragmentChatMain(idhchat,username)
             findNavController().navigate(action)
         })

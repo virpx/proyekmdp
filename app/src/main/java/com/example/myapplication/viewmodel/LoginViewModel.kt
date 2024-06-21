@@ -2,6 +2,7 @@ package com.example.myapplication.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myapplication.Database.LoginDB
 import com.example.myapplication.MainActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,6 +24,8 @@ class LoginViewModel : ViewModel() {
                 if (msg == "Login successful") {
                     val role = response["role"]
                     if (role == "patient" || role == "doctor") {
+                        MainActivity.Repository.deletelogindb()
+                        MainActivity.Repository.inserlogindb(LoginDB(username,password))
                         onResult(LoginResult.Success("Logged in as $role", role))
                     } else {
                         onResult(LoginResult.Error("Invalid role"))

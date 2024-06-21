@@ -34,3 +34,8 @@ class Bodyaddfoodtrack(
     val cholesterol:Int,
     val sodium:Int,
 )
+
+class Recipesend(
+    var nama_obat:String,
+    var deskripsi_obat:String
+)
