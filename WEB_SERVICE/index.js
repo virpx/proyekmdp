@@ -1007,15 +1007,14 @@ app.post("/chats/add",async function(req,res){
   })
   return res.status(200).send(hasil)
 })
-app.get("/user/reviewdokter/:username/:usernamelawan", async function (req, res) {
+app.post("/user/reviewdokter/:username/:usernamelawan", async function (req, res) {
   const { usernamelawan, username } = req.params
-  const { isi,rating } = req.query
   console.log("iyaa")
   await Review.create({
     username_pengirim: username,
     username_target: usernamelawan,
-    isi: isi,
-    rating: rating,
+    isi:req.body.isi,
+    rating: req.body.rating,
   })
   return res.status(200).send("sukses")
 })

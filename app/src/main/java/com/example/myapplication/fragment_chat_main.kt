@@ -99,17 +99,21 @@ class fragment_chat_main : Fragment() {
         }
     }
     fun getdata(){
-        ioScope.launch {
-            databubble.clear()
-            var hasil = repository.usergetbubble(idhcat)
-            databubble.addAll(hasil)
-            try {
-                requireActivity().runOnUiThread {
-                    adminadapter.notifyDataSetChanged()
+        try {
+            ioScope.launch {
+                databubble.clear()
+                var hasil = repository.usergetbubble(idhcat)
+                databubble.addAll(hasil)
+                try {
+                    requireActivity().runOnUiThread {
+                        adminadapter.notifyDataSetChanged()
+                    }
+                } catch (e: IllegalStateException) {
+                    timer.cancel()
                 }
-            }catch (e:IllegalStateException){
-                timer.cancel()
             }
+        }catch (r:Exception){
+            
         }
     }
 }
