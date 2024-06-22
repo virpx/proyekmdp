@@ -16,6 +16,7 @@ import com.example.myapplication.Doctor.Review
 import com.example.myapplication.Hcat
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.Recipesend
+import com.example.myapplication.Sendreviewdokter
 import com.example.myapplication.User.HChat
 import com.example.myapplication.User.Resep
 import com.example.myapplication.changePw
@@ -170,8 +171,8 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
     suspend fun createHcat(newHcat: Hcat):Hcat {
         return remoteDataSource.createHcat(newHcat)
     }
-    suspend fun reviewdoktere(usernamelawan:String,username:String,isi: String,rating:Float) {
-        val newData = remoteDataSource.reviewdoktere(usernamelawan,username,isi,rating)
+    suspend fun reviewdoktere(usernamelawan:String,username:String,isi: Sendreviewdokter) {
+        val newData = remoteDataSource.reviewdoktere(usernamelawan,username,isi)
     }
 
 }

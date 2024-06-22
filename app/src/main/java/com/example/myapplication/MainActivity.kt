@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                 .build()
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(MoshiConverterFactory.create(moshi))
-                .baseUrl("https://test-qgvgl.run.goorm.site/")
+                .baseUrl("https://test-qgvgl.run.goorm.site")
                 .build()
 
             Repository = DefaultRepository(

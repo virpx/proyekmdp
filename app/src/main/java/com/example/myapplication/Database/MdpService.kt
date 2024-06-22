@@ -16,6 +16,7 @@ import com.example.myapplication.Doctor.Review
 import com.example.myapplication.Hcat
 import com.example.myapplication.KirimOtp
 import com.example.myapplication.Recipesend
+import com.example.myapplication.Sendreviewdokter
 import com.example.myapplication.User.HChat
 import com.example.myapplication.User.Resep
 import com.example.myapplication.changePw
@@ -158,18 +159,16 @@ interface MdpService {
 
     @GET("user/h_chat/{user1}")
     suspend fun getHchat(@Path("user1") username: String): MutableList<HChat>
-
+    @POST("user/reviewdokter/{username}/{usernamelawan}")
+    suspend fun reviewdoktere(
+        @Path("username") username: String,
+        @Path("usernamelawan") usernamelawan: String,
+        @Body isi:Sendreviewdokter
+    )
     @GET("user/resep/{user2}/{kesimpulan}")
     suspend fun getResep(@Path("user2") username: String, @Path("kesimpulan") kesimpulan: String)
             : MutableList<Resep>
 
     @POST("chats/add")
     suspend fun createHcat(@Body hcat: Hcat): Hcat
-    @GET("user/reviewdokter/{username}/{usernamelawan}")
-    suspend fun reviewdoktere(
-        @Path("usernamelawan") usernamelawan: String,
-        @Path("username") username: String,
-        @Query("isi") isi: String,
-        @Query("rating") rating: Float,
-    )
 }

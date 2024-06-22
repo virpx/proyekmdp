@@ -70,7 +70,7 @@ class main_dokter : AppCompatActivity() {
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("https://test-qgvgl.run.goorm.site/")
+                .baseUrl("https://test-qgvgl.run.goorm.site")
                 .build()
 
             Repository = DefaultRepository(

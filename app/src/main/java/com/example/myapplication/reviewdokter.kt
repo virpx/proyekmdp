@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class reviewdokter : Fragment() {
     private val ioScope = CoroutineScope(Dispatchers.IO)
-    private val repository = MainActivity.Repository
+    private val repository = main_user.Repository
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,7 +34,7 @@ class reviewdokter : Fragment() {
                 var ratinguserr = view.findViewById<TextView>(R.id.editTextNumberDecimal2).text.toString().toFloat()
                 if(ratinguserr >=1 && ratinguserr<=5){
                     ioScope.launch {
-                        repository.reviewdoktere(MockDB.usernamechatopen,MockDB.usernamelogin,reviewuser,ratinguserr)
+                        repository.reviewdoktere(MockDB.usernamechatopen,MockDB.usernamelogin,Sendreviewdokter(reviewuser,ratinguserr))
                         requireActivity().runOnUiThread {
                             findNavController().navigate(R.id.action_global_historyKesimpulanFragment)
                         }

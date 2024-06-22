@@ -39,3 +39,7 @@ class Recipesend(
     var nama_obat:String,
     var deskripsi_obat:String
 )
+class Sendreviewdokter(
+    var isi:String,
+    var rating:Float
+)

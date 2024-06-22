@@ -76,7 +76,7 @@ class fragment_chat_main : Fragment() {
             override fun run() {
                 getdata()
             }
-        }, 500, 500)
+        }, 2000, 2000)
         view.findViewById<ImageView>(R.id.imageView6).setOnClickListener {
             var isichat = view.findViewById<TextView>(R.id.editTextText11).text.toString()
             if(isichat!= ""){
