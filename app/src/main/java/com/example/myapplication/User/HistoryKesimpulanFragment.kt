@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 data class HChat(
+    val id:Int,
     val username:String,
     val fullName: String,
     val fotoProfile: String,
@@ -49,6 +50,8 @@ class HistoryKesimpulanFragment : Fragment() {
             MockDB.usernamechatopen = it.username
             findNavController().navigate(HistoryKesimpulanFragmentDirections.actionGlobalHistoryResepFragment())
         },{
+            MockDB.currenthchat = it
+            MockDB.usernamechatopen = it.username
             findNavController().navigate(HistoryKesimpulanFragmentDirections.actionGlobalReviewdokter())
         })
         recyclerView.layoutManager = LinearLayoutManager(context)

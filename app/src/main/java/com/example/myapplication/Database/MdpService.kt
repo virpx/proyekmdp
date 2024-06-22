@@ -159,10 +159,11 @@ interface MdpService {
 
     @GET("user/h_chat/{user1}")
     suspend fun getHchat(@Path("user1") username: String): MutableList<HChat>
-    @POST("user/reviewdokter/{username}/{usernamelawan}")
+    @POST("user/reviewdokter/{username}/{usernamelawan}/{id_hchat}")
     suspend fun reviewdoktere(
         @Path("username") username: String,
         @Path("usernamelawan") usernamelawan: String,
+        @Path("id_hchat") id_hchat: Int,
         @Body isi:Sendreviewdokter
     )
     @GET("user/resep/{user2}/{kesimpulan}")

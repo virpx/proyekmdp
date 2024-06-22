@@ -15,5 +15,5 @@ object MockDB {
     var userloginrole = 1
     lateinit var datashowfoodtrack:List<Classuniversal_foodtrack>
 
-    var currenthchat:HChat = HChat("","","", -1,"")
+    var currenthchat:HChat = HChat(0,"","","", -1,"")
 }

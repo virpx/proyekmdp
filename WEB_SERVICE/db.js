@@ -41,26 +41,21 @@ const dotenv = require("dotenv");
 dotenv.config(); // Load environment variables from .env file
 const { Sequelize, DataTypes } = require("sequelize");
 
-// const sequelize = new Sequelize(
-//   process.env.DB_NAME,
-//   process.env.DB_USER,
-//   process.env.DB_PASSWORD,
-//   {
-//     host: process.env.DB_HOST,
-//     dialect: "mysql",
-//     port: process.env.DB_PORT,
-//   }
-// );
 const sequelize = new Sequelize(
-  "proyek_mdp",
-  "root",
-  "",
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: "localhost",
+    host: process.env.DB_HOST,
     dialect: "mysql",
-    port: "3306",
+    port: process.env.DB_PORT,
   }
 );
+// const sequelize = new Sequelize("proyek_mdp", "root", "", {
+//   host: "localhost",
+//   dialect: "mysql",
+//   port: "3306",
+// });
 
 const DChat = sequelize.define(
   "DChat",
@@ -175,7 +170,7 @@ const HChat = sequelize.define(
       allowNull: false,
     },
     selesai: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     kesimpulan: {

@@ -18,6 +18,7 @@ const {
 const { Sequelize, Op } = require("sequelize");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
+const { id } = require("translatte/languages");
 const app = express();
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(express.json({ limit: "50mb" }));
@@ -267,6 +268,7 @@ app.get("/admin/accdokterregis/:username", async function (req, res) {
     tahun_lulus: datae.tahun_lulus,
     lama_praktik: datae.lama_praktik,
     created_at: datae.created_at,
+    foto_profile: datae.foto_profile,
   });
   await Dokterregis.destroy({
     where: {
@@ -907,51 +909,56 @@ app.post("/registerdokter", async function (req, res) {
     return res.status(500).send({ msg: "Server error", error: error.message });
   }
 });
-app.get("/dokter/reviewuser/:idhcat/:usernamelawan/:username", async function (req, res) {
-  const { idhcat, usernamelawan, username } = req.params
-  const { isi, rating, kesimpulan } = req.query
-  await Review.create({
-    username_pengirim: username,
-    username_target: usernamelawan,
-    isi: isi,
-    rating: rating,
-  })
-  await HChat.update(
-    {
-      selesai: 1,
-      kesimpulan: kesimpulan
-    },
-    {
-      where: {
-        id: idhcat
+app.get(
+  "/dokter/reviewuser/:idhcat/:usernamelawan/:username",
+  async function (req, res) {
+    const { idhcat, usernamelawan, username } = req.params;
+    const { isi, rating, kesimpulan } = req.query;
+    await Review.create({
+      username_pengirim: username,
+      username_target: usernamelawan,
+      isi: isi,
+      rating: rating,
+    });
+    await HChat.update(
+      {
+        selesai: 1,
+        kesimpulan: kesimpulan,
       },
-    },)
-  return res.status(200).send("sukses")
-})
+      {
+        where: {
+          id: idhcat,
+        },
+      }
+    );
+    return res.status(200).send("sukses");
+  }
+);
 app.post("/dokter/addrecipe/:idhcat", async function (req, res) {
-  const idhchat = req.params.idhcat
+  const idhchat = req.params.idhcat;
   for (const iterator of req.body) {
     await Resep.create({
       id_hchat: idhchat,
       nama_obat: iterator.nama_obat,
-      deskripsi_obat: iterator.deskripsi_obat
-    })
+      deskripsi_obat: iterator.deskripsi_obat,
+    });
   }
-  return res.status(200).send("sukses")
-})
+  return res.status(200).send("sukses");
+});
 
 app.get("/user/h_chat/:user1", async (req, res) => {
   const { user1 } = req.params;
+  console.log(user1);
 
   try {
     const h_chats = await HChat.findAll({
       where: {
         user1: { [Op.eq]: user1 },
-        selesai: { [Op.eq]: true },
       },
     });
 
     const user2Usernames = h_chats.map((chat) => chat.user2);
+    console.log(h_chats);
 
     const users = await User.findAll({
       where: {
@@ -962,10 +969,11 @@ app.get("/user/h_chat/:user1", async (req, res) => {
     const result = h_chats.map((chat) => {
       const user2Details = users.find((user) => user.username === chat.user2);
       return {
-        username: user2Details.username, 
+        id: chat.id,
+        username: user2Details.username,
         fullName: user2Details.fullname,
         fotoProfile: user2Details.foto_profile,
-        selesai:parseInt(user2Details.selesai),
+        selesai: chat.selesai,
         kesimpulan: chat.kesimpulan,
       };
     });
@@ -994,30 +1002,40 @@ app.get("/user/resep/:user2/:kesimpulan", async (req, res) => {
 
   return res.status(200).json(resep);
 });
-app.post("/chats/add",async function(req,res){
-  const {
-    user1,
-    user2,
-  } = req.body
+app.post("/chats/add", async function (req, res) {
+  const { user1, user2 } = req.body;
   var hasil = await HChat.create({
-    user1:user1,
-    user2:user2,
-    selesai:0,
-    kesimpulan:""
-  })
-  return res.status(200).send(hasil)
-})
-app.post("/user/reviewdokter/:username/:usernamelawan", async function (req, res) {
-  const { usernamelawan, username } = req.params
-  console.log("iyaa")
-  await Review.create({
-    username_pengirim: username,
-    username_target: usernamelawan,
-    isi:req.body.isi,
-    rating: req.body.rating,
-  })
-  return res.status(200).send("sukses")
-})
+    user1: user1,
+    user2: user2,
+    selesai: 0,
+    kesimpulan: "",
+  });
+  return res.status(200).send(hasil);
+});
+app.post(
+  "/user/reviewdokter/:username/:usernamelawan/:id_hchat",
+  async function (req, res) {
+    const { usernamelawan, username, id_hchat } = req.params;
+    console.log("iyaa");
+    await Review.create({
+      username_pengirim: username,
+      username_target: usernamelawan,
+      isi: req.body.isi,
+      rating: req.body.rating,
+    });
+
+    const hchatku = await HChat.findOne({
+      where: { id: { [Op.eq]: id_hchat } },
+    });
+
+    await hchatku.update({
+      id: id_hchat,
+      selesai: 2,
+    });
+
+    return res.status(200).send("sukses");
+  }
+);
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.Database.MockDB
 import com.example.myapplication.R
@@ -15,7 +14,7 @@ import com.example.myapplication.User.HChat
 
 class HChatAdapter(private val hChatList: MutableList<HChat>,
                    var onClick:((HChat)->Unit),
-var review:(()->Unit)) :
+var review:((HChat)->Unit)) :
     RecyclerView.Adapter<HChatAdapter.HChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HChatViewHolder {
@@ -28,12 +27,13 @@ var review:(()->Unit)) :
         val currentItem = hChatList[position]
         holder.fullName.text = "Dr. ${currentItem.fullName}"
         if(currentItem.selesai == 2){
-            holder.btnreview.isVisible = false
+            holder.btnreview.visibility = Button.INVISIBLE
         }
         holder.btnreview.setOnClickListener {
             MockDB.usernamechatopen = currentItem.username
-            review.invoke()
+            review.invoke(currentItem)
         }
+
         if (currentItem.fotoProfile != "") {
             val base64Image = currentItem.fotoProfile ?: ""
             val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
