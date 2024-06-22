@@ -17,14 +17,14 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigationView2"
-            android:layout_width="410dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             app:menu="@menu/nav_menu"
             tools:layout_editor_absoluteX="1dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewHome"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="609dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="79dp" />

@@ -962,9 +962,10 @@ app.get("/user/h_chat/:user1", async (req, res) => {
     const result = h_chats.map((chat) => {
       const user2Details = users.find((user) => user.username === chat.user2);
       return {
-        username: user2Details.username,
+        username: user2Details.username, 
         fullName: user2Details.fullname,
         fotoProfile: user2Details.foto_profile,
+        selesai:parseInt(user2Details.selesai),
         kesimpulan: chat.kesimpulan,
       };
     });
@@ -993,7 +994,31 @@ app.get("/user/resep/:user2/:kesimpulan", async (req, res) => {
 
   return res.status(200).json(resep);
 });
-
+app.post("/chats/add",async function(req,res){
+  const {
+    user1,
+    user2,
+  } = req.body
+  var hasil = await HChat.create({
+    user1:user1,
+    user2:user2,
+    selesai:0,
+    kesimpulan:""
+  })
+  return res.status(200).send(hasil)
+})
+app.get("/user/reviewdokter/:username/:usernamelawan", async function (req, res) {
+  const { usernamelawan, username } = req.params
+  const { isi,rating } = req.query
+  console.log("iyaa")
+  await Review.create({
+    username_pengirim: username,
+    username_target: usernamelawan,
+    isi: isi,
+    rating: rating,
+  })
+  return res.status(200).send("sukses")
+})
 const port = 3000;
 app.listen(port, function () {
   console.log(`Listening on port ${port}...`);

@@ -77,9 +77,14 @@ class HomeDocterFragment : Fragment() {
         }
 
         binding.btnLogoutDokter.setOnClickListener {
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            ioScope.launch {
+                repository.deletelogindb()
+                requireActivity().runOnUiThread {
+                    val intent = Intent(context, MainActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
+            }
         }
     }
 }

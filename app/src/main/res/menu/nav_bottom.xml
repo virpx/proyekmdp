@@ -19,4 +19,16 @@
         android:layout_height="wrap_content"
         android:title="Profile"
         android:icon="@drawable/baseline_person_24"/>
+    <item
+        android:id="@+id/history_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="History Chat"
+        android:icon="@drawable/history_chat"/>
+    <item
+        android:id="@+id/addfood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="Add Food"
+        android:icon="@drawable/add_food_icon"/>
 </menu>

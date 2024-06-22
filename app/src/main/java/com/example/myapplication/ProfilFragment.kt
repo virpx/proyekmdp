@@ -14,8 +14,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-data class Hcat (var id:Int, var user1:String, var user2:String, var selesai:Int, var
-kesimpulan:String)
+data class Hcat(
+    var id: Int?, var user1:String, var user2:String, var selesai:Boolean, var
+    kesimpulan:String)
 class ProfilFragment : Fragment() {
 
     private val args: ProfilFragmentArgs by navArgs()
@@ -59,23 +60,23 @@ class ProfilFragment : Fragment() {
         lm.text = lamaPraktik.toString()
         sp.text = specialist
         em.text = email
-        var ids = ""
-        var idhcat = ""
+        var ids = -1
+        var idhcat = -1
         gochat.setOnClickListener(){
             ioScope.launch {
                 var newHcat = Hcat(
-                    id = id.toInt()+1,
-                    user1 = "",
+                    id = null,
+                    user1 = MockDB.usernamelogin,
                     user2 = username,
-                    selesai = 0,
+                    selesai = false,
                     kesimpulan = ""
                 )
-                repository.createHcat(newHcat)
-                ids = newHcat.id.toString()
+                var hasil = repository.createHcat(newHcat)
+                ids = hasil.id!!
             }
             MockDB.namaopenchat = username
             idhcat = ids
-            val action = ProfilFragmentDirections.actionGlobalFragmentChatMain(idhcat.toInt(),username)
+            val action = ProfilFragmentDirections.actionGlobalFragmentChatMain(idhcat,username)
             findNavController().navigate(action)
         }
 

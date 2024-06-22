@@ -4,14 +4,17 @@ import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.User.HChat
 
 class HChatAdapter(private val hChatList: MutableList<HChat>,
-                   var onClick:((HChat)->Unit)) :
+                   var onClick:((HChat)->Unit),
+var review:(()->Unit)) :
     RecyclerView.Adapter<HChatAdapter.HChatViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HChatViewHolder {
@@ -23,7 +26,12 @@ class HChatAdapter(private val hChatList: MutableList<HChat>,
     override fun onBindViewHolder(holder: HChatViewHolder, position: Int) {
         val currentItem = hChatList[position]
         holder.fullName.text = "Dr. ${currentItem.fullName}"
-
+        if(currentItem.selesai == 2){
+            holder.btnreview.isVisible = false
+        }
+        holder.btnreview.setOnClickListener {
+            review.invoke()
+        }
         if (currentItem.fotoProfile != "") {
             val base64Image = currentItem.fotoProfile ?: ""
             val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
@@ -42,6 +50,7 @@ class HChatAdapter(private val hChatList: MutableList<HChat>,
         val fullName: TextView = itemView.findViewById(R.id.fullName)
         val fotoProfile: ImageView = itemView.findViewById(R.id.fotoProfile)
         val kesimpulan: TextView = itemView.findViewById(R.id.kesimpulan)
+        val btnreview:Button = itemView.findViewById(R.id.button9)
     }
 
     fun updateData(newHChatList: List<HChat>) {

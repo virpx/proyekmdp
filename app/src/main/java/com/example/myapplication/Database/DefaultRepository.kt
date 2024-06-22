@@ -167,9 +167,11 @@ class DefaultRepository(private val localDataSource:AppDatabase, private val rem
         return remoteDataSource.getResep(username, kesimpulan)
     }
 
-    suspend fun createHcat(newHcat: Hcat) {
-        val newData = remoteDataSource.createHcat(newHcat)
+    suspend fun createHcat(newHcat: Hcat):Hcat {
+        return remoteDataSource.createHcat(newHcat)
     }
-
+    suspend fun reviewdoktere(usernamelawan:String,username:String,isi: String,rating:Float) {
+        val newData = remoteDataSource.reviewdoktere(usernamelawan,username,isi,rating)
+    }
 
 }

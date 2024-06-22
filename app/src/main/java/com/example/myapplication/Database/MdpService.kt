@@ -165,4 +165,11 @@ interface MdpService {
 
     @POST("chats/add")
     suspend fun createHcat(@Body hcat: Hcat): Hcat
+    @GET("user/reviewdokter/{username}/{usernamelawan}")
+    suspend fun reviewdoktere(
+        @Path("usernamelawan") usernamelawan: String,
+        @Path("username") username: String,
+        @Query("isi") isi: String,
+        @Query("rating") rating: Float,
+    )
 }

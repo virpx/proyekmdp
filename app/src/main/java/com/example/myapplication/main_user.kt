@@ -51,6 +51,16 @@ class main_user : AppCompatActivity() {
                         .action_global_myProfileFragment)
                     true
                 }
+                R.id.history_chat-> {
+                    container.getFragment<Fragment>().findNavController().navigate(R.id
+                        .action_global_historyKesimpulanFragment)
+                    true
+                }
+                R.id.addfood-> {
+                    container.getFragment<Fragment>().findNavController().navigate(R.id
+                        .action_global_fragment_addfood)
+                    true
+                }
                 else -> false
             }
         }
@@ -77,7 +87,7 @@ class main_user : AppCompatActivity() {
 
             val retrofit = Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create(gson))
-                .baseUrl("http://10.10.2.195:3000/")
+                .baseUrl("http://192.168.1.9:3000/")
                 .build()
 
             Repository = DefaultRepository(

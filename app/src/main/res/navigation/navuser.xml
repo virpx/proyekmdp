@@ -151,4 +151,9 @@
         android:name="com.example.myapplication.User.HistoryResepFragment"
         android:label="fragment_history_resep"
         tools:layout="@layout/fragment_history_resep" /><action android:id="@+id/action_global_historyResepFragment" app:destination="@id/historyResepFragment"/><action android:id="@+id/action_global_historyKesimpulanFragment" app:destination="@id/historyKesimpulanFragment"/>
+    <fragment
+        android:id="@+id/reviewdokter"
+        android:name="com.example.myapplication.reviewdokter"
+        android:label="fragment_reviewdokter"
+        tools:layout="@layout/fragment_reviewdokter" /><action android:id="@+id/action_global_reviewdokter" app:destination="@id/reviewdokter"/>
 </navigation>

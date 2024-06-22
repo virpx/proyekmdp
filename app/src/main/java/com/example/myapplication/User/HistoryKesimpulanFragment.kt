@@ -21,6 +21,7 @@ data class HChat(
     val username:String,
     val fullName: String,
     val fotoProfile: String,
+    val selesai:Int,
     val kesimpulan: String
 )
 
@@ -43,10 +44,13 @@ class HistoryKesimpulanFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerView: RecyclerView = binding.kesimpulanRv
 
-        hChatAdapter = HChatAdapter(mutableListOf()){
+        hChatAdapter = HChatAdapter(mutableListOf(),{
             MockDB.currenthchat = it
+            MockDB.usernamechatopen = it.username
             findNavController().navigate(HistoryKesimpulanFragmentDirections.actionGlobalHistoryResepFragment())
-        }
+        },{
+            findNavController().navigate(HistoryKesimpulanFragmentDirections.actionGlobalReviewdokter())
+        })
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = hChatAdapter
 

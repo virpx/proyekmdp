@@ -17,8 +17,8 @@ class ObatAdapter(private val obatList: MutableList<Resep>) :
 
     override fun onBindViewHolder(holder: ObatViewHolder, position: Int) {
         val currentItem = obatList[position]
-        holder.namaObat.text = currentItem.nama_obat
-        holder.deskripsiObat.text = currentItem.deskripsi_obat
+        holder.namaObat.text = "Nama Obat : "+currentItem.nama_obat
+        holder.deskripsiObat.text = "Deskripsi Obat : "+currentItem.deskripsi_obat
     }
 
     override fun getItemCount() = obatList.size

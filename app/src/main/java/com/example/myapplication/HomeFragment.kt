@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
             1 -> navController.navigate(R.id.action_global_homeFragment)
             2 -> navController.navigate(R.id.action_global_homeFragment)
             3 -> navController.navigate(R.id.action_global_homeFragment)
-//            4 -> navController.navigate(R.id.action_global_chatFragment)
+            4 -> navController.navigate(R.id.action_global_fragment_user_listchat)
         }
     }
 }
