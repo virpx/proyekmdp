@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.Database.MockDB
 import com.example.myapplication.R
 import com.example.myapplication.User.HChat
 
@@ -30,6 +31,7 @@ var review:(()->Unit)) :
             holder.btnreview.isVisible = false
         }
         holder.btnreview.setOnClickListener {
+            MockDB.usernamechatopen = currentItem.username
             review.invoke()
         }
         if (currentItem.fotoProfile != "") {
